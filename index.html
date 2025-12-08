@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kill Team Roster Builder</title>
+    <style>
+        :root {
+            --primary-color: #598c28; /* Default Ork Green */
+            --bg-dark: #2c3e50;
+            --card-bg: #34495e;
+            --text-light: #ecf0f1;
+            --danger: #c0392b; 
+            --warning: #f39c12;
+            --btn-hover: rgba(255,255,255,0.1);
+            
+            /* HP Colors */
+            --hp-active: #e74c3c;      
+            --hp-damaged: #78281f;     
+            --hp-recovered: #2ecc71;   
+            --hp-inactive: #17202a;    
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            min-height: 100vh;
+            background-color: rgba(0,0,0,0.3);
+            position: relative;
+            padding-bottom: 80px;
+        }
+
+        h1, h2, h3 { 
+            color: var(--primary-color); 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            margin-top: 0;
+        }
+
+        /* 유틸리티 */
+        .screen { display: none; animation: fadeIn 0.3s; }
+        .active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* 버튼 */
+        .btn {
+            padding: 12px 20px; border: none; border-radius: 4px;
+            font-weight: bold; font-size: 1rem; cursor: pointer;
+            transition: all 0.2s; width: 100%; text-align: center;
+        }
+        .btn-primary { background-color: var(--primary-color); color: white; margin-top: 10px; }
+        .btn-primary:hover { filter: brightness(1.1); }
+        .btn-danger { background-color: var(--danger); color: white; width: auto; }
+        .btn-secondary { background-color: #7f8c8d; color: white; width: auto; }
+        .btn-info { background-color: #3498db; color: white; }
+        .btn-small { padding: 5px 10px; font-size: 0.8rem; margin-top: 5px; width: auto; display: inline-block;}
+        .btn-outline { background: transparent; border: 1px solid var(--primary-color); color: var(--primary-color); }
+        .btn-equip { background-color: #e67e22; color: white; font-size: 0.8rem; padding: 4px 8px; border-radius: 4px; border:none; cursor: pointer;}
+
+        /* 인풋 & 셀렉트 */
+        .roster-input, .roster-select {
+            width: 100%; padding: 12px; margin-bottom: 15px;
+            font-size: 1.1rem; background: var(--card-bg);
+            border: 2px solid var(--primary-color); color: white; border-radius: 4px;
+        }
+        .roster-select { cursor: pointer; }
+
+        /* 로스터 관리 섹션 */
+        .roster-manager {
+            background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px;
+            margin-bottom: 20px; border: 1px solid #555;
+        }
+
+        /* 상단 자원바 */
+        .top-bar {
+            position: sticky; top: 0; z-index: 10;
+            background: var(--bg-dark); padding-bottom: 10px;
+            border-bottom: 1px solid #444; margin-bottom: 10px;
+        }
+        .tp-tracker {
+            background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 8px;
+            margin-bottom: 10px; display: flex; justify-content: space-between;
+            align-items: center; border: 1px solid var(--primary-color);
+        }
+        .resource-grid {
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px;
+        }
+        .resource-box {
+            background: var(--card-bg); padding: 5px; border-radius: 5px;
+            display: flex; flex-direction: column; align-items: center; border: 1px solid #555;
+        }
+        .resource-label { font-size: 0.65rem; color: #aaa; text-transform: uppercase; margin-bottom: 2px; }
+        .resource-val { font-size: 1.4rem; font-weight: bold; color: white; }
+        .res-btn-group { display: flex; gap: 5px; }
+        .res-btn { 
+            width: 24px; height: 24px; padding: 0; font-size: 1rem; line-height: 1;
+            background: #444; color: white; border: none; border-radius: 3px; cursor: pointer;
+        }
+
+        /* 탭 시스템 */
+        .tab-nav {
+            display: flex; background: #222; border-radius: 8px 8px 0 0;
+            overflow: hidden; margin-top: 10px;
+        }
+        .tab-btn {
+            flex: 1; padding: 12px; background: #222; color: #aaa; border: none;
+            font-weight: bold; cursor: pointer; border-bottom: 3px solid transparent;
+        }
+        .tab-btn.active { background: var(--card-bg); color: white; border-bottom: 3px solid var(--primary-color); }
+        .tab-content { display: none; padding: 10px 0; }
+        .tab-content.active { display: block; }
+
+        /* 카드 & 리스트 스타일 */
+        .op-card, .ploy-card {
+            background: var(--card-bg); border-radius: 8px; padding: 15px;
+            margin-bottom: 15px; border: 1px solid #555; position: relative;
+        }
+        .op-card.incapacitated { opacity: 0.7; filter: grayscale(80%); border: 2px solid #17202a; }
+        .op-card.injured { border: 2px solid var(--warning); }
+        
+        .ploy-card { border-left: 3px solid #777; padding: 10px; margin-bottom:10px;}
+        .ploy-card.strat { border-left-color: #3498db; }
+        .ploy-card.fire { border-left-color: #e74c3c; }
+        
+        .op-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .op-role { font-size: 0.8rem; background: #222; padding: 2px 6px; border-radius: 3px; color: #aaa; }
+        
+        /* 스탯 테이블 */
+        .stat-table { width: 100%; text-align: center; border-collapse: collapse; margin-bottom: 10px; }
+        .stat-table th { font-size: 0.7rem; color: #aaa; padding-bottom: 5px; }
+        .stat-table td { font-size: 1.1rem; font-weight: bold; border: 1px solid #444; padding: 5px; }
+        .stat-modified { color: var(--warning); text-decoration: underline; }
+
+        /* 무기 목록 */
+        .weapon-row {
+            display: flex; flex-direction: column; font-size: 0.85rem;
+            border-bottom: 1px solid #444; padding: 8px 0; transition: all 0.2s;
+        }
+        .weapon-main { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .weapon-name { font-weight: bold; color: #ddd; }
+        .weapon-stats { font-family: monospace; color: #bbb; }
+        .weapon-range-badge { font-size: 0.7rem; padding: 1px 4px; border-radius: 3px; margin-right: 5px; }
+        .range-ranged { background: #2980b9; color: white; }
+        .range-melee { background: #c0392b; color: white; }
+        .weapon-rules { font-size: 0.75rem; color: #aaa; margin-top: 2px; padding-left: 20px; font-style: italic; }
+        .rule-tag { color: #f1c40f; margin-right: 5px; }
+        
+        .weapon-row.interactive { cursor: pointer; }
+        .weapon-row.interactive:hover { background-color: rgba(255, 255, 255, 0.1); }
+        .weapon-row.inactive { opacity: 0.3; text-decoration: line-through; }
+
+        /* 장비 표시 (카드 내) */
+        .card-equip-section {
+            margin-top: 10px; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        .card-equip-item {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px solid #444;
+            transition: all 0.2s;
+        }
+        .card-equip-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        
+        /* 사용된 장비 (Dimmed) */
+        .card-equip-item.used { opacity: 0.4; filter: grayscale(100%); text-decoration: line-through; }
+        .card-equip-item.interactive { cursor: pointer; }
+        .card-equip-item.interactive:hover { background: rgba(255,255,255,0.05); }
+
+        .equip-name { color: #e67e22; font-weight: bold; display: block;}
+        .equip-desc-small { font-size: 0.75rem; color: #aaa; margin-top: 2px; line-height: 1.2; }
+
+        /* 체력 트래커 */
+        .wounds-container { margin-top: 15px; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; }
+        .hp-grid { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+        .hp-btn {
+            width: 28px; height: 28px; border: 1px solid #444; border-radius: 4px;
+            cursor: pointer; display: flex; justify-content: center; align-items: center;
+            font-size: 0.7rem; font-weight: bold; color: rgba(255,255,255,0.7);
+        }
+        .hp-btn.active { background-color: var(--hp-active); color: white; }
+        .hp-btn.damaged { background-color: var(--hp-damaged); opacity: 0.8; }
+        .hp-btn.recovered { background-color: var(--hp-recovered); color: #111; }
+        .hp-btn.inactive { background-color: var(--hp-inactive); opacity: 0.5; }
+
+        /* 모달 */
+        #modal-overlay, #equip-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); display: none;
+            justify-content: center; align-items: center; z-index: 100;
+        }
+        .modal-content {
+            background: var(--bg-dark); padding: 20px; border-radius: 8px;
+            width: 95%; max-width: 600px; max-height: 90vh; overflow-y: auto;
+            border: 2px solid var(--primary-color);
+        }
+        .modal-close { position: sticky; bottom: 0; left: 0; width: 100%; background: var(--bg-dark); padding-top: 10px; }
+
+        /* 알림 메시지 */
+        #toast-msg {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: #333; color: white; padding: 10px 20px; border-radius: 30px;
+            font-size: 0.9rem; z-index: 200; opacity: 0; pointer-events: none;
+            transition: opacity 0.3s; border: 1px solid var(--primary-color);
+        }
+        #toast-msg.show { opacity: 1; }
+
+        .equip-btn-list button {
+            width: 100%; text-align: left; padding: 10px; margin-bottom: 5px;
+            background: var(--card-bg); border: 1px solid #555; color: white;
+            cursor: pointer;
+        }
+        .equip-btn-list button:hover { background: #444; }
+        .equip-btn-list button:disabled { opacity: 0.5; cursor: not-allowed; text-decoration: line-through; }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- 1. 로스터 화면 (빌더) -->
+    <div id="screen-roster" class="screen active">
+        <h1>🛠️ 로스터 빌더</h1>
+        
+        <div class="roster-manager">
+            <label style="font-size: 0.9rem; color: #aaa; display:block; margin-bottom:5px;">📂 로스터 선택</label>
+            <div style="display: flex; gap: 10px;">
+                <select id="roster-select" class="roster-select" onchange="switchRoster()" style="margin-bottom: 0;">
+                    <option value="new">+ 새 로스터 만들기</option>
+                </select>
+                <button class="btn btn-danger" onclick="deleteCurrentRoster()" style="width: auto; padding: 0 15px;">삭제</button>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="font-size: 0.9rem; color: #aaa;">로스터 이름</label>
+            <input type="text" id="roster-name" class="roster-input" placeholder="예: 나의 최강 킬팀" value="새 로스터">
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="font-size: 0.9rem; color: #aaa;">킬 팀 선택</label>
+            <select id="team-select" class="roster-select" onchange="changeTeam()">
+                <!-- JS Option -->
+            </select>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+            <button class="btn btn-info" onclick="openInfoModal()" style="width: auto;">📖 팩션 정보 보기 (룰/계략)</button>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; margin-top: 20px;">
+            <h3>팀 구성 (<span id="roster-count">0</span>명)</h3>
+            <div style="font-size:0.9rem; color:#aaa;">장비: <span id="equip-count" style="color:var(--primary-color); font-weight:bold;">0</span> / 4</div>
+        </div>
+        <button class="btn btn-secondary" onclick="openAddModal()" style="margin-bottom: 10px;">+ 오퍼레이티브 추가</button>
+
+        <div id="my-roster-list"></div>
+
+        <div style="margin-top: 30px;">
+            <button class="btn btn-primary" onclick="startGame()">🚀 게임 시작</button>
+        </div>
+    </div>
+
+    <!-- 2. 게임 화면 (플레이 모드) -->
+    <div id="screen-game" class="screen">
+        <div class="top-bar">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                <button class="btn btn-secondary" onclick="showScreen('roster')" style="width: auto; padding: 5px 10px;">← 나가기</button>
+                <h3 id="game-title" style="margin: 0; font-size: 1.1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></h3>
+            </div>
+
+            <!-- TP Tracker -->
+            <div class="tp-tracker">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.2rem; font-weight: bold;">Turn (TP)</span>
+                    <div class="resource-control">
+                        <button class="res-btn" onclick="updateTP(-1)">-</button>
+                        <span id="tp-val" class="resource-val">1</span>
+                        <button class="res-btn" onclick="updateTP(1)">+</button>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="endTurn()" style="width: auto; margin-top:0; padding: 5px 12px; font-size: 0.9rem;">🏁 턴 종료</button>
+            </div>
+
+            <!-- Resource Grid -->
+            <div class="resource-grid" id="resource-grid">
+                <div class="resource-box">
+                    <span class="resource-label">VP (승점)</span>
+                    <span id="vp-val" class="resource-val">0</span>
+                    <div class="res-btn-group">
+                        <button class="res-btn" onclick="updateResource('vp', -1)">-</button>
+                        <button class="res-btn" onclick="updateResource('vp', 1)">+</button>
+                    </div>
+                </div>
+                <div class="resource-box">
+                    <span class="resource-label">CP (커맨드)</span>
+                    <span id="cp-val" class="resource-val">2</span>
+                    <div class="res-btn-group">
+                        <button class="res-btn" onclick="updateResource('cp', -1)">-</button>
+                        <button class="res-btn" onclick="updateResource('cp', 1)">+</button>
+                    </div>
+                </div>
+                <!-- Faction Resource Box -->
+                <div class="resource-box" id="faction-res-box" style="display: none; border-color: var(--primary-color);">
+                    <span class="resource-label" id="fp-name">FP</span>
+                    <span id="fp-val" class="resource-val" style="color: var(--primary-color);">0</span>
+                    <div class="res-btn-group">
+                        <button class="res-btn" onclick="updateResource('fp', -1)">-</button>
+                        <button class="res-btn" onclick="updateResource('fp', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Nav -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('ops', event)">오퍼레이티브</button>
+            <button class="tab-btn" onclick="switchTab('ploys', event)">규칙 & 계략</button>
+            <button class="tab-btn" onclick="switchTab('equip', event)">장비 도감</button>
+        </div>
+
+        <!-- Tab Contents -->
+        <div id="tab-ops" class="tab-content active">
+            <div id="game-op-list"></div>
+        </div>
+
+        <div id="tab-ploys" class="tab-content">
+            <h3 style="margin-top:0;">📜 팩션 규칙</h3>
+            <div id="game-faction-rules"></div>
+            <h3>⚡ 전략 계략</h3>
+            <div id="game-strat-ploys"></div>
+            <h3>🔥 교전 계략</h3>
+            <div id="game-fire-ploys"></div>
+        </div>
+
+        <div id="tab-equip" class="tab-content">
+            <h3 style="margin-top:0;">🎒 장비 도감 (Reference)</h3>
+            <div id="game-equipment-list"></div>
+        </div>
+    </div>
+</div>
+
+<!-- 오퍼레이티브 추가 모달 -->
+<div id="modal-overlay">
+    <div class="modal-content">
+        <h3 style="margin-bottom: 15px;">오퍼레이티브 선택</h3>
+        <div id="modal-op-list"></div>
+        <div class="modal-close">
+            <button class="btn btn-danger" onclick="closeAddModal()" style="width: 100%;">닫기</button>
+        </div>
+    </div>
+</div>
+
+<!-- 장비 추가 모달 -->
+<div id="equip-modal-overlay">
+    <div class="modal-content">
+        <h3 style="margin-bottom: 15px;">장비 추가</h3>
+        <div id="equip-modal-list" class="equip-btn-list"></div>
+        <div class="modal-close">
+            <button class="btn btn-danger" onclick="closeEquipModal()" style="width: 100%;">취소</button>
+        </div>
+    </div>
+</div>
+
+<!-- 정보 보기 모달 -->
+<div id="info-modal-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 100;">
+    <div class="modal-content">
+        <h2 style="margin-top:0;">📖 팩션 정보</h2>
+        
+        <h3>📜 팩션 규칙</h3>
+        <div id="info-faction-rules"></div>
+
+        <h3>⚡ 전략 계략</h3>
+        <div id="info-strat-ploys"></div>
+
+        <h3>🔥 교전 계략</h3>
+        <div id="info-fire-ploys"></div>
+
+        <div class="modal-close">
+            <button class="btn btn-danger" onclick="closeInfoModal()" style="width: 100%;">닫기</button>
+        </div>
+    </div>
+</div>
+
+<div id="toast-msg"></div>
+
+<script>
+    /** * 데이터 카탈로그 */
+    const catalog = {
+        "ork_wrecka_krew": {
+            name: "렉카 크루 (Orks)",
+            color: "#598c28",
+            rulesText: "• 리더 1명 (필수)<br>• 밤 스퀴그 2명 (필수)<br>• 나머지 5명 선택 (각 전문가 최대 1명)",
+            
+            resourceConfig: { name: "Wrecka Pts", start: 0, min: 0, max: 6 },
+
+            factionRules: [
+                { title: "Wrecka Rampage", desc: "사격/격투 시 6이 나오면 렉카 포인트 +1. (최대 6점)<br>포인트를 소모해 실패한 주사위를 일반 성공으로 변경 가능." },
+                { title: "Tanked Up", desc: "Engage 오더인 아군이 사격/격투 액션 수행 시, 다음 활성화까지 APL +1." }
+            ],
+            ploys: {
+                strategy: [
+                    { name: "Waaagh!", cost: "1CP", desc: "이번 턴 동안 아군 근접 무기에 [Balanced] 부여." },
+                    { name: "Tuff Gitz", cost: "1CP", desc: "Engage 오더인 아군이 사격당할 때 방어 주사위 1개 리롤." },
+                    { name: "Destruction", cost: "1CP", desc: "이번 턴 동안 아군 사격 무기에 [Saturate] 부여." },
+                    { name: "Amped Up", cost: "1CP", desc: "Engage 오더인 아군들 각각 D3+1 체력 회복." }
+                ],
+                firefight: [
+                    { name: "Just a Scratch", cost: "1CP", desc: "일반 피해 1개를 무시. (리액션으로 사용)" },
+                    { name: "Demolition Job", cost: "1CP", desc: "사격/격투 후 마커 배치. 마커 근처 적 공격 시 포인트 소모 무료." },
+                    { name: "Proppa Scrap", cost: "1CP", desc: "해당 오퍼레이티브가 이번 활성화에 격투(Fight)를 2번 수행 가능." },
+                    { name: "Kaboom!", cost: "1CP", desc: "Blast 무기 사격 시, Blast 범위 +1인치 및 주대상에게 [Severe] 적용." }
+                ]
+            },
+            equipments: [
+                // Faction Equipment (렉카 크루: 전투당 1개 제한)
+                { id: "eq_drill", name: "Drill Rokkits", cost: "EP", desc: "록킷 런쳐가 [Blast]를 잃고 [Piercing 1]을 얻음.", limit: 1 },
+                { id: "eq_armor", name: "Extra Armour", cost: "EP", desc: "이동력 -1인치, 체력(Wounds) +1.", limit: 1 },
+                { id: "eq_oil", name: "Engine Oil", cost: "EP", desc: "한 턴에 한 번, 부상(Injured) 페널티 무시.", limit: 1 },
+                { id: "eq_glyph", name: "Glyphs", cost: "EP", desc: "Waaagh! 또는 Destruction 사용 시 비용 할인.", limit: 1 },
+                
+                // Universal Equipment (공용: 일반적으로 제한 없음, 단 수류탄은 1인당 1개 룰 존재할 수 있으나 여기선 제한 해제)
+                { id: "eq_frag", name: "Frag Grenade", cost: "EP", desc: "Ranged 6\", Blast 2\", Dmg 4/5 (범위 공격)", limit: 99 },
+                { id: "eq_krak", name: "Krak Grenade", cost: "EP", desc: "Ranged 6\", AP1, Dmg 4/5 (고관통)", limit: 99 },
+                { id: "eq_smoke", name: "Smoke Grenade", cost: "EP", desc: "연막 생성 (시야 차단)", limit: 99 },
+                { id: "eq_barricade", name: "Portable Barricade", cost: "EP", desc: "엄폐물(Cover) 제공", limit: 99 },
+                { id: "eq_rope", name: "Climbing Rope", cost: "EP", desc: "등반 이동 시 거리 페널티 무시", limit: 99 }
+            ],
+            operatives: [
+                {
+                    id: "boss_nob",
+                    name: "렉카 보스 놉",
+                    role: "리더",
+                    stats: { M: "6\"", APL: 2, D: 3, S: "4+", W: 14 },
+                    abilities: [{ title: "Wrecka Boss", desc: "사격/격투(가드 제외) 시 1 렉카 포인트 획득." }],
+                    weapons: [
+                        { name: "록킷 피스톨", A: 6, hit: "5+", dmg: "4/5", range: "Ranged", rules: ["Rng 8\"", "Blast 1\""] },
+                        { name: "록킷 피스톨 쌍수 (집중)", A: 6, hit: "4+", dmg: "4/5", range: "Ranged", rules: ["Rng 8\"", "Blast 1\"", "Ceaseless"] },
+                        { name: "록킷 피스톨 쌍수 (일제)", A: 6, hit: "5+", dmg: "4/5", range: "Ranged", rules: ["Rng 8\"", "Blast 1\"", "Salvo"] },
+                        { name: "스매시 해머", A: 4, hit: "3+", dmg: "5/6", range: "Melee", rules: ["Brutal"] },
+                        { name: "챱파", A: 4, hit: "3+", dmg: "4/5", range: "Melee", rules: [] }
+                    ]
+                },
+                {
+                    id: "bomb_squig",
+                    name: "밤 스퀴그",
+                    role: "일반병",
+                    stats: { M: "6\"", APL: 2, D: 3, S: "5+", W: 5 },
+                    abilities: [
+                        { title: "Stoopid", desc: "Conceal 불가, 액션 제한됨." },
+                        { title: "Boom!", desc: "무력화 시 4+ 롤 성공하면 공짜 자폭 사격." },
+                        { title: "Expendable", desc: "승리 조건 계산 제외." }
+                    ],
+                    weapons: [
+                        { name: "폭발물 (자폭)", A: 6, hit: "4+", dmg: "4/5", range: "Ranged", rules: ["Blast 1\"", "Limited 1", "Explosive"] },
+                        { name: "물기", A: 3, hit: "4+", dmg: "4/5", range: "Melee", rules: [] }
+                    ]
+                },
+                {
+                    id: "demolisha",
+                    name: "데몰리셔",
+                    role: "전문가",
+                    stats: { M: "6\"", APL: 2, D: 3, S: "4+", W: 12 },
+                    abilities: [{ title: "Reckless", desc: "자해 피해 감소 (일반 4+ 시 -1Dmg)." }],
+                    weapons: [
+                        { name: "탱크해머 (기폭)", A: 4, hit: "3+", dmg: "4/5", range: "Melee", rules: ["Lethal 5+", "Limited 1", "Detonate"] },
+                        { name: "탱크해머 (타격)", A: 4, hit: "3+", dmg: "4/5", range: "Melee", rules: [] }
+                    ]
+                },
+                {
+                    id: "fighter",
+                    name: "파이터",
+                    role: "일반병",
+                    stats: { M: "6\"", APL: 2, D: 3, S: "4+", W: 12 },
+                    abilities: [{ title: "BREAK STUFF", desc: "지형지물에 Breach 마커 설치." }],
+                    weapons: [
+                        { name: "스매시 해머", A: 4, hit: "3+", dmg: "5/6", range: "Melee", rules: ["Brutal"] }
+                    ]
+                },
+                {
+                    id: "krusha",
+                    name: "크러셔",
+                    role: "전문가",
+                    stats: { M: "6\"", APL: 2, D: 3, S: "4+", W: 12 },
+                    abilities: [{ title: "Armoured Up", desc: "상대는 이 모델 공격 시 6 미만으로 치명타 불가." }],
+                    weapons: [
+                        { name: "너클버스타", A: 4, hit: "3+", dmg: "5/6", range: "Melee", rules: ["Brutal", "Shock", "Smash"] }
+                    ]
+                },
+                {
+                    id: "gunner",
+                    name: "거너",
+                    role: "일반병",
+                    stats: { M: "6\"", APL: 2, D: 3, S: "4+", W: 12 },
+                    abilities: [{ title: "Kompetitive", desc: "이번 턴 아군이 쏜 적 또 쏘면 1 렉카 포인트." }],
+                    weapons: [
+                        { name: "헤비 록킷 런쳐", A: 6, hit: "4+", dmg: "4/5", range: "Ranged", rules: ["Blast 1\"", "Heavy (Dash only)"] },
+                        { name: "록킷 런쳐", A: 6, hit: "5+", dmg: "4/5", range: "Ranged", rules: ["Blast 1\""] },
+                        { name: "주먹", A: 3, hit: "3+", dmg: "3/4", range: "Melee", rules: [] }
+                    ]
+                },
+                {
+                    id: "rokkiteer",
+                    name: "록키티어",
+                    role: "전문가",
+                    stats: { M: "6\"", APL: 2, D: 3, S: "4+", W: 12 },
+                    abilities: [
+                        { title: "Pulsa", desc: "마커 설치 (주변 적 D3 피해)." },
+                        { title: "Shokkwave", desc: "마커 근처 적 -1 Hit, -2\" Move." }
+                    ],
+                    weapons: [
+                        { name: "록킷 런쳐", A: 6, hit: "5+", dmg: "4/5", range: "Ranged", rules: ["Blast 1\""] },
+                        { name: "록킷 랙", A: 6, hit: "5+", dmg: "4/5", range: "Ranged", rules: ["Blast 2\"", "Relentless", "Limited 1", "Heavy"] },
+                        { name: "펄사 록킷", A: 6, hit: "5+", dmg: "-/-", range: "Ranged", rules: ["Pulsa", "Limited 1", "Heavy"] },
+                        { name: "주먹", A: 3, hit: "3+", dmg: "3/4", range: "Melee", rules: [] }
+                    ]
+                }
+            ]
+        }
+    };
+
+    /** 상태 관리 */
+    const STORAGE_KEY = 'kt_roster_library'; 
+    let savedRosters = []; 
+    let currentRosterId = null; 
+
+    let currentTeamId = "ork_wrecka_krew";
+    let myRoster = [];
+    
+    let gameState = { vp: 0, cp: 2, fp: 0, currentTP: 1, operatives: [] };
+    let currentOpForEquip = null; 
+
+    document.addEventListener('DOMContentLoaded', function() {
+        init();
+    });
+
+    function init() {
+        if (!document.getElementById('team-select')) return;
+        populateTeamSelect();
+        loadLibrary();
+        const nameInput = document.getElementById('roster-name');
+        if (nameInput) nameInput.addEventListener('input', autoSave);
+        if (savedRosters.length > 0) loadRosterById(savedRosters[0].id);
+        else resetToNewRoster();
+    }
+
+    /* 유틸리티 */
+    function showToast(msg) {
+        const el = document.getElementById('toast-msg');
+        if (!el) return;
+        el.innerText = msg; el.classList.add('show');
+        setTimeout(() => { el.classList.remove('show'); }, 2000);
+    }
+
+    function switchTab(tabId, e) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(con => con.classList.remove('active'));
+        if(e && e.target) e.target.classList.add('active');
+        const tab = document.getElementById(`tab-${tabId}`);
+        if(tab) tab.classList.add('active');
+    }
+
+    /* 1. 로스터 및 데이터 관리 */
+    function populateTeamSelect() {
+        const select = document.getElementById('team-select');
+        if(!select) return;
+        select.innerHTML = '';
+        for (const [key, val] of Object.entries(catalog)) {
+            const option = document.createElement('option');
+            option.value = key; option.text = val.name; select.appendChild(option);
+        }
+    }
+    
+    function changeTeam(shouldSave = true) {
+        const select = document.getElementById('team-select');
+        if(!select) return;
+        currentTeamId = select.value;
+        updateTeamUI();
+        myRoster = [];
+        renderRosterList();
+        if (shouldSave) autoSave();
+    }
+
+    function updateTeamUI() {
+        const teamData = catalog[currentTeamId];
+        if(!teamData) return;
+        document.documentElement.style.setProperty('--primary-color', teamData.color);
+        const rulesEl = document.getElementById('team-rules-text');
+        if(rulesEl) rulesEl.innerHTML = teamData.rulesText;
+    }
+
+    /* 장비 관리 로직 (개별 오퍼) */
+    function openEquipModal(opIdx) {
+        currentOpForEquip = opIdx;
+        const list = document.getElementById('equip-modal-list');
+        const teamData = catalog[currentTeamId];
+        list.innerHTML = '';
+
+        if (!teamData.equipments || teamData.equipments.length === 0) {
+            list.innerHTML = '<p>장비가 없습니다.</p>';
+        } else {
+            let totalEquipCount = 0;
+            const takenEquipIds = [];
+            // 팀 전체에서 각 장비별로 몇 개 선택되었는지 카운트
+            const equipUsageCounts = {};
+
+            myRoster.forEach(op => {
+                if(op.assignedEquipments) {
+                    totalEquipCount += op.assignedEquipments.length;
+                    op.assignedEquipments.forEach(e => {
+                        takenEquipIds.push(e.id);
+                        equipUsageCounts[e.id] = (equipUsageCounts[e.id] || 0) + 1;
+                    });
+                }
+            });
+
+            const isTeamFull = totalEquipCount >= 4;
+
+            teamData.equipments.forEach(eq => {
+                // limit 설정 확인 (기본값 무제한, 렉카는 1)
+                const limit = eq.limit !== undefined ? eq.limit : 99;
+                const currentCount = equipUsageCounts[eq.id] || 0;
+                
+                const isLimitReached = currentCount >= limit;
+                const isDisabled = isTeamFull || isLimitReached;
+                
+                let reason = "";
+                if (isLimitReached) reason = `(제한 도달: ${limit}/${limit})`;
+                else if (isTeamFull) reason = "(장비 한도 4개 초과)";
+
+                const btn = document.createElement('button');
+                btn.innerHTML = `<span style="font-weight:bold; color:#e67e22;">${eq.name}</span> <span style="font-size:0.8rem;">${reason}</span><br><span style="font-size:0.8rem; color:#aaa;">${eq.desc}</span>`;
+                btn.disabled = isDisabled;
+                btn.onclick = () => { addEquipToOp(eq); };
+                list.appendChild(btn);
+            });
+        }
+        document.getElementById('equip-modal-overlay').style.display = 'flex';
+    }
+
+    function closeEquipModal() { document.getElementById('equip-modal-overlay').style.display = 'none'; }
+
+    function addEquipToOp(equipData) {
+        if (currentOpForEquip === null) return;
+        const op = myRoster[currentOpForEquip];
+        if (!op.assignedEquipments) op.assignedEquipments = [];
+        
+        // 장비 추가 시 isUsed 속성 초기화
+        const newEquip = JSON.parse(JSON.stringify(equipData));
+        newEquip.isUsed = false;
+        
+        op.assignedEquipments.push(newEquip);
+        closeEquipModal();
+        renderRosterList();
+        autoSave();
+    }
+
+    function removeEquipFromOp(opIdx, eqIdx) {
+        myRoster[opIdx].assignedEquipments.splice(eqIdx, 1);
+        renderRosterList();
+        autoSave();
+    }
+
+    function getTeamEquipCount() {
+        let cnt = 0;
+        myRoster.forEach(op => { if(op.assignedEquipments) cnt += op.assignedEquipments.length; });
+        return cnt;
+    }
+
+    // 장비 사용 상태 토글 (게임 모드)
+    function toggleEquipUsed(opIdx, eqIdx) {
+        const op = gameState.operatives[opIdx];
+        if (op && op.assignedEquipments && op.assignedEquipments[eqIdx]) {
+            const eq = op.assignedEquipments[eqIdx];
+            eq.isUsed = !eq.isUsed; // 토글
+            renderGameScreen();
+        }
+    }
+
+    /* 저장/로드 로직 */
+    function switchRoster() {
+        const select = document.getElementById('roster-select');
+        if(!select) return;
+        const val = select.value;
+        val === 'new' ? resetToNewRoster() : loadRosterById(val);
+    }
+
+    function updateRosterSelectDropdown() {
+        const select = document.getElementById('roster-select');
+        if(!select) return;
+        select.innerHTML = '';
+        const newOption = document.createElement('option'); newOption.value = 'new'; newOption.text = '+ 새 로스터 만들기'; select.appendChild(newOption);
+        savedRosters.forEach(r => {
+            const opt = document.createElement('option');
+            opt.value = r.id; opt.text = r.name || "(이름 없음)"; select.appendChild(opt);
+        });
+        select.value = currentRosterId || 'new';
+    }
+
+    function resetToNewRoster() {
+        currentRosterId = null;
+        const nameEl = document.getElementById('roster-name');
+        if(nameEl) nameEl.value = "새 로스터";
+        myRoster = [];
+        const defaultTeam = Object.keys(catalog)[0];
+        const teamSelect = document.getElementById('team-select');
+        if(teamSelect) teamSelect.value = defaultTeam;
+        currentTeamId = defaultTeam;
+        updateTeamUI(); renderRosterList(); updateRosterSelectDropdown();
+    }
+
+    function loadRosterById(id) {
+        const found = savedRosters.find(r => r.id === id);
+        if (!found) return;
+        currentRosterId = found.id;
+        const nameEl = document.getElementById('roster-name');
+        if(nameEl) nameEl.value = found.name;
+        myRoster = JSON.parse(JSON.stringify(found.roster));
+        if (catalog[found.teamId]) {
+            currentTeamId = found.teamId;
+            const teamSelect = document.getElementById('team-select');
+            if(teamSelect) teamSelect.value = currentTeamId;
+            updateTeamUI();
+        }
+        renderRosterList(); updateRosterSelectDropdown();
+    }
+
+    function autoSave() {
+        const nameEl = document.getElementById('roster-name');
+        const name = nameEl ? nameEl.value : "Unknown";
+        const rosterData = { 
+            id: currentRosterId, name: name, teamId: currentTeamId, 
+            roster: myRoster, 
+            updatedAt: new Date().getTime() 
+        };
+        if (!currentRosterId) {
+            rosterData.id = 'roster_' + new Date().getTime();
+            currentRosterId = rosterData.id; savedRosters.push(rosterData);
+        } else {
+            const idx = savedRosters.findIndex(r => r.id === currentRosterId);
+            if (idx >= 0) savedRosters[idx] = rosterData; else savedRosters.push(rosterData);
+        }
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(savedRosters));
+        updateRosterSelectDropdown();
+        showToast("자동 저장됨");
+    }
+
+    function deleteCurrentRoster() {
+        if (!currentRosterId) { showToast("저장되지 않은 로스터입니다."); return; }
+        savedRosters = savedRosters.filter(r => r.id !== currentRosterId);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(savedRosters));
+        resetToNewRoster(); showToast("삭제됨");
+    }
+    
+    function loadLibrary() {
+        const json = localStorage.getItem(STORAGE_KEY);
+        if (json) try { savedRosters = JSON.parse(json); } catch (e) { savedRosters = []; }
+    }
+
+    /* 렌더링 */
+    function renderRosterList() {
+        const container = document.getElementById('my-roster-list');
+        const countSpan = document.getElementById('roster-count');
+        const equipSpan = document.getElementById('equip-count');
+        
+        if(!container) return;
+        container.innerHTML = ''; 
+        if(countSpan) countSpan.innerText = myRoster.length;
+        if(equipSpan) equipSpan.innerText = getTeamEquipCount();
+        
+        if (myRoster.length === 0) { 
+            container.innerHTML = '<div style="text-align:center; padding:20px; color:#aaa; border: 2px dashed #555; border-radius:4px;">팀원이 없습니다.<br>추가 버튼을 눌러주세요.</div>'; 
+            return; 
+        }
+        myRoster.forEach((op, index) => { container.innerHTML += renderOpCard(op, 'roster', index); });
+    }
+
+    function renderOpCard(op, mode, idx) {
+        const isGameMode = (mode === 'game');
+        const isRosterMode = (mode === 'roster');
+        
+        const isDead = isGameMode && (op.currentW <= 0);
+        const isInjured = isGameMode && !isDead && (op.currentW < op.stats.W / 2);
+
+        let cardClass = 'op-card';
+        let badgeHtml = '';
+        if (isDead) { cardClass += ' incapacitated'; badgeHtml = '<div class="status-badge badge-dead">💀 사망</div>'; }
+        else if (isInjured) { cardClass += ' injured'; badgeHtml = '<div class="status-badge badge-injured">🩹 부상 (-2"M / -1BS)</div>'; }
+
+        let displayM = op.stats.M;
+        let injuredClass = isInjured ? 'stat-modified' : '';
+        if (isInjured) {
+            const moveVal = parseInt(op.stats.M.replace('"', ''));
+            displayM = Math.max(0, moveVal - 2) + '"';
+        }
+
+        let abilitiesHtml = '';
+        if (op.abilities && op.abilities.length > 0) {
+            const list = op.abilities.map(a => `<div class="ability-item"><span class="ability-title">${a.title}:</span><span class="ability-desc">${a.desc}</span></div>`).join('');
+            abilitiesHtml = `<div class="op-abilities">${list}</div>`;
+        }
+
+        const weaponsHtml = op.weapons.map((w, wIdx) => {
+            if (isGameMode && w.active === false) return '';
+            const isActive = (w.active !== false);
+            let rowClass = 'weapon-row';
+            let onclickAttr = '';
+            if (isRosterMode) {
+                rowClass += ' interactive';
+                if (!isActive) rowClass += ' inactive';
+                onclickAttr = `onclick="toggleWeapon(${idx}, ${wIdx})"`;
+            }
+            let hitVal = w.hit;
+            if (isInjured) {
+                const baseHit = parseInt(w.hit.replace('+', ''));
+                hitVal = (baseHit + 1) + '+';
+            }
+            const rangeBadgeClass = w.range === 'Ranged' ? 'range-ranged' : 'range-melee';
+            const rangeBadgeText = w.range === 'Ranged' ? 'R' : 'M';
+            let rulesHtml = '';
+            if (w.rules && w.rules.length > 0) {
+                const ruleTags = w.rules.map(r => `<span class="rule-tag">${r}</span>`).join(', ');
+                rulesHtml = `<div class="weapon-rules">${ruleTags}</div>`;
+            }
+            return `
+                <div class="${rowClass}" ${onclickAttr}>
+                    <div class="weapon-main">
+                        <div style="display:flex; align-items:center;">
+                            <span class="weapon-range-badge ${rangeBadgeClass}">${rangeBadgeText}</span>
+                            <span class="weapon-name">${w.name}</span>
+                        </div>
+                        <span class="weapon-stats">
+                            A:${w.A}&nbsp; Hit:<span class="${injuredClass}">${hitVal}</span>&nbsp; D:${w.dmg}
+                        </span>
+                    </div>
+                    ${rulesHtml}
+                </div>`;
+        }).join('');
+
+        const tipHtml = isRosterMode ? `<div class="weapon-tip">💡 무기를 클릭하여 활성/비활성(사용 안함) 상태를 변경하세요.</div>` : '';
+
+        // --- 체력 트래커 ---
+        let woundsArea = '';
+        if (isGameMode) {
+            const maxW = op.stats.W;
+            const curW = op.currentW;
+            const startW = op.startOfTurnW; 
+            let btnsHtml = '';
+            for(let i = 1; i <= maxW; i++) {
+                let stateClass = '';
+                if (i <= curW) { if (i <= startW) stateClass = 'active'; else stateClass = 'recovered'; } 
+                else { if (i <= startW) stateClass = 'damaged'; else stateClass = 'inactive'; }
+                btnsHtml += `<div class="hp-btn ${stateClass}" onclick="setWounds(${idx}, ${i})">${i}</div>`;
+            }
+            woundsArea = `<div class="wounds-container"><div class="wounds-label"><span>체력</span><span style="color:white; font-weight:bold;">${curW} / ${maxW}</span></div><div class="hp-grid">${btnsHtml}</div></div>`;
+        }
+
+        // --- 장비 섹션 ---
+        let equipSection = '';
+        if (op.assignedEquipments && op.assignedEquipments.length > 0) {
+            const items = op.assignedEquipments.map((e, eIdx) => {
+                const isUsed = e.isUsed || false;
+                const usedClass = isUsed ? 'used' : '';
+                const clickAttr = isGameMode ? `onclick="toggleEquipUsed(${idx}, ${eIdx})"` : '';
+                const cursorClass = isGameMode ? 'interactive' : '';
+                
+                const rmBtn = isRosterMode ? `<button style="background:transparent; border:none; color:red; cursor:pointer;" onclick="removeEquipFromOp(${idx}, ${eIdx})">✖</button>` : '';
+                
+                return `<div class="card-equip-item ${usedClass} ${cursorClass}" ${clickAttr}>
+                            <div>
+                                <span class="equip-name">${e.name}</span>
+                                <div class="equip-desc-small">${e.desc}</div>
+                            </div>
+                            ${rmBtn}
+                        </div>`;
+            }).join('');
+            equipSection = `<div class="card-equip-section">${items}</div>`;
+        }
+
+        let actionArea = '';
+        if (mode === 'modal') actionArea = `<button class="btn btn-primary btn-small" onclick="addOpFromModal(${idx})">➕ 팀에 추가</button>`;
+        else if (mode === 'roster') {
+            actionArea = `
+                <div style="display:flex; justify-content:space-between; margin-top:10px;">
+                    <button class="btn-equip" onclick="openEquipModal(${idx})">➕ 장비 추가</button>
+                    <button class="btn btn-danger btn-small" onclick="removeOp(${idx})">🗑️ 제거</button>
+                </div>
+            `;
+        }
+        
+        return `
+            <div class="${cardClass}">
+                ${badgeHtml}
+                <div class="op-header">
+                    <h3>${op.name}</h3>
+                    <span class="op-role">${op.role}</span>
+                </div>
+                <table class="stat-table">
+                    <thead><tr><th>M</th><th>APL</th><th>DF</th><th>SV</th><th>W</th></tr></thead>
+                    <tbody><tr><td class="${injuredClass}">${displayM}</td><td>${op.stats.APL}</td><td>${op.stats.D}</td><td>${op.stats.S}</td><td>${op.stats.W}</td></tr></tbody>
+                </table>
+                ${abilitiesHtml}
+                <div style="margin: 5px 0;">${weaponsHtml}${tipHtml}</div>
+                ${equipSection}
+                ${woundsArea}
+                ${actionArea}
+            </div>
+        `;
+    }
+
+    function toggleWeapon(opIdx, wIdx) {
+        const weapon = myRoster[opIdx].weapons[wIdx];
+        if (weapon.active === undefined) weapon.active = true;
+        weapon.active = !weapon.active;
+        renderRosterList(); autoSave();
+    }
+
+    /* 모달 */
+    function openAddModal() {
+        const list = document.getElementById('modal-op-list'); list.innerHTML = '';
+        const currentTeamOps = catalog[currentTeamId].operatives;
+        currentTeamOps.forEach((op, index) => { list.innerHTML += renderOpCard(op, 'modal', index); });
+        document.getElementById('modal-overlay').style.display = 'flex';
+    }
+    function closeAddModal() { document.getElementById('modal-overlay').style.display = 'none'; }
+    function addOpFromModal(index) { 
+        const currentTeamOps = catalog[currentTeamId].operatives;
+        addOp(currentTeamOps[index]); closeAddModal(); 
+    }
+    function addOp(opData) { 
+        const newOp = JSON.parse(JSON.stringify(opData));
+        newOp.weapons.forEach(w => w.active = true);
+        newOp.assignedEquipments = []; // 장비 배열 초기화
+        myRoster.push(newOp); renderRosterList(); autoSave(); 
+    }
+    function removeOp(index) { myRoster.splice(index, 1); renderRosterList(); autoSave(); }
+
+    /* 정보 보기 모달 */
+    function openInfoModal() {
+        const team = catalog[currentTeamId];
+        
+        document.getElementById('info-faction-rules').innerHTML = team.factionRules.map(r => 
+            `<div class="ploy-card"><div class="ploy-name" style="color:var(--primary-color)">${r.title}</div><div class="ploy-desc">${r.desc}</div></div>`
+        ).join('');
+        
+        document.getElementById('info-strat-ploys').innerHTML = team.ploys.strategy.map(p => 
+            `<div class="ploy-card strat"><div class="ploy-header"><span class="ploy-name">${p.name}</span><span class="ploy-cost">${p.cost}</span></div><div class="ploy-desc">${p.desc}</div></div>`
+        ).join('');
+
+        document.getElementById('info-fire-ploys').innerHTML = team.ploys.firefight.map(p => 
+            `<div class="ploy-card fire"><div class="ploy-header"><span class="ploy-name">${p.name}</span><span class="ploy-cost">${p.cost}</span></div><div class="ploy-desc">${p.desc}</div></div>`
+        ).join('');
+
+        document.getElementById('info-modal-overlay').style.display = 'flex';
+    }
+    function closeInfoModal() { document.getElementById('info-modal-overlay').style.display = 'none'; }
+
+    /* 3. 게임 로직 */
+    function startGame() {
+        if(myRoster.length === 0) { showToast("팀원을 최소 1명 이상 추가해주세요!"); return; }
+        const teamData = catalog[currentTeamId];
+
+        gameState.vp = 0; 
+        gameState.cp = 2;
+        gameState.fp = teamData.resourceConfig ? teamData.resourceConfig.start : 0;
+        gameState.currentTP = 1;
+        
+        gameState.operatives = JSON.parse(JSON.stringify(myRoster));
+        gameState.operatives.forEach(op => { op.currentW = op.stats.W; op.startOfTurnW = op.stats.W; });
+
+        const titleEl = document.getElementById('game-title');
+        const nameEl = document.getElementById('roster-name');
+        if(titleEl && nameEl) titleEl.innerText = nameEl.value;
+        
+        renderGameInfo(); // 규칙/계략 탭
+        renderGameEquipment(); // 장비 도감 탭
+        updateResourceDisplay(); 
+        renderGameScreen(); 
+        showScreen('game');
+        
+        const firstTabBtn = document.querySelector('.tab-btn');
+        if(firstTabBtn) switchTab('ops', { target: firstTabBtn });
+    }
+
+    function renderGameEquipment() {
+        const container = document.getElementById('game-equipment-list');
+        const teamData = catalog[currentTeamId];
+        if(!container) return;
+        
+        container.innerHTML = teamData.equipments.map(e => `
+            <div class="ploy-card">
+                <div class="ploy-header"><span class="ploy-name">${e.name}</span><span class="ploy-cost">${e.cost}</span></div>
+                <div class="ploy-desc">${e.desc}</div>
+            </div>
+        `).join('');
+    }
+
+    function renderGameInfo() {
+        const team = catalog[currentTeamId];
+        
+        const fpBox = document.getElementById('faction-res-box');
+        if(fpBox) {
+            if (team.resourceConfig) {
+                fpBox.style.display = 'flex';
+                const nameEl = document.getElementById('fp-name');
+                if(nameEl) nameEl.innerText = team.resourceConfig.name;
+            } else {
+                fpBox.style.display = 'none';
+            }
+        }
+
+        const rList = document.getElementById('game-faction-rules');
+        if(rList) rList.innerHTML = team.factionRules.map(r => 
+            `<div class="ploy-card"><div class="ploy-name" style="color:var(--primary-color)">${r.title}</div><div class="ploy-desc">${r.desc}</div></div>`
+        ).join('');
+        
+        const sList = document.getElementById('game-strat-ploys');
+        if(sList) sList.innerHTML = team.ploys.strategy.map(p => 
+            `<div class="ploy-card strat"><div class="ploy-header"><span class="ploy-name">${p.name}</span><span class="ploy-cost">${p.cost}</span></div><div class="ploy-desc">${p.desc}</div><button class="btn-outline" style="margin-top:5px; width:100%; font-size:0.8rem;" onclick="spendCP()">사용 (CP 소모)</button></div>`
+        ).join('');
+
+        const fList = document.getElementById('game-fire-ploys');
+        if(fList) fList.innerHTML = team.ploys.firefight.map(p => 
+            `<div class="ploy-card fire"><div class="ploy-header"><span class="ploy-name">${p.name}</span><span class="ploy-cost">${p.cost}</span></div><div class="ploy-desc">${p.desc}</div><button class="btn-outline" style="margin-top:5px; width:100%; font-size:0.8rem;" onclick="spendCP()">사용 (CP 소모)</button></div>`
+        ).join('');
+    }
+
+    function spendCP() {
+        if (gameState.cp > 0) { updateResource('cp', -1); showToast("CP를 소모했습니다."); } 
+        else { showToast("CP가 부족합니다!"); }
+    }
+    
+    function showScreen(name) { 
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); 
+        const target = document.getElementById(`screen-${name}`);
+        if(target) target.classList.add('active'); 
+    }
+    
+    function updateResource(type, val) { 
+        gameState[type] += val; 
+        if(gameState[type] < 0) gameState[type] = 0;
+        if(type === 'fp') {
+            const conf = catalog[currentTeamId].resourceConfig;
+            if(conf && gameState.fp > conf.max) gameState.fp = conf.max;
+        }
+        updateResourceDisplay(); 
+    }
+    
+    function updateTP(val) {
+        gameState.currentTP += val; if(gameState.currentTP < 1) gameState.currentTP = 1;
+        finalizeWoundStates(); updateResourceDisplay(); renderGameScreen();
+    }
+
+    function endTurn() {
+        gameState.cp += 1; gameState.currentTP += 1;
+        finalizeWoundStates(); updateResourceDisplay(); renderGameScreen();
+        showToast("턴이 종료되었습니다. (CP+1, TP+1)");
+    }
+
+    function finalizeWoundStates() { gameState.operatives.forEach(op => { op.startOfTurnW = op.currentW; }); }
+
+    function updateResourceDisplay() { 
+        const vpEl = document.getElementById('vp-val');
+        const cpEl = document.getElementById('cp-val');
+        const fpEl = document.getElementById('fp-val');
+        const tpEl = document.getElementById('tp-val');
+        
+        if(vpEl) vpEl.innerText = gameState.vp; 
+        if(cpEl) cpEl.innerText = gameState.cp; 
+        if(fpEl) fpEl.innerText = gameState.fp;
+        if(tpEl) tpEl.innerText = gameState.currentTP;
+    }
+    
+    function setWounds(opIdx, val) {
+        const op = gameState.operatives[opIdx];
+        if (op.currentW === val) { op.currentW = val - 1; } else { op.currentW = val; }
+        renderGameScreen();
+    }
+    
+    function renderGameScreen() {
+        const container = document.getElementById('game-op-list'); 
+        if(!container) return;
+        container.innerHTML = '';
+        gameState.operatives.forEach((op, idx) => { container.innerHTML += renderOpCard(op, 'game', idx); });
+    }
+
+</script>
+</body>
+</html>
