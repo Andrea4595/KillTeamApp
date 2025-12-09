@@ -1,0 +1,752 @@
+{
+  "name": {
+    "en": "Wrecka Krew",
+    "ko": "렉카 크루"
+  },
+  "color": "#598c28",
+  "rulesText": {
+    "en": "• 1 WRECKA KREW BOSS NOB operative<br>• 2 WRECKA KREWE BOMB SQUIG operatives<br>• 5 WRECKA KREW operatives selected from the list (each operative other than Bomb Squig, Fighter, and Gunner can only be selected once)",
+    "ko": "• 렉카 크루 보스 놉 1명 (필수)<br>• 렉카 크루 밤 스퀴그 2명 (필수)<br>• 나머지 렉카 크루 오퍼레이티브 5명 선택 (밤 스퀴그, 파이터, 거너를 제외한 병종은 각 1명씩만 선택 가능)"
+  },
+  "resourceConfig": {
+    "name": {
+      "en": "Wrecka Pts",
+      "ko": "렉카 포인트"
+    },
+    "start": 0,
+    "min": 0,
+    "max": 6
+  },
+  "factionRules": [
+    {
+      "title": {
+        "en": "Wrecka Rampage",
+        "ko": "렉카 램페이지"
+      },
+      "desc": {
+        "en": "Whenever a friendly operative is shooting, fighting or retaliating, for each attack dice result of 6 you retain, you gain 1 Wrecka point (Max 6). You can spend up to 3 points to retain a fail as a normal success.",
+        "ko": "아군이 사격, 격투 또는 반격을 수행할 때, 6이 나온 공격 주사위마다 렉카 포인트 1점을 얻습니다 (최대 6점). 포인트를 소모(최대 3점)하여 실패한 주사위 하나를 일반 성공으로 변경할 수 있습니다."
+      }
+    },
+    {
+      "title": {
+        "en": "Tanked Up",
+        "ko": "탱크드 업"
+      },
+      "desc": {
+        "en": "Whenever a friendly operative (excluding BOMB SQUIG) with an Engage order performs Shoot or Fight action, add 1 to its APL until next activation.",
+        "ko": "인게이지(Engage) 오더 상태인 아군(밤 스퀴그 제외)이 사격 또는 격투 액션을 수행하면, 다음 활성화 전까지 APL이 1 증가합니다."
+      }
+    }
+  ],
+  "ploys": {
+    "strategy": [
+      {
+        "name": {
+          "en": "Waaagh!",
+          "ko": "와아아아!"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Friendly operatives' melee weapons have the [Balanced] rule this turning point.",
+          "ko": "이번 터닝 포인트 동안 아군 근접 무기에 [Balanced] 규칙을 부여합니다."
+        }
+      },
+      {
+        "name": {
+          "en": "Tuff Gitz",
+          "ko": "터프 깃츠"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "When an Engage order friendly operative is being shot, re-roll 1 defence dice.",
+          "ko": "인게이지 오더인 아군이 사격 공격을 당할 때, 방어 주사위 1개를 리롤할 수 있습니다."
+        }
+      },
+      {
+        "name": {
+          "en": "Destruction",
+          "ko": "디스트럭션"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Friendly operatives' ranged weapons have the [Saturate] rule this turning point.",
+          "ko": "이번 터닝 포인트 동안 아군 사격 무기에 [Saturate] 규칙을 부여합니다."
+        }
+      },
+      {
+        "name": {
+          "en": "Amped Up",
+          "ko": "앰프드 업"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Each friendly operative with an Engage order immediately regains up to D3+1 lost wounds.",
+          "ko": "인게이지 오더인 아군 오퍼레이티브들은 즉시 각각 D3+1만큼의 체력을 회복합니다."
+        }
+      }
+    ],
+    "firefight": [
+      {
+        "name": {
+          "en": "Just a Scratch",
+          "ko": "저스트 어 스크래치"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Ignore normal damage from one attack dice against a friendly operative (excluding BOMB SQUIG).",
+          "ko": "아군(밤 스퀴그 제외)이 입은 일반 피해(Normal Dmg) 1개를 무시합니다."
+        }
+      },
+      {
+        "name": {
+          "en": "Demolition Job",
+          "ko": "데몰리션 잡"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "After Shoot/Fight, place a Marker. Attacks near marker cost 0 Wrecka points to boost.",
+          "ko": "사격/격투 후 마커를 배치합니다. 마커 근처의 적을 공격할 때는 렉카 포인트 소모가 무료가 됩니다."
+        }
+      },
+      {
+        "name": {
+          "en": "Proppa Scrap",
+          "ko": "프라파 스크랩"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Use during activation. That operative can perform two Fight actions.",
+          "ko": "활성화 중에 사용합니다. 해당 오퍼레이티브는 이번 활성화 동안 격투(Fight) 액션을 2번 수행할 수 있습니다."
+        }
+      },
+      {
+        "name": {
+          "en": "Kaboom!",
+          "ko": "카붐!"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "When shooting Blast weapon, add 1\" to Blast radius and apply [Severe] to primary target.",
+          "ko": "Blast 무기 사격 시, Blast 범위를 1인치 늘리고 주 대상에게 [Severe] 규칙을 적용합니다."
+        }
+      }
+    ]
+  },
+  "equipments": [
+    {
+      "id": "eq_drill",
+      "name": {
+        "en": "Drill Rokkits",
+        "ko": "드릴 록킷"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "Rokkit launcha loses [Blast] and gains [Piercing 1].",
+        "ko": "록킷 런쳐가 [Blast]를 잃는 대신 [Piercing 1]을 얻습니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "eq_armor",
+      "name": {
+        "en": "Extra Armour",
+        "ko": "추가 장갑"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "Subtract 1\" from Move, add 1 to Wounds.",
+        "ko": "이동력이 1인치 감소하지만, 체력(Wounds)이 1 증가합니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "eq_oil",
+      "name": {
+        "en": "Engine Oil",
+        "ko": "엔진 오일"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "Once per turning point, ignore penalties from being injured.",
+        "ko": "터닝 포인트당 한 번, 부상(Injured)으로 인한 페널티를 무시합니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "eq_glyph",
+      "name": {
+        "en": "Glyphs",
+        "ko": "글리프"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "Discount on Waaagh! or Destruction ploys.",
+        "ko": "Waaagh! 또는 Destruction 전략 사용 시 비용을 할인받습니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "eq_frag",
+      "name": {
+        "en": "Frag Grenade",
+        "ko": "파편 수류탄"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "Ranged 6\", Blast 2\", Dmg 4/5",
+        "ko": "사거리 6\", 폭발(Blast) 2\", 데미지 4/5"
+      },
+      "limit": 99
+    },
+    {
+      "id": "eq_krak",
+      "name": {
+        "en": "Krak Grenade",
+        "ko": "크랙 수류탄"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "Ranged 6\", AP1, Dmg 4/5",
+        "ko": "사거리 6\", 관통(AP) 1, 데미지 4/5"
+      },
+      "limit": 99
+    },
+    {
+      "id": "eq_smoke",
+      "name": {
+        "en": "Smoke Grenade",
+        "ko": "연막탄"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "Creates a smoke area that blocks visibility.",
+        "ko": "시야를 차단하는 연막을 생성합니다."
+      },
+      "limit": 99
+    },
+    {
+      "id": "eq_barricade",
+      "name": {
+        "en": "Portable Barricade",
+        "ko": "휴대용 방벽"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "Provides Cover.",
+        "ko": "엄폐물(Cover)을 제공합니다."
+      },
+      "limit": 99
+    },
+    {
+      "id": "eq_rope",
+      "name": {
+        "en": "Climbing Rope",
+        "ko": "등반 로프"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "Ignore vertical distance penalties when climbing.",
+        "ko": "등반 이동 시 거리 페널티를 무시합니다."
+      },
+      "limit": 99
+    }
+  ],
+  "operatives": [
+    {
+      "id": "boss_nob",
+      "name": {
+        "en": "Boss Nob",
+        "ko": "보스 놉"
+      },
+      "role": {
+        "en": "LEADER",
+        "ko": "리더"
+      },
+      "stats": {
+        "M": "6\"",
+        "APL": 2,
+        "D": 3,
+        "S": "4+",
+        "W": 14
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Wrecka Boss",
+            "ko": "렉카 보스"
+          },
+          "desc": {
+            "en": "Whenever this operative performs the Shoot or Fight action (excluding Guard), you gain 1 Wrecka point.",
+            "ko": "이 오퍼레이티브가 사격 또는 격투(가드 제외)를 수행할 때마다, 1 렉카 포인트를 획득합니다."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Rokkit pistol",
+            "ko": "록킷 피스톨"
+          },
+          "A": 6,
+          "hit": "5+",
+          "dmg": "4/5",
+          "range": "Ranged",
+          "rules": [
+            "Rng 8\"",
+            "Blast 1\""
+          ]
+        },
+        {
+          "name": {
+            "en": "Two rokkit pistols (focused)",
+            "ko": "록킷 피스톨 쌍수 (집중)"
+          },
+          "A": 6,
+          "hit": "4+",
+          "dmg": "4/5",
+          "range": "Ranged",
+          "rules": [
+            "Rng 8\"",
+            "Blast 1\"",
+            "Ceaseless"
+          ]
+        },
+        {
+          "name": {
+            "en": "Two rokkit pistols (salvo)",
+            "ko": "록킷 피스톨 쌍수 (일제)"
+          },
+          "A": 6,
+          "hit": "5+",
+          "dmg": "4/5",
+          "range": "Ranged",
+          "rules": [
+            "Rng 8\"",
+            "Blast 1\"",
+            "Salvo"
+          ]
+        },
+        {
+          "name": {
+            "en": "Smash hammer",
+            "ko": "스매시 해머"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "5/6",
+          "range": "Melee",
+          "rules": [
+            "Brutal"
+          ]
+        },
+        {
+          "name": {
+            "en": "Choppa",
+            "ko": "챱파"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "4/5",
+          "range": "Melee",
+          "rules": []
+        }
+      ]
+    },
+    {
+      "id": "bomb_squig",
+      "name": {
+        "en": "Bomb Squig",
+        "ko": "밤 스퀴그"
+      },
+      "role": {
+        "en": "OPERATIVE",
+        "ko": "일반병"
+      },
+      "stats": {
+        "M": "6\"",
+        "APL": 2,
+        "D": 3,
+        "S": "5+",
+        "W": 5
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Stoopid",
+            "ko": "멍청함 (Stoopid)"
+          },
+          "desc": {
+            "en": "Cannot have Conceal order. Actions limited to Charge, Dash, Fight, Reposition, Shoot.",
+            "ko": "컨실(Conceal) 오더 불가. 돌격, 대시, 격투, 재배치, 사격 액션만 수행 가능합니다."
+          }
+        },
+        {
+          "title": {
+            "en": "Boom!",
+            "ko": "쾅! (Boom!)"
+          },
+          "desc": {
+            "en": "If incapacitated without shooting, roll D6. On 4+, perform free Shoot with Explosives before removal.",
+            "ko": "사격하지 않고 무력화될 경우 D6을 굴려 4+가 나오면 제거되기 전에 자폭(Explosives) 사격을 무료로 수행합니다."
+          }
+        },
+        {
+          "title": {
+            "en": "Expendable",
+            "ko": "소모품"
+          },
+          "desc": {
+            "en": "Ignored for victory conditions and kill operations.",
+            "ko": "승리 조건 계산 및 적의 처치 목표 계산에서 제외됩니다."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Explosives",
+            "ko": "폭발물 (자폭)"
+          },
+          "A": 6,
+          "hit": "4+",
+          "dmg": "4/5",
+          "range": "Ranged",
+          "rules": [
+            "Blast 1\"",
+            "Limited 1",
+            "Explosive"
+          ]
+        },
+        {
+          "name": {
+            "en": "Bite",
+            "ko": "물기"
+          },
+          "A": 3,
+          "hit": "4+",
+          "dmg": "4/5",
+          "range": "Melee",
+          "rules": []
+        }
+      ]
+    },
+    {
+      "id": "demolisha",
+      "name": {
+        "en": "Demolisha",
+        "ko": "데몰리셔"
+      },
+      "role": {
+        "en": "SPECIALIST",
+        "ko": "전문가"
+      },
+      "stats": {
+        "M": "6\"",
+        "APL": 2,
+        "D": 3,
+        "S": "4+",
+        "W": 12
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Reckless Temperament",
+            "ko": "무모한 기질"
+          },
+          "desc": {
+            "en": "Reduces self-inflicted damage (Normal 4+ reduces by 1).",
+            "ko": "자신에게 입히는 피해를 줄입니다 (일반 피해 4 이상일 때 데미지 -1)."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Tankhammer (detonate)",
+            "ko": "탱크해머 (기폭)"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "4/5",
+          "range": "Melee",
+          "rules": [
+            "Lethal 5+",
+            "Limited 1",
+            "Detonate"
+          ]
+        },
+        {
+          "name": {
+            "en": "Tankhammer (bash)",
+            "ko": "탱크해머 (타격)"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "4/5",
+          "range": "Melee",
+          "rules": []
+        }
+      ]
+    },
+    {
+      "id": "fighter",
+      "name": {
+        "en": "Fighter",
+        "ko": "파이터"
+      },
+      "role": {
+        "en": "OPERATIVE",
+        "ko": "일반병"
+      },
+      "stats": {
+        "M": "6\"",
+        "APL": 2,
+        "D": 3,
+        "S": "4+",
+        "W": 12
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "BREAK STUFF",
+            "ko": "다 부숴! (BREAK STUFF)"
+          },
+          "desc": {
+            "en": "Place Breach marker on terrain. Makes terrain accessible.",
+            "ko": "지형지물에 침투(Breach) 마커를 설치하여 해당 지형을 통과 가능하게 만듭니다."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Smash hammer",
+            "ko": "스매시 해머"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "5/6",
+          "range": "Melee",
+          "rules": [
+            "Brutal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "krusha",
+      "name": {
+        "en": "Krusha",
+        "ko": "크러셔"
+      },
+      "role": {
+        "en": "SPECIALIST",
+        "ko": "전문가"
+      },
+      "stats": {
+        "M": "6\"",
+        "APL": 2,
+        "D": 3,
+        "S": "4+",
+        "W": 12
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Armoured Up",
+            "ko": "중장갑 (Armoured Up)"
+          },
+          "desc": {
+            "en": "Opponent cannot retain critical successes of less than 6 against this operative.",
+            "ko": "상대는 이 모델을 공격할 때 주사위 값이 6 미만인 경우 치명타로 간주할 수 없습니다."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Knucklebustas",
+            "ko": "너클버스타"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "5/6",
+          "range": "Melee",
+          "rules": [
+            "Brutal",
+            "Shock",
+            "Smash"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gunner",
+      "name": {
+        "en": "Gunner",
+        "ko": "거너"
+      },
+      "role": {
+        "en": "OPERATIVE",
+        "ko": "일반병"
+      },
+      "stats": {
+        "M": "6\"",
+        "APL": 2,
+        "D": 3,
+        "S": "4+",
+        "W": 12
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Kompetitive Streak",
+            "ko": "경쟁심 (Kompetitive Streak)"
+          },
+          "desc": {
+            "en": "Gain 1 Wrecka point if you shoot an enemy already shot by a friendly operative this turn.",
+            "ko": "이번 턴에 아군이 이미 사격했던 적을 다시 사격하면 1 렉카 포인트를 획득합니다."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "'Eavy rokkit launcha",
+            "ko": "헤비 록킷 런쳐"
+          },
+          "A": 6,
+          "hit": "4+",
+          "dmg": "4/5",
+          "range": "Ranged",
+          "rules": [
+            "Blast 1\"",
+            "Heavy (Dash only)"
+          ]
+        },
+        {
+          "name": {
+            "en": "Rokkit launcha",
+            "ko": "록킷 런쳐"
+          },
+          "A": 6,
+          "hit": "5+",
+          "dmg": "4/5",
+          "range": "Ranged",
+          "rules": [
+            "Blast 1\""
+          ]
+        },
+        {
+          "name": {
+            "en": "Fists",
+            "ko": "주먹"
+          },
+          "A": 3,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Melee",
+          "rules": []
+        }
+      ]
+    },
+    {
+      "id": "rokkiteer",
+      "name": {
+        "en": "Rokkiteer",
+        "ko": "록키티어"
+      },
+      "role": {
+        "en": "SPECIALIST",
+        "ko": "전문가"
+      },
+      "stats": {
+        "M": "6\"",
+        "APL": 2,
+        "D": 3,
+        "S": "4+",
+        "W": 12
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Pulsa",
+            "ko": "펄사"
+          },
+          "desc": {
+            "en": "Place marker. Inflicts D3 damage to nearby enemies based on accumulated points.",
+            "ko": "마커를 설치합니다. 축적된 포인트에 따라 주변 적에게 D3 피해를 입힙니다."
+          }
+        },
+        {
+          "title": {
+            "en": "Shokkwave",
+            "ko": "쇼크웨이브"
+          },
+          "desc": {
+            "en": "Enemies near marker suffer -1 Hit and -2\" Move.",
+            "ko": "마커 근처의 적은 명중(Hit) -1, 이동력(Move) -2\" 페널티를 받습니다."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Rokkit launcha",
+            "ko": "록킷 런쳐"
+          },
+          "A": 6,
+          "hit": "5+",
+          "dmg": "4/5",
+          "range": "Ranged",
+          "rules": [
+            "Blast 1\""
+          ]
+        },
+        {
+          "name": {
+            "en": "Rokkit rack",
+            "ko": "록킷 랙"
+          },
+          "A": 6,
+          "hit": "5+",
+          "dmg": "4/5",
+          "range": "Ranged",
+          "rules": [
+            "Blast 2\"",
+            "Relentless",
+            "Limited 1",
+            "Heavy"
+          ]
+        },
+        {
+          "name": {
+            "en": "Pulsa rokkit",
+            "ko": "펄사 록킷"
+          },
+          "A": 6,
+          "hit": "5+",
+          "dmg": "- /-",
+          "range": "Ranged",
+          "rules": [
+            "Pulsa",
+            "Limited 1",
+            "Heavy"
+          ]
+        },
+        {
+          "name": {
+            "en": "Fists",
+            "ko": "주먹"
+          },
+          "A": 3,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Melee",
+          "rules": []
+        }
+      ]
+    }
+  ]
+}

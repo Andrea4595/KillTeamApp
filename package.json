@@ -1,0 +1,25 @@
+{
+  "name": "kill-team",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andrea4595/KillTeamApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Andrea4595/KillTeamApp/issues"
+  },
+  "homepage": "https://github.com/Andrea4595/KillTeamApp#readme",
+  "dependencies": {
+    "serve": "^14.2.5"
+  }
+}

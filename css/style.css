@@ -1,0 +1,219 @@
+:root {
+    --primary-color: #598c28; /* Default Ork Green */
+    --bg-dark: #2c3e50;
+    --card-bg: #34495e;
+    --text-light: #ecf0f1;
+    --danger: #c0392b; 
+    --warning: #f39c12;
+    --btn-hover: rgba(255,255,255,0.1);
+    
+    /* HP Colors */
+    --hp-active: #e74c3c;      
+    --hp-damaged: #78281f;     
+    --hp-recovered: #2ecc71;   
+    --hp-inactive: #17202a;    
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    min-height: 100vh;
+    background-color: rgba(0,0,0,0.3);
+    position: relative;
+    padding-bottom: 80px;
+}
+
+h1, h2, h3 { 
+    color: var(--primary-color); 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+    margin-top: 0;
+}
+
+/* 유틸리티 */
+.screen { display: none; animation: fadeIn 0.3s; }
+.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* 버튼 */
+.btn {
+    padding: 12px 20px; border: none; border-radius: 4px;
+    font-weight: bold; font-size: 1rem; cursor: pointer;
+    transition: all 0.2s; width: 100%; text-align: center;
+}
+.btn-primary { background-color: var(--primary-color); color: white; margin-top: 10px; }
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-danger { background-color: var(--danger); color: white; width: auto; }
+.btn-secondary { background-color: #7f8c8d; color: white; width: auto; }
+.btn-info { background-color: #3498db; color: white; }
+.btn-small { padding: 5px 10px; font-size: 0.8rem; margin-top: 5px; width: auto; display: inline-block;}
+.btn-outline { background: transparent; border: 1px solid var(--primary-color); color: var(--primary-color); }
+.btn-equip { background-color: #e67e22; color: white; font-size: 0.8rem; padding: 4px 8px; border-radius: 4px; border:none; cursor: pointer;}
+
+/* 인풋 & 셀렉트 */
+.roster-input, .roster-select {
+    width: 100%; padding: 12px; margin-bottom: 15px;
+    font-size: 1.1rem; background: var(--card-bg);
+    border: 2px solid var(--primary-color); color: white; border-radius: 4px;
+}
+.roster-select { cursor: pointer; }
+
+/* 로스터 관리 섹션 */
+.roster-manager {
+    background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px;
+    margin-bottom: 20px; border: 1px solid #555;
+}
+
+/* 상단 자원바 */
+.top-bar {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--bg-dark); padding-bottom: 10px;
+    border-bottom: 1px solid #444; margin-bottom: 10px;
+}
+.tp-tracker {
+    background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 8px;
+    margin-bottom: 10px; display: flex; justify-content: space-between;
+    align-items: center; border: 1px solid var(--primary-color);
+}
+.resource-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px;
+}
+.resource-box {
+    background: var(--card-bg); padding: 5px; border-radius: 5px;
+    display: flex; flex-direction: column; align-items: center; border: 1px solid #555;
+}
+.resource-label { font-size: 0.65rem; color: #aaa; text-transform: uppercase; margin-bottom: 2px; }
+.resource-val { font-size: 1.4rem; font-weight: bold; color: white; }
+.res-btn-group { display: flex; gap: 5px; }
+.res-btn { 
+    width: 24px; height: 24px; padding: 0; font-size: 1rem; line-height: 1;
+    background: #444; color: white; border: none; border-radius: 3px; cursor: pointer;
+}
+
+/* 탭 시스템 */
+.tab-nav {
+    display: flex; background: #222; border-radius: 8px 8px 0 0;
+    overflow: hidden; margin-top: 10px;
+}
+.tab-btn {
+    flex: 1; padding: 12px; background: #222; color: #aaa; border: none;
+    font-weight: bold; cursor: pointer; border-bottom: 3px solid transparent;
+}
+.tab-btn.active { background: var(--card-bg); color: white; border-bottom: 3px solid var(--primary-color); }
+.tab-content { display: none; padding: 10px 0; }
+.tab-content.active { display: block; }
+
+/* 카드 & 리스트 스타일 */
+.op-card, .ploy-card {
+    background: var(--card-bg); border-radius: 8px; padding: 15px;
+    margin-bottom: 15px; border: 1px solid #555; position: relative;
+}
+.op-card.incapacitated { opacity: 0.7; filter: grayscale(80%); border: 2px solid #17202a; }
+.op-card.injured { border: 2px solid var(--warning); }
+
+.ploy-card { border-left: 3px solid #777; padding: 10px; margin-bottom:10px;}
+.ploy-card.strat { border-left-color: #3498db; }
+.ploy-card.fire { border-left-color: #e74c3c; }
+
+.op-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.op-role { font-size: 0.8rem; background: #222; padding: 2px 6px; border-radius: 3px; color: #aaa; }
+
+/* 스탯 테이블 */
+.stat-table { width: 100%; text-align: center; border-collapse: collapse; margin-bottom: 10px; }
+.stat-table th { font-size: 0.7rem; color: #aaa; padding-bottom: 5px; }
+.stat-table td { font-size: 1.1rem; font-weight: bold; border: 1px solid #444; padding: 5px; }
+.stat-modified { color: var(--warning); text-decoration: underline; }
+
+/* 무기 목록 */
+.weapon-row {
+    display: flex; flex-direction: column; font-size: 0.85rem;
+    border-bottom: 1px solid #444; padding: 8px 0; transition: all 0.2s;
+}
+.weapon-main { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+.weapon-name { font-weight: bold; color: #ddd; }
+.weapon-stats { font-family: monospace; color: #bbb; }
+.weapon-range-badge { font-size: 0.7rem; padding: 1px 4px; border-radius: 3px; margin-right: 5px; }
+.range-ranged { background: #2980b9; color: white; }
+.range-melee { background: #c0392b; color: white; }
+.weapon-rules { font-size: 0.75rem; color: #aaa; margin-top: 2px; padding-left: 20px; font-style: italic; }
+.rule-tag { color: #f1c40f; margin-right: 5px; }
+
+.weapon-row.interactive { cursor: pointer; }
+.weapon-row.interactive:hover { background-color: rgba(255, 255, 255, 0.1); }
+.weapon-row.inactive { opacity: 0.3; text-decoration: line-through; }
+
+/* 장비 표시 (카드 내) */
+.card-equip-section {
+    margin-top: 10px; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 5px;
+    font-size: 0.9rem;
+}
+.card-equip-item {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px solid #444;
+    transition: all 0.2s;
+}
+.card-equip-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+/* 사용된 장비 (Dimmed) */
+.card-equip-item.used { opacity: 0.4; filter: grayscale(100%); text-decoration: line-through; }
+.card-equip-item.interactive { cursor: pointer; }
+.card-equip-item.interactive:hover { background: rgba(255,255,255,0.05); }
+
+.equip-name { color: #e67e22; font-weight: bold; display: block;}
+.equip-desc-small { font-size: 0.75rem; color: #aaa; margin-top: 2px; line-height: 1.2; }
+
+/* 체력 트래커 */
+.wounds-container { margin-top: 15px; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; }
+.hp-grid { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+.hp-btn {
+    width: 28px; height: 28px; border: 1px solid #444; border-radius: 4px;
+    cursor: pointer; display: flex; justify-content: center; align-items: center;
+    font-size: 0.7rem; font-weight: bold; color: rgba(255,255,255,0.7);
+}
+.hp-btn.active { background-color: var(--hp-active); color: white; }
+.hp-btn.damaged { background-color: var(--hp-damaged); opacity: 0.8; }
+.hp-btn.recovered { background-color: var(--hp-recovered); color: #111; }
+.hp-btn.inactive { background-color: var(--hp-inactive); opacity: 0.5; }
+
+/* 모달 */
+#modal-overlay, #equip-modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85); display: none;
+    justify-content: center; align-items: center; z-index: 100;
+}
+.modal-content {
+    background: var(--bg-dark); padding: 20px; border-radius: 8px;
+    width: 95%; max-width: 600px; max-height: 90vh; overflow-y: auto;
+    border: 2px solid var(--primary-color);
+}
+.modal-close { position: sticky; bottom: 0; left: 0; width: 100%; background: var(--bg-dark); padding-top: 10px; }
+
+/* 알림 메시지 */
+#toast-msg {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: #333; color: white; padding: 10px 20px; border-radius: 30px;
+    font-size: 0.9rem; z-index: 200; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s; border: 1px solid var(--primary-color);
+}
+#toast-msg.show { opacity: 1; }
+
+.equip-btn-list button {
+    width: 100%; text-align: left; padding: 10px; margin-bottom: 5px;
+    background: var(--card-bg); border: 1px solid #555; color: white;
+    cursor: pointer;
+}
+.equip-btn-list button:hover { background: #444; }
+.equip-btn-list button:disabled { opacity: 0.5; cursor: not-allowed; text-decoration: line-through; }
