@@ -115,7 +115,7 @@ export function renderRosterList(roster, equipCount, eventHandler, lang) {
     if (!container) return;
     container.innerHTML = '';
     if (countSpan) countSpan.innerText = roster.length;
-    if (equipSpan) equipSpan.innerText = `${equipCount} / 4`;
+    if (equipSpan) equipSpan.innerText = equipCount;
 
     if (roster.length === 0) {
         container.innerHTML = `<div style="text-align:center; padding:20px; color:#aaa; border: 2px dashed #555; border-radius:4px;">${lang === 'ko' ? '팀원이 없습니다.<br>추가 버튼을 눌러주세요.' : 'No operatives.<br>Please add one.'}</div>`;
