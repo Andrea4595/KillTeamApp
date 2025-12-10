@@ -77,7 +77,7 @@ function rerenderUI() {
     document.getElementById('team-select').value = currentTeamId; // re-select current team
     
     if(catalog[currentTeamId]) {
-        ui.updateTeamUI(catalog[currentTeamId]);
+        ui.updateTeamUI(catalog[currentTeamId], currentLang);
         ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
         // If game is active, re-render game screen too
         const gameScreen = document.getElementById('screen-game');
@@ -201,7 +201,7 @@ async function changeTeam(shouldSave = true) {
         return;
     }
 
-    ui.updateTeamUI(catalog[currentTeamId]);
+    ui.updateTeamUI(catalog[currentTeamId], currentLang);
     myRoster = [];
     ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
     if (shouldSave) autoSave();
@@ -254,7 +254,7 @@ function resetToNewRoster() {
     currentTeamId = Object.keys(catalog)[0];
     document.getElementById('team-select').value = currentTeamId;
     
-    ui.updateTeamUI(catalog[currentTeamId]);
+    ui.updateTeamUI(catalog[currentTeamId], currentLang);
     ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
     ui.updateRosterSelectDropdown(savedRosters, currentRosterId, currentLang);
 }
@@ -291,7 +291,7 @@ async function loadRosterById(id) {
     myRoster = JSON.parse(JSON.stringify(found.roster));
     document.getElementById('team-select').value = currentTeamId;
     
-    ui.updateTeamUI(catalog[currentTeamId]);
+    ui.updateTeamUI(catalog[currentTeamId], currentLang);
     ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
     ui.updateRosterSelectDropdown(savedRosters, currentRosterId, currentLang);
 }

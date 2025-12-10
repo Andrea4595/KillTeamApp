@@ -32,9 +32,14 @@ export function switchTab(tabId, e) {
     }
 }
 
-export function updateTeamUI(teamData) {
+export function updateTeamUI(teamData, lang) {
     if (!teamData) return;
     document.documentElement.style.setProperty('--primary-color', teamData.color);
+
+    const rulesEl = document.getElementById('team-rules-text');
+    if (rulesEl) {
+        rulesEl.innerHTML = getText(teamData.rulesText, lang) || '';
+    }
 }
 
 export function openEquipModal(teamData, myRoster, addEquipHandler, lang) {
