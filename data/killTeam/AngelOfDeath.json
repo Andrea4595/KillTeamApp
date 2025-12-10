@@ -1,0 +1,905 @@
+{
+  "name": {
+    "en": "Angels of Death",
+    "ko": "엔젤 오브 데스"
+  },
+  "color": "#004688",
+  "rulesText": {
+    "en": "• 1 Leader operative selected from: ASSAULT INTERCESSOR SERGEANT, INTERCESSOR SERGEANT, SPACE MARINE CAPTAIN<br>• 5 Operatives selected from the list<br>• Max 1 of each operative type (excluding WARRIOR operatives)<br>• Max 1 ELIMINATOR SNIPER or HEAVY INTERCESSOR GUNNER combined",
+    "ko": "• 리더 오퍼레이티브 1명 선택 (어설트 인터세서 서전트, 인터세서 서전트, 스페이스 마린 캡틴 중)<br>• 나머지 오퍼레이티브 5명 선택<br>• 워리어(Warrior)를 제외한 각 병종은 1명씩만 포함 가능<br>• 엘리미네이터 스나이퍼와 헤비 인터세서 거너는 합쳐서 최대 1명만 선택 가능"
+  },
+  "factionRules": [
+    {
+      "title": {
+        "en": "Chapter Tactics",
+        "ko": "챕터 전술"
+      },
+      "desc": {
+        "en": "Select a primary and secondary Chapter Tactic. Options include: Aggressive (Rending), Dueller (Parry bonus), Resolute (Ignore APL mods), Stealthy (Cover save bonus), Mobile (Fall Back/Charge buff), Hardy (5+ Def crit), Sharpshooter (Severe bolts), Siege Specialist (Saturate).",
+        "ko": "주(Primary) 챕터 전술과 부(Secondary) 챕터 전술을 선택합니다. 선택지: 공격적(Rending), 결투가(패리 보너스), 결의(APL 변동 무시), 은밀함(커버 세이브 보너스), 기동성(후퇴/돌격 강화), 강인함(방어 5+ 치명타), 명사수(볼트 무기 Severe), 공성 전문가(Saturate)."
+      }
+    },
+    {
+      "title": {
+        "en": "Astartes",
+        "ko": "아스타르테스"
+      },
+      "desc": {
+        "en": "Operatives can perform two Shoot actions or two Fight actions during their activation. (Bolt weapons required for double Shoot).",
+        "ko": "오퍼레이티브는 활성화 동안 사격 액션 2회 또는 격투 액션 2회를 수행할 수 있습니다. (2회 사격 시 최소 하나는 볼트 무기여야 함)."
+      }
+    }
+  ],
+  "ploys": {
+    "strategy": [
+      {
+        "name": {
+          "en": "Combat Doctrine",
+          "ko": "전투 교리"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Select a Doctrine (Devastator, Tactical, Assault). Operatives gain [Balanced] under specific conditions relevant to the doctrine.",
+          "ko": "교리(데바스테이터, 택티컬, 어설트)를 하나 선택합니다. 해당 교리의 조건에 따라 오퍼레이티브들이 [Balanced] 규칙을 얻습니다."
+        }
+      },
+      {
+        "name": {
+          "en": "And They Shall Know No Fear",
+          "ko": "그들은 공포를 모르니"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Ignore penalties from being injured.",
+          "ko": "부상(Injured)으로 인한 모든 페널티를 무시합니다."
+        }
+      },
+      {
+        "name": {
+          "en": "Adaptive Tactics",
+          "ko": "적응형 전술"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Change your secondary Chapter Tactic for this turning point.",
+          "ko": "이번 터닝 포인트 동안 부(Secondary) 챕터 전술을 변경합니다."
+        }
+      },
+      {
+        "name": {
+          "en": "Indomitus",
+          "ko": "인도미투스"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "When defending against shooting, discard one fail to retain another fail as a normal success.",
+          "ko": "사격 방어 시, 실패한 주사위 하나를 버리고 다른 실패 주사위 하나를 일반 성공으로 바꿀 수 있습니다."
+        }
+      }
+    ],
+    "firefight": [
+      {
+        "name": {
+          "en": "Adjust Doctrine",
+          "ko": "교리 조정"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Change the active Combat Doctrine.",
+          "ko": "현재 적용 중인 전투 교리(Combat Doctrine)를 변경합니다."
+        }
+      },
+      {
+        "name": {
+          "en": "Transhuman Physiology",
+          "ko": "초인적 신체"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "When rolling defence dice against shooting, retain one normal success as a critical success.",
+          "ko": "사격 방어 주사위를 굴릴 때, 일반 성공 1개를 치명타(Critical) 성공으로 변경합니다."
+        }
+      },
+      {
+        "name": {
+          "en": "Shock Assault",
+          "ko": "충격 돌격"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Use when Fighting after Charging. Weapon gains [Shock] and first strike deals +1 Dmg.",
+          "ko": "돌격(Charge) 후 격투 시 사용. 무기가 [Shock]를 얻으며, 첫 타격의 데미지가 1 증가합니다."
+        }
+      },
+      {
+        "name": {
+          "en": "Wrath of Vengeance",
+          "ko": "복수의 분노"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "When counteracting, perform an additional 1AP action for free (must be different action).",
+          "ko": "반격(Counteract) 시, 1AP 액션 하나를 무료로 추가 수행합니다 (서로 다른 액션이어야 함)."
+        }
+      }
+    ]
+  },
+  "equipments": [
+    {
+      "id": "eq_purity",
+      "name": {
+        "en": "Purity Seals",
+        "ko": "퓨리티 씰"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "Once per turning point, discard one fail to retain another as normal success.",
+        "ko": "터닝 포인트당 한 번, 실패 주사위 하나를 버리고 다른 하나를 일반 성공으로 변경합니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "eq_reliquary",
+      "name": {
+        "en": "Chapter Reliquaries",
+        "ko": "챕터 성물함"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "Wrath of Vengeance costs 0CP for this operative if engaged.",
+        "ko": "이 오퍼레이티브가 인게이지 상태라면 '복수의 분노' 계략 비용이 0CP가 됩니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "eq_shield",
+      "name": {
+        "en": "Tilting Shields",
+        "ko": "틸팅 쉴드"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "In melee, opponent cannot retain results less than 6 as critical successes.",
+        "ko": "근접전에서 상대는 6 미만의 주사위 값을 치명타로 간주할 수 없습니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "eq_auspex",
+      "name": {
+        "en": "Auspex",
+        "ko": "오스펙스"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "Once per turning point when shooting, enemies within 8\" cannot be Obscured.",
+        "ko": "터닝 포인트당 한 번 사격 시 사용. 8인치 이내의 적은 가려짐(Obscured) 효과를 받을 수 없습니다."
+      },
+      "limit": 1
+    }
+  ],
+  "operatives": [
+    {
+      "id": "captain",
+      "name": {
+        "en": "Space Marine Captain",
+        "ko": "스페이스 마린 캡틴"
+      },
+      "role": {
+        "en": "LEADER",
+        "ko": "리더"
+      },
+      "stats": {
+        "M": "6\"",
+        "APL": 3,
+        "D": 3,
+        "S": "3+",
+        "W": 15
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Heroic Leader",
+            "ko": "영웅적 리더"
+          },
+          "desc": {
+            "en": "Once per turning point, use a firefight ploy for 0CP (or Adjust Doctrine).",
+            "ko": "터닝 포인트당 한 번, 사격전(Firefight) 계략 하나를 0CP로 사용하거나 '교리 조정'을 0CP로 사용합니다."
+          }
+        },
+        {
+          "title": {
+            "en": "Iron Halo",
+            "ko": "아이언 헤일로"
+          },
+          "desc": {
+            "en": "Once per battle, ignore one Normal Damage attack.",
+            "ko": "전투당 한 번, 입게 되는 일반 피해(Normal Dmg) 하나를 무시합니다."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Plasma pistol (standard)",
+            "ko": "플라즈마 피스톨 (일반)"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/5",
+          "range": "Ranged",
+          "rules": [
+            "Rng 8\"",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": {
+            "en": "Plasma pistol (supercharge)",
+            "ko": "플라즈마 피스톨 (과충전)"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "4/5",
+          "range": "Ranged",
+          "rules": [
+            "Rng 8\"",
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": {
+            "en": "Power fist",
+            "ko": "파워 피스트"
+          },
+          "A": 5,
+          "hit": "3+",
+          "dmg": "5/7",
+          "range": "Melee",
+          "rules": [
+            "Brutal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "assault_sgt",
+      "name": {
+        "en": "Assault Intercessor Sergeant",
+        "ko": "어설트 인터세서 서전트"
+      },
+      "role": {
+        "en": "LEADER",
+        "ko": "리더"
+      },
+      "stats": {
+        "M": "6\"",
+        "APL": 3,
+        "D": 3,
+        "S": "3+",
+        "W": 15
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Doctrine Warfare",
+            "ko": "교리 전술"
+          },
+          "desc": {
+            "en": "Combat Doctrine (Assault or Tactical) costs 0CP if this operative is in killzone.",
+            "ko": "이 오퍼레이티브가 킬존에 있으면 '전투 교리' (어설트 또는 택티컬) 사용 비용이 0CP가 됩니다."
+          }
+        },
+        {
+          "title": {
+            "en": "Chapter Veteran",
+            "ko": "챕터 베테랑"
+          },
+          "desc": {
+            "en": "Select one additional Chapter Tactic for this operative.",
+            "ko": "이 오퍼레이티브에게 적용할 챕터 전술 하나를 추가로 선택합니다."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Hand flamer",
+            "ko": "핸드 플레이머"
+          },
+          "A": 4,
+          "hit": "2+",
+          "dmg": "3/3",
+          "range": "Ranged",
+          "rules": [
+            "Rng 6\"",
+            "Saturate",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": {
+            "en": "Heavy bolt pistol",
+            "ko": "헤비 볼트 피스톨"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": [
+            "Rng 8\"",
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": {
+            "en": "Plasma pistol",
+            "ko": "플라즈마 피스톨"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/5",
+          "range": "Ranged",
+          "rules": [
+            "Rng 8\""
+          ]
+        },
+        {
+          "name": {
+            "en": "Chainsword",
+            "ko": "체인소드"
+          },
+          "A": 5,
+          "hit": "3+",
+          "dmg": "4/5",
+          "range": "Melee",
+          "rules": []
+        },
+        {
+          "name": {
+            "en": "Power fist",
+            "ko": "파워 피스트"
+          },
+          "A": 5,
+          "hit": "4+",
+          "dmg": "5/7",
+          "range": "Melee",
+          "rules": [
+            "Brutal"
+          ]
+        },
+        {
+          "name": {
+            "en": "Power weapon",
+            "ko": "파워 웨폰"
+          },
+          "A": 5,
+          "hit": "3+",
+          "dmg": "4/6",
+          "range": "Melee",
+          "rules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": {
+            "en": "Thunder hammer",
+            "ko": "썬더 해머"
+          },
+          "A": 5,
+          "hit": "4+",
+          "dmg": "5/6",
+          "range": "Melee",
+          "rules": [
+            "Shock",
+            "Stun"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "intercessor_sgt",
+      "name": {
+        "en": "Intercessor Sergeant",
+        "ko": "인터세서 서전트"
+      },
+      "role": {
+        "en": "LEADER",
+        "ko": "리더"
+      },
+      "stats": {
+        "M": "6\"",
+        "APL": 3,
+        "D": 3,
+        "S": "3+",
+        "W": 15
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Doctrine Warfare",
+            "ko": "교리 전술"
+          },
+          "desc": {
+            "en": "Combat Doctrine (Devastator or Tactical) costs 0CP if this operative is in killzone.",
+            "ko": "이 오퍼레이티브가 킬존에 있으면 '전투 교리' (데바스테이터 또는 택티컬) 사용 비용이 0CP가 됩니다."
+          }
+        },
+        {
+          "title": {
+            "en": "Chapter Veteran",
+            "ko": "챕터 베테랑"
+          },
+          "desc": {
+            "en": "Select one additional Chapter Tactic for this operative.",
+            "ko": "이 오퍼레이티브에게 적용할 챕터 전술 하나를 추가로 선택합니다."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Auto bolt rifle",
+            "ko": "오토 볼트 라이플"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": [
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": {
+            "en": "Bolt rifle",
+            "ko": "볼트 라이플"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": [
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": {
+            "en": "Stalker bolt rifle (heavy)",
+            "ko": "스토커 볼트 라이플 (중화기)"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/5",
+          "range": "Ranged",
+          "rules": [
+            "Heavy (Dash only)",
+            "Lethal 5+",
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": {
+            "en": "Chainsword",
+            "ko": "체인소드"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "4/5",
+          "range": "Melee",
+          "rules": []
+        },
+        {
+          "name": {
+            "en": "Power fist",
+            "ko": "파워 피스트"
+          },
+          "A": 4,
+          "hit": "4+",
+          "dmg": "5/7",
+          "range": "Melee",
+          "rules": [
+            "Brutal"
+          ]
+        },
+        {
+          "name": {
+            "en": "Power weapon",
+            "ko": "파워 웨폰"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "4/6",
+          "range": "Melee",
+          "rules": [
+            "Lethal 5+"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "assault_grenadier",
+      "name": {
+        "en": "Assault Intercessor Grenadier",
+        "ko": "어설트 인터세서 그레나디어"
+      },
+      "role": {
+        "en": "OPERATIVE",
+        "ko": "일반병"
+      },
+      "stats": {
+        "M": "6\"",
+        "APL": 3,
+        "D": 3,
+        "S": "3+",
+        "W": 14
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Grenadier",
+            "ko": "그레나디어"
+          },
+          "desc": {
+            "en": "Free Frag and Krak grenades. Improve Hit stat by 1 when using grenades.",
+            "ko": "파편(Frag) 및 크랙(Krak) 수류탄을 무료로 장비합니다. 수류탄 사용 시 명중(Hit) 스탯이 1 향상됩니다."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Heavy bolt pistol",
+            "ko": "헤비 볼트 피스톨"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": [
+            "Rng 8\"",
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": {
+            "en": "Chainsword",
+            "ko": "체인소드"
+          },
+          "A": 5,
+          "hit": "3+",
+          "dmg": "4/5",
+          "range": "Melee",
+          "rules": []
+        }
+      ]
+    },
+    {
+      "id": "assault_warrior",
+      "name": {
+        "en": "Assault Intercessor Warrior",
+        "ko": "어설트 인터세서 워리어"
+      },
+      "role": {
+        "en": "OPERATIVE",
+        "ko": "일반병"
+      },
+      "stats": {
+        "M": "6\"",
+        "APL": 3,
+        "D": 3,
+        "S": "3+",
+        "W": 14
+      },
+      "abilities": [],
+      "weapons": [
+        {
+          "name": {
+            "en": "Heavy bolt pistol",
+            "ko": "헤비 볼트 피스톨"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": [
+            "Rng 8\"",
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": {
+            "en": "Chainsword",
+            "ko": "체인소드"
+          },
+          "A": 5,
+          "hit": "3+",
+          "dmg": "4/5",
+          "range": "Melee",
+          "rules": []
+        }
+      ]
+    },
+    {
+      "id": "eliminator",
+      "name": {
+        "en": "Eliminator Sniper",
+        "ko": "엘리미네이터 스나이퍼"
+      },
+      "role": {
+        "en": "OPERATIVE",
+        "ko": "일반병"
+      },
+      "stats": {
+        "M": "6\"",
+        "APL": 3,
+        "D": 3,
+        "S": "3+",
+        "W": 12
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Camo Cloak",
+            "ko": "카모 클록"
+          },
+          "desc": {
+            "en": "Ignore [Saturate] when being shot. Has [Stealthy] Tactic (double bonus if selected).",
+            "ko": "사격 당할 때 [Saturate] 규칙을 무시합니다. '은밀함(Stealthy)' 전술을 기본 보유하며, 해당 전술 선택 시 효과가 강화됩니다."
+          }
+        },
+        {
+          "title": {
+            "en": "Optics",
+            "ko": "광학 장비"
+          },
+          "desc": {
+            "en": "1AP. Until next activation, enemies cannot be Obscured against this operative's shooting.",
+            "ko": "1AP. 다음 활성화 시작 전까지, 이 오퍼레이티브가 사격할 때 적은 가려짐(Obscured) 상태가 될 수 없습니다."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Bolt sniper rifle (executioner)",
+            "ko": "볼트 스나이퍼 라이플 (처형)"
+          },
+          "A": 4,
+          "hit": "2+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": [
+            "Heavy",
+            "Saturate",
+            "Seek Light",
+            "Silent"
+          ]
+        },
+        {
+          "name": {
+            "en": "Bolt sniper rifle (mortis)",
+            "ko": "볼트 스나이퍼 라이플 (모르티스)"
+          },
+          "A": 4,
+          "hit": "2+",
+          "dmg": "3/3",
+          "range": "Ranged",
+          "rules": [
+            "Devastating 3",
+            "Heavy",
+            "Piercing 1",
+            "Silent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heavy_intercessor",
+      "name": {
+        "en": "Heavy Intercessor Gunner",
+        "ko": "헤비 인터세서 거너"
+      },
+      "role": {
+        "en": "OPERATIVE",
+        "ko": "일반병"
+      },
+      "stats": {
+        "M": "6\"",
+        "APL": 3,
+        "D": 3,
+        "S": "3+",
+        "W": 18
+      },
+      "abilities": [],
+      "weapons": [
+        {
+          "name": {
+            "en": "Heavy bolter (focused)",
+            "ko": "헤비 볼터 (집중)"
+          },
+          "A": 5,
+          "hit": "3+",
+          "dmg": "4/5",
+          "range": "Ranged",
+          "rules": [
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": {
+            "en": "Heavy bolter (sweeping)",
+            "ko": "헤비 볼터 (소사)"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "4/5",
+          "range": "Ranged",
+          "rules": [
+            "Piercing Crits 1",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": {
+            "en": "Fists",
+            "ko": "주먹"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Melee",
+          "rules": []
+        }
+      ]
+    },
+    {
+      "id": "intercessor_gunner",
+      "name": {
+        "en": "Intercessor Gunner",
+        "ko": "인터세서 거너"
+      },
+      "role": {
+        "en": "OPERATIVE",
+        "ko": "일반병"
+      },
+      "stats": {
+        "M": "6\"",
+        "APL": 3,
+        "D": 3,
+        "S": "3+",
+        "W": 14
+      },
+      "abilities": [],
+      "weapons": [
+        {
+          "name": {
+            "en": "Auxiliary grenade launcher (frag)",
+            "ko": "보조 유탄 발사기 (파편)"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "2/4",
+          "range": "Ranged",
+          "rules": [
+            "Blast 2\""
+          ]
+        },
+        {
+          "name": {
+            "en": "Auxiliary grenade launcher (krak)",
+            "ko": "보조 유탄 발사기 (크랙)"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "4/5",
+          "range": "Ranged",
+          "rules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": {
+            "en": "Auto bolt rifle",
+            "ko": "오토 볼트 라이플"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": [
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": {
+            "en": "Bolt rifle",
+            "ko": "볼트 라이플"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": [
+            "Piercing Crits 1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "intercessor_warrior",
+      "name": {
+        "en": "Intercessor Warrior",
+        "ko": "인터세서 워리어"
+      },
+      "role": {
+        "en": "OPERATIVE",
+        "ko": "일반병"
+      },
+      "stats": {
+        "M": "6\"",
+        "APL": 3,
+        "D": 3,
+        "S": "3+",
+        "W": 14
+      },
+      "abilities": [],
+      "weapons": [
+        {
+          "name": {
+            "en": "Auto bolt rifle",
+            "ko": "오토 볼트 라이플"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": [
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": {
+            "en": "Bolt rifle",
+            "ko": "볼트 라이플"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": [
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": {
+            "en": "Stalker bolt rifle (heavy)",
+            "ko": "스토커 볼트 라이플 (중화기)"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/5",
+          "range": "Ranged",
+          "rules": [
+            "Heavy (Dash only)",
+            "Lethal 5+",
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": {
+            "en": "Fists",
+            "ko": "주먹"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Melee",
+          "rules": []
+        }
+      ]
+    }
+  ]
+}
