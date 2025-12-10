@@ -286,9 +286,31 @@ async function loadRosterById(id) {
         }
     }
     
-    // Now that data is guaranteed, proceed with UI updates
+    // Re-hydrate the roster
+    const teamData = catalog[currentTeamId];
+    myRoster = found.roster.map(savedOp => {
+        const fullOpData = teamData.operatives.find(op => op.id === savedOp.opId);
+        if (!fullOpData) return null; // Or handle error
+
+        const hydratedOp = JSON.parse(JSON.stringify(fullOpData));
+        
+        // Deactivate weapons
+        if (savedOp.disabledWeapons && savedOp.disabledWeapons.length > 0) {
+            hydratedOp.weapons.forEach(w => {
+                if (savedOp.disabledWeapons.includes(w.name.en)) {
+                    w.active = false;
+                }
+            });
+        }
+        
+        // Assign equipment
+        hydratedOp.assignedEquipments = savedOp.equipments || [];
+        
+        return hydratedOp;
+    }).filter(Boolean); // Filter out any nulls if an op wasn't found
+
+    // Update UI
     document.getElementById('roster-name').value = found.name;
-    myRoster = JSON.parse(JSON.stringify(found.roster));
     document.getElementById('team-select').value = currentTeamId;
     
     ui.updateTeamUI(catalog[currentTeamId], currentLang);
@@ -298,11 +320,25 @@ async function loadRosterById(id) {
 
 function autoSave() {
     const name = document.getElementById('roster-name').value || "Unknown";
+
+    // Create a minimal roster to save
+    const minimalRoster = myRoster.map(op => {
+        const disabledWeapons = op.weapons
+            .filter(w => w.active === false)
+            .map(w => w.name.en); // Save with the English name as a stable ID
+        
+        return {
+            opId: op.id,
+            disabledWeapons: disabledWeapons,
+            equipments: op.assignedEquipments || []
+        };
+    });
+
     const rosterData = { 
         id: currentRosterId, 
         name: name, 
         teamId: currentTeamId, 
-        roster: myRoster, 
+        roster: minimalRoster, 
         updatedAt: new Date().getTime() 
     };
 
