@@ -47,7 +47,7 @@ async function init() {
         await changeTeam(false); // Load team data, but don't auto-save yet
         
         if (savedRosters.length > 0 && lastUsedRoster) {
-            loadRosterById(lastUsedRoster.id);
+            await loadRosterById(lastUsedRoster.id);
         } else {
             resetToNewRoster();
         }
@@ -239,11 +239,11 @@ function toggleEquipUsed(opIdx, eqIdx) {
     }
 }
 
-function switchRoster(value) {
+async function switchRoster(value) {
     if (value === 'new') {
         resetToNewRoster();
     } else {
-        loadRosterById(value);
+        await loadRosterById(value);
     }
 }
 
@@ -259,20 +259,39 @@ function resetToNewRoster() {
     ui.updateRosterSelectDropdown(savedRosters, currentRosterId, currentLang);
 }
 
-function loadRosterById(id) {
+async function loadRosterById(id) {
     const found = savedRosters.find(r => r.id === id);
     if (!found) return;
 
     currentRosterId = found.id;
-    document.getElementById('roster-name').value = found.name;
-    myRoster = JSON.parse(JSON.stringify(found.roster));
-    
-    if (catalog[found.teamId]) {
-        currentTeamId = found.teamId;
-        document.getElementById('team-select').value = currentTeamId;
-        ui.updateTeamUI(catalog[currentTeamId]);
+    currentTeamId = found.teamId;
+
+    // Ensure team data is loaded
+    if (!catalog[currentTeamId]) {
+        const teamManifest = availableKillTeams.find(team => team.id === currentTeamId);
+        if (teamManifest) {
+            try {
+                const response = await fetch(`data/killTeam/${teamManifest.file_path}`);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                catalog[currentTeamId] = await response.json();
+            } catch (error) {
+                console.error(`Could not load data for ${currentTeamId}:`, error);
+                ui.showToast(`Error loading data for ${currentTeamId}.`);
+                return; // Stop if data loading fails
+            }
+        } else {
+            console.error(`Manifest for team ${currentTeamId} not found.`);
+            ui.showToast(`Error: Team ${currentTeamId} data not found.`);
+            return; // Stop if manifest is missing
+        }
     }
     
+    // Now that data is guaranteed, proceed with UI updates
+    document.getElementById('roster-name').value = found.name;
+    myRoster = JSON.parse(JSON.stringify(found.roster));
+    document.getElementById('team-select').value = currentTeamId;
+    
+    ui.updateTeamUI(catalog[currentTeamId]);
     ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
     ui.updateRosterSelectDropdown(savedRosters, currentRosterId, currentLang);
 }
