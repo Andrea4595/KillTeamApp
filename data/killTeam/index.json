@@ -1,12 +1,10 @@
 [
     {
         "id": "ork_wrecka_krew",
-        "name": "렉카 크루 (Orks)",
         "file_path": "WreckaCrew.json"
     },
     {
         "id": "spaceMarine_angel_of_death",
-        "name": "엔젤 오브 데스 (Space Marine)",
         "file_path": "AngelOfDeath.json"
     }
 ]

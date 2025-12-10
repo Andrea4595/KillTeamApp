@@ -1,11 +1,10 @@
 import * as ui from './ui.js';
 
 // State variables
-let availableKillTeams = []; // New state variable
 let catalog = {};
 let savedRosters = [];
 let currentRosterId = null;
-let currentTeamId = null; // Will be set after manifest load or from saved roster
+let currentTeamId = null; 
 let currentLang = 'ko';
 let myRoster = [];
 let gameState = { vp: 0, cp: 2, fp: 0, currentTP: 1, operatives: [] };
@@ -17,18 +16,31 @@ const STORAGE_KEY = 'kt_roster_library';
 
 async function init() {
     try {
-        const response = await fetch('data/killTeam/index.json');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        const manifestResponse = await fetch('data/killTeam/index.json');
+        if (!manifestResponse.ok) {
+            throw new Error(`HTTP error! status: ${manifestResponse.status}`);
         }
-        availableKillTeams = await response.json();
+        const teamManifests = await manifestResponse.json();
+
+        // Eagerly load all kill team data
+        await Promise.all(teamManifests.map(async (manifest) => {
+            try {
+                const teamResponse = await fetch(`data/killTeam/${manifest.file_path}`);
+                if (!teamResponse.ok) throw new Error(`Failed to load ${manifest.file_path}`);
+                const teamData = await teamResponse.json();
+                catalog[teamData.id] = teamData; // Use ID from within the file
+            } catch (error) {
+                console.error(`Could not load data for ${manifest.id}:`, error);
+            }
+        }));
+
     } catch (error) {
         console.error("Could not load Kill Team manifest:", error);
-        // Handle the error
         return;
     }
 
-    ui.populateTeamSelect(availableKillTeams, currentLang); // Pass availableKillTeams to UI
+    const availableTeams = Object.values(catalog);
+    ui.populateTeamSelect(availableTeams, currentLang);
     loadLibrary();
     
     // Determine the initial Kill Team to load
@@ -37,27 +49,26 @@ async function init() {
     if (savedRosters.length > 0) {
         lastUsedRoster = savedRosters.sort((a, b) => b.updatedAt - a.updatedAt)[0];
         initialTeamId = lastUsedRoster.teamId;
-    } else if (availableKillTeams.length > 0) {
-        initialTeamId = availableKillTeams[0].id;
+    } else if (availableTeams.length > 0) {
+        initialTeamId = availableTeams[0].id;
     }
 
     if (initialTeamId) {
-        // Set currentTeamId and load the specific Kill Team data
-        document.getElementById('team-select').value = initialTeamId;
-        await changeTeam(false); // Load team data, but don't auto-save yet
+        currentTeamId = initialTeamId;
+        document.getElementById('team-select').value = currentTeamId;
         
         if (savedRosters.length > 0 && lastUsedRoster) {
             await loadRosterById(lastUsedRoster.id);
         } else {
             resetToNewRoster();
         }
-
     } else {
-        resetToNewRoster(); // No teams available or saved rosters
+        // Handle case where no teams are available at all
+        console.error("No Kill Teams could be loaded.");
     }
     
     setupEventListeners();
-    setLanguage(currentLang); // Set initial button styles
+    setLanguage(currentLang);
 }
 
 function setLanguage(lang) {
@@ -73,7 +84,7 @@ function setLanguage(lang) {
 
 function rerenderUI() {
     // This function will re-render all visible text-based components
-    ui.populateTeamSelect(availableKillTeams, currentLang);
+    ui.populateTeamSelect(Object.values(catalog), currentLang);
     document.getElementById('team-select').value = currentTeamId; // re-select current team
     
     if(catalog[currentTeamId]) {
@@ -175,32 +186,12 @@ function handleGameOpListClick(event) {
 
 // --- Data & State Management ---
 
-async function changeTeam(shouldSave = true) {
+function changeTeam(shouldSave = true) {
     const select = document.getElementById('team-select');
     if (!select) return;
     currentTeamId = select.value;
 
-    const selectedTeamManifest = availableKillTeams.find(team => team.id === currentTeamId);
-    if (selectedTeamManifest) {
-        try {
-            const response = await fetch(`data/killTeam/${selectedTeamManifest.file_path}`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const teamData = await response.json();
-            catalog[currentTeamId] = teamData; // Populate the catalog with the fetched data
-        } catch (error) {
-            console.error(`Could not load data for ${currentTeamId}:`, error);
-            ui.showToast(`Error loading data for ${currentTeamId}.`);
-            return;
-        }
-    } else {
-        // Handle case where team manifest is not found
-        console.error(`Manifest for team ${currentTeamId} not found.`);
-        ui.showToast(`Error: Team ${currentTeamId} data not found.`);
-        return;
-    }
-
+    // Data is pre-loaded, just update UI
     ui.updateTeamUI(catalog[currentTeamId], currentLang);
     myRoster = [];
     ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
@@ -266,28 +257,15 @@ async function loadRosterById(id) {
     currentRosterId = found.id;
     currentTeamId = found.teamId;
 
-    // Ensure team data is loaded
-    if (!catalog[currentTeamId]) {
-        const teamManifest = availableKillTeams.find(team => team.id === currentTeamId);
-        if (teamManifest) {
-            try {
-                const response = await fetch(`data/killTeam/${teamManifest.file_path}`);
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                catalog[currentTeamId] = await response.json();
-            } catch (error) {
-                console.error(`Could not load data for ${currentTeamId}:`, error);
-                ui.showToast(`Error loading data for ${currentTeamId}.`);
-                return; // Stop if data loading fails
-            }
-        } else {
-            console.error(`Manifest for team ${currentTeamId} not found.`);
-            ui.showToast(`Error: Team ${currentTeamId} data not found.`);
-            return; // Stop if manifest is missing
-        }
+    // Data is pre-loaded, just re-hydrate and update UI
+    const teamData = catalog[currentTeamId];
+    if (!teamData) {
+        console.error(`Attempted to load roster for team ID ${currentTeamId}, but it was not found in the catalog.`);
+        ui.showToast(`Error: Data for team ${currentTeamId} is missing.`);
+        return;
     }
     
     // Re-hydrate the roster
-    const teamData = catalog[currentTeamId];
     myRoster = found.roster.map(savedOp => {
         const fullOpData = teamData.operatives.find(op => op.id === savedOp.opId);
         if (!fullOpData) return null; // Or handle error
