@@ -217,3 +217,27 @@ h1, h2, h3 {
 }
 .equip-btn-list button:hover { background: #444; }
 .equip-btn-list button:disabled { opacity: 0.5; cursor: not-allowed; text-decoration: line-through; }
+
+/* 2열 레이아웃 (넓은 화면) */
+@media (min-width: 768px) {
+    .container {
+        max-width: 1200px;
+    }
+
+    .modal-content {
+        max-width: 1100px;
+    }
+
+    #my-roster-list, #modal-op-list, #game-op-list,
+    #info-faction-rules, #info-strat-ploys, #info-fire-ploys,
+    #game-faction-rules, #game-strat-ploys, #game-fire-ploys,
+    #equip-modal-list, #game-equipment-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .op-card, .ploy-card, .equip-btn-list button, .card-equip-item {
+        margin-bottom: 0;
+    }
+}
