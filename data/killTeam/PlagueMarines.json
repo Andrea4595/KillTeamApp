@@ -1,0 +1,653 @@
+{
+  "name": {
+    "en": "Plague Marines",
+    "ko": "플레이그 마린"
+  },
+  "color": "#7b8350",
+  "rulesText": {
+    "en": "• 1 PLAGUE MARINE CHAMPION operative<br>• 5 PLAGUE MARINE operatives selected from the list (BOMBARDIER, FIGHTER, HEAVY GUNNER, ICON BEARER, MALIGNANT PLAGUECASTER, WARRIOR)<br>• Each operative type can be selected only once.",
+    "ko": "• 플레이그 마린 챔피언 1명 (필수)<br>• 나머지 플레이그 마린 오퍼레이티브 5명 선택 (봄바디어, 파이터, 헤비 거너, 아이콘 베어러, 말리그넌트 플레이그캐스터, 워리어)<br>• 각 병종은 1명씩만 선택 가능합니다."
+  },
+  "factionRules": [
+    {
+      "title": {
+        "en": "Astartes",
+        "ko": "아스타르테스"
+      },
+      "desc": {
+        "en": "Can perform two Shoot actions or two Fight actions during activation. If two Shoot actions, one must be a bolt pistol, boltgun, or PSYCHIC weapon. Can counteract regardless of order.",
+        "ko": "활성화 동안 사격 액션 2회 또는 격투 액션 2회를 수행할 수 있습니다. 사격 2회 시 최소 하나는 볼트 피스톨, 볼트건 또는 사이킥 무기여야 합니다. 명령(Order) 상태와 상관없이 반격(Counteract)할 수 있습니다."
+      }
+    },
+    {
+      "title": {
+        "en": "Poison",
+        "ko": "독 (Poison)"
+      },
+      "desc": {
+        "en": "When inflicting damage with a Poison weapon, target gains a Poison token. Activated operatives with Poison tokens suffer 1 damage.",
+        "ko": "[Poison] 무기로 피해를 입히면 대상에게 독 토큰을 부여합니다. 독 토큰을 가진 오퍼레이티브가 활성화될 때 1 피해를 입습니다."
+      }
+    },
+    {
+      "title": {
+        "en": "Disgustingly Resilient",
+        "ko": "혐오스러운 맷집"
+      },
+      "desc": {
+        "en": "When taking 3+ damage, roll D6. On 4+, reduce damage by 1.",
+        "ko": "3 이상의 피해를 입을 때 D6을 굴려 4+가 나오면 피해량을 1 줄입니다."
+      }
+    }
+  ],
+  "ploys": {
+    "strategy": [
+      {
+        "name": {
+          "en": "Contagion",
+          "ko": "전염"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Enemy suffers -2\" Move and -1 Hit if near Plague Marines or Poisoned.",
+          "ko": "플레이그 마린 근처에 있거나, 독 토큰을 보유하고 있는 적은 이동력 -2\", 명중 -1 페널티를 받습니다."
+        }
+      },
+      {
+        "name": {
+          "en": "Lumbering Death",
+          "ko": "육중한 죽음"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Weapons gain [Ceaseless] if operative moved no more than 3\".",
+          "ko": "3인치 이하로 이동한 경우, 사격이나 격투 시 무기가 [Ceaseless] 규칙을 얻습니다."
+        }
+      },
+      {
+        "name": {
+          "en": "Cloud of Flies",
+          "ko": "파리 떼"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Place a marker. Friendly operatives within 3\" of marker are Obscured from enemies >3\" away.",
+          "ko": "마커를 배치합니다. 마커 3인치 이내의 아군 오퍼레이티브는 3인치 이상 떨어진 적으로부터 가려짐(Obscured) 판정을 받습니다."
+        }
+      },
+      {
+        "name": {
+          "en": "Nurglings",
+          "ko": "너글링"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Target enemy near friendly operative suffers -1 APL.",
+          "ko": "아군 근처의 적 하나를 선택하여 APL을 1 감소시킵니다."
+        }
+      }
+    ],
+    "firefight": [
+      {
+        "name": {
+          "en": "Virulent Poison",
+          "ko": "맹독"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Apply Poison token to enemy within 3\" (or 7\" on 2D6 roll of 7+).",
+          "ko": "3인치 이내의 적에게 독 토큰을 부여합니다 (또는 2D6 굴림 7+ 성공 시 7인치 이내)."
+        }
+      },
+      {
+        "name": {
+          "en": "Poisonous Demise",
+          "ko": "독성 최후"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "When incapacitated, nearby enemies gain Poison token or take damage.",
+          "ko": "무력화될 때 사용. 3인치 이내의 적들은 독 토큰을 얻거나, 이미 있다면 피해를 입습니다."
+        }
+      },
+      {
+        "name": {
+          "en": "Sickening Resilience",
+          "ko": "역겨운 회복력"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Subtract 1 from damage inflicted (min 2) for Disgustingly Resilient without rolling.",
+          "ko": "피해를 입을 때 사용. 혐오스러운 맷집 굴림 없이 피해량을 1 줄입니다 (최소 2까지)."
+        }
+      },
+      {
+        "name": {
+          "en": "Curse of Rot",
+          "ko": "부패의 저주"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "When fighting/shooting nearby enemy, opponent's rolls of 3 inflict 1 self-damage and count as fails.",
+          "ko": "근처의 적과 전투 시, 상대의 주사위 값이 3이면 실패로 간주하고 상대에게 1 피해를 입힙니다."
+        }
+      }
+    ]
+  },
+  "equipments": [
+    {
+      "id": "eq_bells",
+      "name": {
+        "en": "Plague Bells",
+        "ko": "플레이그 벨"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "Ignore stats penalties from being injured.",
+        "ko": "부상(Injured)으로 인한 스탯 페널티를 무시합니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "eq_blight_grenade",
+      "name": {
+        "en": "Blight Grenades",
+        "ko": "블라이트 수류탄"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "Grants ranged weapon: 6\", 4+, 2/4, Blast 2\", Saturate, Severe, Poison. (Max 2 uses).",
+        "ko": "사거리 6\", 명중 4+, 데미지 2/4, [Blast 2\"], [Saturate], [Severe], [Poison] 무기를 얻습니다. (전투 중 최대 2회 사용 가능)."
+      },
+      "limit": 1
+    },
+    {
+      "id": "eq_rounds",
+      "name": {
+        "en": "Plague Rounds",
+        "ko": "플레이그 탄환"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "Boltguns and bolt pistols gain [Poison] and [Severe].",
+        "ko": "볼트건과 볼트 피스톨이 [Poison]과 [Severe] 규칙을 얻습니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "eq_vents",
+      "name": {
+        "en": "Poison Vents",
+        "ko": "포이즌 벤트"
+      },
+      "cost": "EP",
+      "desc": {
+        "en": "Poisoned enemies activated within 3\" take D3 damage instead of 1.",
+        "ko": "독 토큰을 가진 적이 3인치 이내에서 활성화되면 1 대신 D3 피해를 입습니다."
+      },
+      "limit": 1
+    }
+  ],
+  "operatives": [
+    {
+      "id": "champion",
+      "name": {
+        "en": "Plague Marine Champion",
+        "ko": "플레이그 마린 챔피언"
+      },
+      "role": {
+        "en": "LEADER",
+        "ko": "리더"
+      },
+      "stats": {
+        "M": "5\"",
+        "APL": 3,
+        "D": 3,
+        "S": "3+",
+        "W": 15
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Grandfather's Blessing",
+            "ko": "할아버지의 축복"
+          },
+          "desc": {
+            "en": "Regain 1 wound when nearby Poisoned enemy loses a wound (max 3 per turning point).",
+            "ko": "근처의 독에 걸린 적이 피해를 입으면 체력을 1 회복합니다 (터닝 포인트당 최대 3)."
+          }
+        },
+        {
+          "title": {
+            "en": "Toxic",
+            "ko": "독성 (Toxic)"
+          },
+          "desc": {
+            "en": "Add 1 to Damage against Poisoned enemies.",
+            "ko": "독에 걸린 적 공격 시 데미지 +1."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Plasma pistol",
+            "ko": "플라즈마 피스톨"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/5",
+          "range": "Ranged",
+          "rules": [
+            "Rng 8\"",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": {
+            "en": "Plague sword",
+            "ko": "플레이그 소드"
+          },
+          "A": 5,
+          "hit": "3+",
+          "dmg": "4/5",
+          "range": "Melee",
+          "rules": [
+            "Severe",
+            "Poison",
+            "Toxic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "plaguecaster",
+      "name": {
+        "en": "Malignant Plaguecaster",
+        "ko": "말리그넌트 플레이그캐스터"
+      },
+      "role": {
+        "en": "PSYKER",
+        "ko": "사이커"
+      },
+      "stats": {
+        "M": "5\"",
+        "APL": 3,
+        "D": 3,
+        "S": "3+",
+        "W": 14
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Poisonous Miasma",
+            "ko": "독성 미아즈마"
+          },
+          "desc": {
+            "en": "1AP. Psychic. Apply Poison token to enemy within 7\" (or 3 dmg if already poisoned).",
+            "ko": "1AP. 사이킥. 7인치 이내 적에게 독 토큰 부여 (이미 있으면 3 데미지)."
+          }
+        },
+        {
+          "title": {
+            "en": "Putrescent Vitality",
+            "ko": "부패의 활력"
+          },
+          "desc": {
+            "en": "1AP. Psychic. Heal friendly operative within 3\". Roll 2D6, heal 7 if result is 7, else highest die.",
+            "ko": "1AP. 사이킥. 3인치 이내 아군 치유. 2D6을 굴려 합이 7이면 7 회복, 아니면 높은 주사위 값만큼 회복."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Entropy",
+            "ko": "엔트로피"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/7",
+          "range": "Ranged",
+          "rules": [
+            "Rng 7\"",
+            "Saturate",
+            "Severe",
+            "Poison"
+          ]
+        },
+        {
+          "name": {
+            "en": "Plague wind",
+            "ko": "플레이그 윈드"
+          },
+          "A": 6,
+          "hit": "3+",
+          "dmg": "2/3",
+          "range": "Ranged",
+          "rules": [
+            "Saturate",
+            "Severe",
+            "Torrent 1\"",
+            "Poison"
+          ]
+        },
+        {
+          "name": {
+            "en": "Corrupted staff",
+            "ko": "타락한 지팡이"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Melee",
+          "rules": [
+            "Severe",
+            "Shock",
+            "Stun",
+            "Poison"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bombardier",
+      "name": {
+        "en": "Plague Marine Bombardier",
+        "ko": "플레이그 마린 봄바디어"
+      },
+      "role": {
+        "en": "OPERATIVE",
+        "ko": "일반병"
+      },
+      "stats": {
+        "M": "5\"",
+        "APL": 3,
+        "D": 3,
+        "S": "3+",
+        "W": 14
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Grenadier",
+            "ko": "그레나디어"
+          },
+          "desc": {
+            "en": "Free Blight and Krak grenades. +1 Hit when using grenades. Blight grenades gain [Toxic].",
+            "ko": "블라이트 및 크랙 수류탄 무료 사용. 수류탄 사용 시 명중 +1. 블라이트 수류탄에 [Toxic] 추가."
+          }
+        },
+        {
+          "title": {
+            "en": "Toxic",
+            "ko": "독성 (Toxic)"
+          },
+          "desc": {
+            "en": "Add 1 to Damage against Poisoned enemies.",
+            "ko": "독에 걸린 적 공격 시 데미지 +1."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Boltgun",
+            "ko": "볼트건"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": []
+        },
+        {
+          "name": {
+            "en": "Fists",
+            "ko": "주먹"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Melee",
+          "rules": []
+        }
+      ]
+    },
+    {
+      "id": "fighter",
+      "name": {
+        "en": "Plague Marine Fighter",
+        "ko": "플레이그 마린 파이터"
+      },
+      "role": {
+        "en": "OPERATIVE",
+        "ko": "일반병"
+      },
+      "stats": {
+        "M": "5\"",
+        "APL": 3,
+        "D": 3,
+        "S": "3+",
+        "W": 14
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Flail",
+            "ko": "플레일"
+          },
+          "desc": {
+            "en": "1AP. Deal D3+2 dmg to all enemies within 2\". Apply Poison on 3+.",
+            "ko": "1AP. 2인치 이내 모든 적에게 D3+2 피해. 3+로 독 토큰 부여."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Flail of Corruption",
+            "ko": "부패의 도리깨"
+          },
+          "A": 5,
+          "hit": "3+",
+          "dmg": "4/5",
+          "range": "Melee",
+          "rules": [
+            "Brutal",
+            "Severe",
+            "Shock",
+            "Poison"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heavy_gunner",
+      "name": {
+        "en": "Plague Marine Heavy Gunner",
+        "ko": "플레이그 마린 헤비 거너"
+      },
+      "role": {
+        "en": "OPERATIVE",
+        "ko": "일반병"
+      },
+      "stats": {
+        "M": "5\"",
+        "APL": 3,
+        "D": 3,
+        "S": "3+",
+        "W": 14
+      },
+      "abilities": [],
+      "weapons": [
+        {
+          "name": {
+            "en": "Plague spewer",
+            "ko": "플레이그 스퓨어"
+          },
+          "A": 5,
+          "hit": "2+",
+          "dmg": "3/3",
+          "range": "Ranged",
+          "rules": [
+            "Rng 7\"",
+            "Saturate",
+            "Severe",
+            "Torrent 2\"",
+            "Poison"
+          ]
+        },
+        {
+          "name": {
+            "en": "Fists",
+            "ko": "주먹"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Melee",
+          "rules": []
+        }
+      ]
+    },
+    {
+      "id": "icon_bearer",
+      "name": {
+        "en": "Plague Marine Icon Bearer",
+        "ko": "플레이그 마린 아이콘 베어러"
+      },
+      "role": {
+        "en": "OPERATIVE",
+        "ko": "일반병"
+      },
+      "stats": {
+        "M": "5\"",
+        "APL": 3,
+        "D": 3,
+        "S": "3+",
+        "W": 14
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Icon Bearer",
+            "ko": "아이콘 베어러"
+          },
+          "desc": {
+            "en": "Treat APL as 1 higher for objective control.",
+            "ko": "목표물 통제 시 APL을 1 높게 간주합니다."
+          }
+        },
+        {
+          "title": {
+            "en": "Icon of Contagion",
+            "ko": "전염의 아이콘"
+          },
+          "desc": {
+            "en": "Contagion strategy ploy costs 0CP.",
+            "ko": "전염(Contagion) 전략 사용 비용이 0CP가 됩니다."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Bolt pistol",
+            "ko": "볼트 피스톨"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": [
+            "Rng 8\""
+          ]
+        },
+        {
+          "name": {
+            "en": "Plague knife",
+            "ko": "플레이그 나이프"
+          },
+          "A": 5,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Melee",
+          "rules": [
+            "Severe",
+            "Poison"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "warrior",
+      "name": {
+        "en": "Plague Marine Warrior",
+        "ko": "플레이그 마린 워리어"
+      },
+      "role": {
+        "en": "OPERATIVE",
+        "ko": "일반병"
+      },
+      "stats": {
+        "M": "5\"",
+        "APL": 3,
+        "D": 3,
+        "S": "3+",
+        "W": 14
+      },
+      "abilities": [
+        {
+          "title": {
+            "en": "Repulsive Fortitude",
+            "ko": "혐오스러운 인내"
+          },
+          "desc": {
+            "en": "Defence dice results of 5+ are critical successes against shooting.",
+            "ko": "사격 방어 시 주사위 5+는 치명타 성공으로 간주합니다."
+          }
+        },
+        {
+          "title": {
+            "en": "Toxic",
+            "ko": "독성 (Toxic)"
+          },
+          "desc": {
+            "en": "Add 1 to Damage against Poisoned enemies.",
+            "ko": "독에 걸린 적 공격 시 데미지 +1."
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "name": {
+            "en": "Boltgun",
+            "ko": "볼트건"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": [
+            "Toxic"
+          ]
+        },
+        {
+          "name": {
+            "en": "Plague knife",
+            "ko": "플레이그 나이프"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Melee",
+          "rules": [
+            "Severe",
+            "Poison"
+          ]
+        }
+      ]
+    }
+  ]
+}
