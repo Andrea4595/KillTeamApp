@@ -33,7 +33,7 @@ body {
     min-height: 100vh;
     background-color: rgba(0,0,0,0.3);
     position: relative;
-    padding-bottom: 80px;
+    padding-bottom: calc(80px + 10px); /* Adjusted for search bar */
 }
 
 h1, h2, h3 { 
@@ -240,4 +240,56 @@ h1, h2, h3 {
     .op-card, .ploy-card, .equip-btn-list button, .card-equip-item {
         margin-bottom: 0;
     }
+}
+
+
+/* 검색 컨테이너 */
+#search-container {
+    position: fixed;
+    bottom: 0; /* Reverted to bottom */
+    left: 0;
+    width: 100%;
+    background-color: #222;
+    border-top: 1px solid var(--primary-color); /* Reverted to border-top */
+    padding: 10px;
+    z-index: 150;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.5); /* Reverted shadow for bottom position */
+    display: flex;
+    flex-direction: column-reverse; /* Results expand upwards */
+    max-height: 50vh; /* 화면의 절반을 넘지 않도록 */
+}
+
+#rule-search-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    background: var(--card-bg);
+    border: 1px solid #555;
+    color: white;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+#rule-search-results {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.search-result-item {
+    background-color: var(--card-bg);
+    padding: 10px;
+    border-radius: 4px;
+    border-left: 3px solid var(--primary-color);
+}
+.search-result-item .key {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+.search-result-item .desc {
+    font-size: 0.85rem;
+    color: #ccc;
+    line-height: 1.4;
 }

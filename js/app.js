@@ -7,6 +7,7 @@ let currentRosterId = null;
 let currentTeamId = null; 
 let currentLang = 'ko';
 let myRoster = [];
+let rules = [];
 let gameState = { vp: 0, cp: 2, fp: 0, currentTP: 1, operatives: [] };
 let currentOpForEquip = null;
 
@@ -16,19 +17,21 @@ const STORAGE_KEY = 'kt_roster_library';
 
 async function init() {
     try {
-        const manifestResponse = await fetch('data/killTeam/index.json');
-        if (!manifestResponse.ok) {
-            throw new Error(`HTTP error! status: ${manifestResponse.status}`);
-        }
+        // Load all data files in parallel
+        const [manifestResponse, universalRulesResponse, rulesResponse] = await Promise.all([
+            fetch('data/killTeam/index.json'),
+            fetch('data/killTeam/Universal.json'),
+            fetch('data/rules.json')
+        ]);
+
+        if (!manifestResponse.ok) throw new Error(`Failed to load index.json: ${manifestResponse.status}`);
+        if (!universalRulesResponse.ok) throw new Error(`Failed to load Universal.json: ${universalRulesResponse.status}`);
+        if (!rulesResponse.ok) throw new Error(`Failed to load rules.json: ${rulesResponse.status}`);
+
         const teamFilePaths = await manifestResponse.json();
-
-        // Load Universal Rules
-        const universalRulesResponse = await fetch('data/killTeam/Universal.json');
-        if (!universalRulesResponse.ok) {
-            throw new Error(`HTTP error! status: ${universalRulesResponse.status}`);
-        }
         const universalRules = await universalRulesResponse.json();
-
+        rules = await rulesResponse.json();
+        
         // Eagerly load all kill team data
         await Promise.all(teamFilePaths.map(async (filePath) => {
             try {
@@ -158,6 +161,17 @@ function setupEventListeners() {
     // Event Delegation for dynamic content
     document.getElementById('my-roster-list').addEventListener('click', handleRosterListClick);
     document.getElementById('game-op-list').addEventListener('click', handleGameOpListClick);
+
+    // Rule Search
+    document.getElementById('rule-search-input').addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        if (searchTerm.length > 1) {
+            const results = rules.filter(rule => rule.key.toLowerCase().includes(searchTerm));
+            ui.renderSearchResults(results, currentLang);
+        } else {
+            ui.renderSearchResults([], currentLang);
+        }
+    });
 }
 
 function handleRosterListClick(event) {

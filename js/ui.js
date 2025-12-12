@@ -376,3 +376,25 @@ export function populateTeamSelect(availableKillTeams, lang) {
         select.appendChild(option);
     });
 }
+
+export function renderSearchResults(results, lang) {
+    const container = document.getElementById('rule-search-results');
+    if (!container) return;
+
+    container.innerHTML = ''; // Clear previous results
+
+    if (results.length === 0) {
+        // Optional: Show a "no results" message
+        return;
+    }
+
+    results.forEach(rule => {
+        const item = document.createElement('div');
+        item.className = 'search-result-item';
+        item.innerHTML = `
+            <div class="key">${rule.key}</div>
+            <div class="desc">${getText(rule.desc, lang)}</div>
+        `;
+        container.appendChild(item);
+    });
+}

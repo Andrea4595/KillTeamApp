@@ -1,0 +1,289 @@
+[
+	{
+		"key": "Initiative",
+		"desc": {
+			"en": "Determined by rolling a D6 at the start of the Strategy Phase. The winner decides who has initiative. In the first phase, both gain 1CP. In subsequent phases, the player with initiative gains 1CP, the other gains 2CP. [cite: 40, 42, 43]",
+			"ko": "전략 단계 시작 시 D6를 굴려 결정하며, 승자가 누가 주도권을 가질지 정합니다. 첫 단계에서는 둘 다 1CP를 얻고, 이후 단계부터는 주도권을 가진 쪽이 1CP, 없는 쪽이 2CP를 얻습니다."
+		}
+	},
+	{
+		"key": "Drop Zone",
+		"desc": {
+			"en": "The area within 3\" of a player's killzone edge where operatives are set up. [cite: 14, 16]",
+			"ko": "플레이어의 킬존 가장자리에서 3인치 이내의 구역으로, 오퍼레이티브가 배치되는 곳입니다."
+		}
+	},
+	{
+		"key": "Engage Order",
+		"desc": {
+			"en": "An operative with an Engage order can perform actions as normal and counteract. [cite: 17, 18]",
+			"ko": "교전 명령 상태의 오퍼레이티브는 정상적으로 행동하고 대응(Counteract)할 수 있습니다."
+		}
+	},
+	{
+		"key": "Conceal Order",
+		"desc": {
+			"en": "An operative with a Conceal order is not a valid target while in cover, but cannot perform Shoot or Charge actions. [cite: 19, 34]",
+			"ko": "잠입 명령 상태의 오퍼레이티브는 엄폐 중일 때 사격 대상이 되지 않지만, 사격이나 돌격 행동을 할 수 없습니다."
+		}
+	},
+	{
+		"key": "Counteract",
+		"desc": {
+			"en": "If all your operatives are expended but the opponent's aren't, one expended friendly operative with an Engage order can perform a 1AP action for free (max move 2\"). Usable once per turning point per operative. [cite: 22, 23]",
+			"ko": "내 오퍼레이티브가 모두 행동을 마쳤는데 상대는 남았다면, 행동을 마친 '교전' 상태 아군 하나가 무료로 1AP 행동(최대 이동 2인치)을 수행합니다. 오퍼레이티브당 턴마다 1회 가능합니다."
+		}
+	},
+	{
+		"key": "Reposition",
+		"desc": {
+			"en": "1AP. Move the operative up to its Move stat. Cannot move within control range of enemy operatives. [cite: 26, 27, 28]",
+			"ko": "1AP. 이동 수치만큼 이동합니다. 적의 제어 범위 안으로 이동할 수 없습니다."
+		}
+	},
+	{
+		"key": "Dash",
+		"desc": {
+			"en": "1AP. Move like Reposition but max 3\" and cannot climb. Cannot be performed in the same activation as Charge. [cite: 32, 33, 61]",
+			"ko": "1AP. 재배치처럼 이동하되 최대 3인치까지만 가능하며 등반 불가합니다. 돌격과 같은 활성화 단계에서 사용할 수 없습니다."
+		}
+	},
+	{
+		"key": "Fall Back",
+		"desc": {
+			"en": "2AP. Move like Reposition, allowed to move within enemy control range but cannot finish there. Only usable if starting within enemy control range. [cite: 63, 64, 65]",
+			"ko": "2AP. 재배치처럼 이동하며 적 제어 범위 내를 통과할 수 있으나 거기서 멈출 순 없습니다. 적 제어 범위 내에 있을 때만 사용 가능합니다."
+		}
+	},
+	{
+		"key": "Charge",
+		"desc": {
+			"en": "1AP. Move like Reposition + 2\". Must finish within enemy control range. Cannot be used if Concealed or already in enemy control range. [cite: 68, 69, 70]",
+			"ko": "1AP. 재배치 거리 + 2인치를 이동합니다. 반드시 적 제어 범위 내에서 이동을 마쳐야 합니다. 잠입 상태거나 이미 적 제어 범위 내라면 사용 불가합니다."
+		}
+	},
+	{
+		"key": "Shoot",
+		"desc": {
+			"en": "1AP. Perform a shooting attack. Cannot be used if Concealed or within enemy control range. [cite: 73, 74]",
+			"ko": "1AP. 사격 공격을 수행합니다. 잠입 상태거나 적 제어 범위 내에 있다면 사용할 수 없습니다."
+		}
+	},
+	{
+		"key": "Fight",
+		"desc": {
+			"en": "1AP. Perform a melee fight. Must have an enemy within control range. [cite: 77, 78]",
+			"ko": "1AP. 근접 전투를 수행합니다. 제어 범위 내에 적이 있어야 합니다."
+		}
+	},
+	{
+		"key": "Command Re-roll",
+		"desc": {
+			"en": "1CP. Firefight Ploy. Use after rolling attack or defence dice to re-roll one of those dice. [cite: 59, 60]",
+			"ko": "1CP. 교전 단계 계략. 공격 또는 방어 주사위를 굴린 후 하나를 다시 굴립니다."
+		}
+	},
+	{
+		"key": "Dice Rules",
+		"desc": {
+			"en": "Results of 6 are critical successes. Results of 1 are always fails. All other successes are normal. [cite: 82, 83]",
+			"ko": "주사위 6은 치명타 성공, 1은 항상 실패, 그 외 성공은 일반 성공입니다."
+		}
+	},
+	{
+		"key": "Shooting Sequence",
+		"desc": {
+			"en": "1. Attacker rolls Hit dice. 2. Defender rolls Save dice (can retain 1 auto-save if in cover). 3. Defender blocks hits (1 normal blocks 1 normal; 2 normal blocks 1 crit; 1 crit blocks anything). 4. Resolve damage. [cite: 84, 86, 89, 90, 91, 93, 94]",
+			"ko": "1. 공격자가 명중 굴림. 2. 방어자가 방어 굴림(엄폐 시 1개 자동 성공). 3. 방어자가 성공을 상쇄(일반 1개로 일반 1개 막음, 일반 2개로 치명타 1개 막음, 치명타 1개로 아무거나 1개 막음). 4. 피해 적용."
+		}
+	},
+	{
+		"key": "Fighting Sequence",
+		"desc": {
+			"en": "Both players roll attack dice. Starting with attacker, alternate resolving dice to Strike (deal dmg) or Block (cancel enemy success). [cite: 104, 107, 108]",
+			"ko": "양측 모두 공격 굴림을 합니다. 공격자부터 번갈아 가며 주사위를 사용해 타격(피해 입힘)하거나 방어(상대 성공 무효화)합니다."
+		}
+	},
+	{
+		"key": "Control Range",
+		"desc": {
+			"en": "Visible to and within 1\" of the operative. Mutual between operatives. [cite: 116, 117]",
+			"ko": "오퍼레이티브에게 보이고 1인치 이내인 범위입니다. 오퍼레이티브 간에는 상호 적용됩니다."
+		}
+	},
+	{
+		"key": "Visible",
+		"desc": {
+			"en": "An unobstructed straight line can be drawn from the operative's head to any part of the target (excluding bases). [cite: 123]",
+			"ko": "오퍼레이티브의 머리에서 대상의 어느 부분(베이스 제외)으로든 방해 없는 직선을 그을 수 있어야 합니다."
+		}
+	},
+	{
+		"key": "Cover",
+		"desc": {
+			"en": "Target is in cover if intervening terrain is within its control range. Negated if within 2\" of the active operative. [cite: 125, 126]",
+			"ko": "대상 제어 범위 내에 지형지물이 사선을 가리면 엄폐입니다. 공격자와 2인치 이내면 엄폐 효과가 무효화됩니다."
+		}
+	},
+	{
+		"key": "Injured",
+		"desc": {
+			"en": "Fewer than half starting wounds. [cite_start]-2\" Move, -1 Hit stat. [cite: 115]",
+			"ko": "체력이 절반 미만인 상태. 이동 -2인치, 명중 수치 -1 페널티를 받습니다."
+		}
+	},
+	{
+		"key": "Accurate x",
+		"desc": {
+			"en": "Retain up to x attack dice as normal successes without rolling. Multiple instances count as Accurate 2. [cite: 136, 137]",
+			"ko": "굴리지 않고 공격 주사위 x개를 일반 성공으로 간주합니다. 중복 시 Accurate 2로 취급합니다."
+		}
+	},
+	{
+		"key": "Balanced",
+		"desc": {
+			"en": "Re-roll one attack dice. [cite: 138]",
+			"ko": "공격 주사위 하나를 다시 굴릴 수 있습니다."
+		}
+	},
+	{
+		"key": "Blast x",
+		"desc": {
+			"en": "After shooting primary target, shoot every other visible operative within x\" of it. [cite: 140, 141]",
+			"ko": "주 대상을 사격한 후, 주 대상으로부터 x인치 이내에 보이는 다른 모든 오퍼레이티브를 추가 사격합니다."
+		}
+	},
+	{
+		"key": "Brutal",
+		"desc": {
+			"en": "Opponent can only block with critical successes. [cite: 143]",
+			"ko": "상대는 오직 치명타 성공으로만 방어(Block)할 수 있습니다."
+		}
+	},
+	{
+		"key": "Ceaseless",
+		"desc": {
+			"en": "Re-roll any results of 1. [cite: 143]",
+			"ko": "주사위 결과가 1인 경우 다시 굴릴 수 있습니다."
+		}
+	},
+	{
+		"key": "Devastating x",
+		"desc": {
+			"en": "Each retained critical success immediately inflicts x damage. If distance specified (e.g., 1\"), inflicts on target and others within distance. [cite: 144, 145]",
+			"ko": "확정된 치명타 성공 하나당 즉시 x 피해를 입힙니다. 거리(예: 1\")가 명시된 경우 대상 및 그 거리 내의 적에게 피해를 줍니다."
+		}
+	},
+	{
+		"key": "Heavy",
+		"desc": {
+			"en": "Cannot move in the same activation/counteraction as shooting this weapon. Specifics like 'Heavy (Dash only)' allow limited movement. [cite: 146, 148]",
+			"ko": "이 무기를 사격하는 활성화/대응 단계에는 이동할 수 없습니다. 'Heavy (Dash only)' 같은 경우 해당 이동만 허용됩니다."
+		}
+	},
+	{
+		"key": "Hot",
+		"desc": {
+			"en": "After use, roll D6. If result < Hit stat, user takes damage equal to result x2. [cite: 149]",
+			"ko": "사용 후 D6를 굴려 무기의 명중 수치 미만이 나오면, 사용자는 (결과값 x 2)만큼의 피해를 입습니다."
+		}
+	},
+	{
+		"key": "Lethal x+",
+		"desc": {
+			"en": "Successes of x or higher are critical successes. [cite: 151]",
+			"ko": "주사위 값이 x 이상이면 치명타 성공으로 취급합니다."
+		}
+	},
+	{
+		"key": "Limited x",
+		"desc": {
+			"en": "Weapon can only be used x times per battle. [cite: 152]",
+			"ko": "전투 중 x번만 사용할 수 있는 무기입니다."
+		}
+	},
+	{
+		"key": "Piercing x",
+		"desc": {
+			"en": "Defender rolls x fewer defence dice. Piercing Crits x applies only if you retain criticals. [cite: 154, 155]",
+			"ko": "방어자는 방어 주사위를 x개 적게 굴립니다. 'Piercing Crits'는 치명타 성공이 있을 때만 적용됩니다."
+		}
+	},
+	{
+		"key": "Punishing",
+		"desc": {
+			"en": "If you retain a critical success, you can retain one fail as a normal success. [cite: 156]",
+			"ko": "치명타 성공이 있다면, 실패한 주사위 하나를 일반 성공으로 바꿀 수 있습니다."
+		}
+	},
+	{
+		"key": "Range x",
+		"desc": {
+			"en": "Only targets within x inches are valid. [cite: 157]",
+			"ko": "x인치 이내의 적만 유효한 대상으로 선택할 수 있습니다."
+		}
+	},
+	{
+		"key": "Relentless",
+		"desc": {
+			"en": "Re-roll any attack dice. [cite: 158]",
+			"ko": "공격 주사위를 원하는 만큼 다시 굴릴 수 있습니다."
+		}
+	},
+	{
+		"key": "Rending",
+		"desc": {
+			"en": "If you retain a critical success, you can turn one normal success into a critical success. [cite: 159]",
+			"ko": "치명타 성공이 있다면, 일반 성공 하나를 치명타 성공으로 바꿀 수 있습니다."
+		}
+	},
+	{
+		"key": "Saturate",
+		"desc": {
+			"en": "Defender cannot retain cover saves. [cite: 160]",
+			"ko": "방어자는 엄폐 보너스(주사위 자동 성공)를 받을 수 없습니다."
+		}
+	},
+	{
+		"key": "Seek",
+		"desc": {
+			"en": "Targets with Conceal order cannot use terrain for cover (Seek Light ignores Light terrain). Does not remove cover save. [cite: 161, 162]",
+			"ko": "잠입 명령 상태의 적이 지형을 이용해 사격 대상에서 제외되는 것을 무시합니다(엄폐 주사위 보너스는 유지됨)."
+		}
+	},
+	{
+		"key": "Severe",
+		"desc": {
+			"en": "If no criticals retained, change one normal success to critical. [cite: 164]",
+			"ko": "치명타 성공이 하나도 없다면, 일반 성공 하나를 치명타로 바꿉니다."
+		}
+	},
+	{
+		"key": "Shock",
+		"desc": {
+			"en": "First critical strike also discards one of opponent's unresolved successes. [cite: 166]",
+			"ko": "첫 번째 치명타 타격 시, 상대의 미해결 성공 주사위 하나를 제거합니다."
+		}
+	},
+	{
+		"key": "Silent",
+		"desc": {
+			"en": "Can Shoot while having a Conceal order. [cite: 167]",
+			"ko": "잠입 명령 상태에서도 사격 행동을 할 수 있습니다."
+		}
+	},
+	{
+		"key": "Stun",
+		"desc": {
+			"en": "If critical retained, target gets -1 APL until end of next activation. [cite: 168]",
+			"ko": "치명타 성공 시, 대상의 다음 활성화 종료까지 APL(행동 포인트)을 1 감소시킵니다."
+		}
+	},
+	{
+		"key": "Torrent x",
+		"desc": {
+			"en": "Shoot primary target, then shoot any number of other valid targets within x\" of the first target (not near friendly operatives). [cite: 169]",
+			"ko": "주 대상을 사격한 후, 주 대상으로부터 x인치 이내의 다른 유효한 적들을 원하는 만큼 추가 사격합니다(아군 근처 제외)."
+		}
+	}
+]
