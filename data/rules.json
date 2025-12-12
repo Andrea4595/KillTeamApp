@@ -285,5 +285,176 @@
 			"en": "Shoot primary target, then shoot any number of other valid targets within x\" of the first target (not near friendly operatives). [cite: 169]",
 			"ko": "주 대상을 사격한 후, 주 대상으로부터 x인치 이내의 다른 유효한 적들을 원하는 만큼 추가 사격합니다(아군 근처 제외)."
 		}
+	},{
+		"key": "Wounds",
+		"desc": {
+			"en": "The measure of an operative's health. Operatives with fewer than half their starting wounds are Injured. Operatives reduced to 0 wounds are incapacitated and removed from the killzone.",
+			"ko": "오퍼레이티브의 생명력 수치입니다. 남은 체력이 시작 수치의 절반 미만이면 '부상' 상태가 되며, 0이 되면 '무력화'되어 킬존에서 제거됩니다."
+		}
+	},
+	{
+		"key": "Support",
+		"desc": {
+			"en": "A keyword associated with certain actions or abilities (often buffs). It has no inherent rules effect on its own but serves as a tag for interactions with other rules (e.g., equipment like Comms Devices may boost Support abilities).",
+			"ko": "특정 행동이나 능력(주로 버프)에 붙는 키워드입니다. 그 자체로는 특별한 규칙 효과가 없으나, 통신 장비(Comms Device) 등 다른 규칙과 상호작용하는 데 사용됩니다."
+		}
+	},
+	{
+		"key": "Exposed",
+		"desc": {
+			"en": "Terrain trait. Operatives cannot be in Cover behind Exposed terrain. It provides no protection.",
+			"ko": "지형 특성. 이 특성을 가진 지형 뒤에서는 엄폐(Cover)할 수 없습니다. 즉, 아무런 보호 효과를 제공하지 않습니다."
+		}
+	},
+	{
+		"key": "Obstructing",
+		"desc": {
+			"en": "Terrain trait. Whenever an operative moves across this terrain feature within 1\" of it, the distance moved counts as an additional 1\".",
+			"ko": "지형 특성. 오퍼레이티브가 이 지형의 1인치 이내를 가로질러 이동할 때, 이동 거리를 1인치 더 소모한 것으로 취급합니다."
+		}
+	},
+	{
+		"key": "Insignificant",
+		"desc": {
+			"en": "Terrain trait. This terrain is too small to affect line of sight or provide cover. Operatives generally ignore it for movement and cover purposes.",
+			"ko": "지형 특성. 크기가 너무 작아 시야나 엄폐에 영향을 주지 않는 지형입니다. 이동이나 엄폐 판정 시 일반적으로 무시됩니다."
+		}
+	},
+	{
+		"key": "Heavy",
+		"desc": {
+			"en": "Terrain trait. Provides Cover and Obscuring. Unlike Light terrain, Cover provided by Heavy terrain cannot be negated by an attacker on a Vantage Point.",
+			"ko": "지형 특성. 엄폐(Cover)와 시야 차단(Obscuring)을 모두 제공합니다. 일반 지형(Light)과 달리, 고지대(Vantage Point)에 있는 공격자라도 헤비 지형의 엄폐 효과는 무시할 수 없습니다."
+		}
+	},
+	{
+		"key": "Light",
+		"desc": {
+			"en": "Terrain trait. Provides Cover, but does not provide Obscuring. An attacker on a Vantage Point treats a Concealed target in Light cover as having an Engage order (negating the inability to be targeted).",
+			"ko": "지형 특성. 엄폐(Cover)를 제공하지만 시야 차단(Obscuring)은 제공하지 않습니다. 고지대(Vantage Point)의 공격자는 라이트 커버 뒤에 숨은(Conceal) 대상을 교전(Engage) 상태로 취급하여 사격할 수 있습니다."
+		}
+	},
+	{
+		"key": "Protective",
+		"desc": {
+			"en": "Equipment trait. While an operative is in cover from this terrain feature, improve its Save stat by 1 (to a maximum of 2+).",
+			"ko": "장비 특성. 이 지형지물로부터 엄폐 혜택을 받는 동안, 오퍼레이티브의 방어(Save) 수치가 1 개선됩니다(최대 2+까지)."
+		}
+	},
+	{
+		"key": "Portable",
+		"desc": {
+			"en": "Equipment trait. This terrain only provides cover while an operative is connected to it (within 1\"). Operatives connected to it can perform the 'Move with Barricade' action to move the terrain with them.",
+			"ko": "장비 특성. 오퍼레이티브가 이 지형에 붙어 있을 때(1인치 이내)만 엄폐를 제공합니다. 붙어 있는 오퍼레이티브는 '바리케이드 이동' 행동을 통해 지형을 밀며 이동할 수 있습니다."
+		}
+	},
+	{
+		"key": "Firefight Phase",
+		"desc": {
+			"en": "The main phase of a turning point where players alternate activating ready friendly operatives to perform actions (Move, Shoot, Fight, etc.). Players can also use Firefight Ploys during this phase.",
+			"ko": "터닝 포인트의 주요 전투 단계입니다. 플레이어들은 번갈아 가며 준비된(Ready) 아군 오퍼레이티브를 활성화하여 이동, 사격, 근접전 등의 행동을 수행합니다. 이 단계에서 교전 단계 계략(Firefight Ploys)을 사용할 수도 있습니다."
+		}
+	},{
+		"key": "Strategy Phase",
+		"desc": {
+			"en": "The first phase of a turning point. Players determine initiative, generate Command Points (CP), and use Strategic Ploys or Gambits.",
+			"ko": "터닝 포인트의 첫 번째 단계입니다. 플레이어들은 주도권을 결정하고, 커맨드 포인트(CP)를 획득하며, 전략 계략(Strategic Ploys)이나 갬빗을 사용합니다."
+		}
+	},
+	{
+		"key": "Turning Point",
+		"desc": {
+			"en": "A complete round of the battle. A standard battle includes four turning points. Each turning point consists of a Strategy Phase followed by a Firefight Phase.",
+			"ko": "전투의 한 라운드입니다. 표준 전투는 4개의 터닝 포인트로 구성됩니다. 각 터닝 포인트는 전략 단계(Strategy Phase)와 그 뒤를 잇는 교전 단계(Firefight Phase)로 이루어집니다."
+		}
+	},{
+		"key": "Ploy",
+		"desc": {
+			"en": "Special abilities that players can use by spending Command Points (CP). They are divided into Strategic Ploys (used in the Strategy Phase, usually last for the Turning Point) and Firefight Ploys (used in the Firefight Phase, usually have instant effects).",
+			"ko": "커맨드 포인트(CP)를 소모하여 사용하는 특수 능력입니다. 전략 단계에서 사용하여 해당 턴 동안 지속되는 '전략 계략(Strategic Ploys)'과 교전 단계에서 사용하여 즉각적인 효과를 내는 '교전 계략(Firefight Ploys)'으로 나뉩니다."
+		}
+	},
+	{
+		"key": "Equipment",
+		"desc": {
+			"en": "Items selected before the battle to enhance operatives. These can be weapons, protective gear, or utility items (e.g., Ladders, Barricades). Some equipment is specific to a Kill Team faction, while others are Universal Equipment available to all.",
+			"ko": "전투 전 오퍼레이티브를 강화하기 위해 선택하는 아이템입니다. 무기, 방어구 또는 사다리나 바리케이드 같은 유틸리티 아이템이 포함됩니다. 특정 팩션 전용 장비와 모든 팀이 사용 가능한 공용 장비(Universal Equipment)가 있습니다."
+		}
+	},
+	{
+		"key": "Operative",
+		"desc": {
+			"en": "The individual soldiers or models that make up a Kill Team. Each operative has a datacard detailing their characteristics (Move, APL, Defence, Save, Wounds) and unique abilities.",
+			"ko": "킬 팀을 구성하는 개별 병사 또는 모델입니다. 각 오퍼레이티브는 특성(이동, APL, 방어, 세이브, 체력)과 고유 능력이 적힌 데이터카드를 가집니다."
+		}
+	},{
+		"key": "APL (Action Point Limit)",
+		"desc": {
+			"en": "The limit on Action Points (AP) an operative can generate and spend during its activation. You cannot spend more AP than this value per activation[cite: 53].",
+			"ko": "오퍼레이티브가 활성화될 때 생성하고 사용할 수 있는 행동 포인트(AP)의 최대 한도입니다. 활성화 당 이 수치보다 많은 AP를 사용할 수 없습니다."
+		}
+	},
+	{
+		"key": "GA (Group Activation)",
+		"desc": {
+			"en": "The number of operatives of this type that are activated consecutively. If GA is 2, you activate two of these operatives back-to-back before play passes to your opponent.",
+			"ko": "이 종류의 오퍼레이티브를 연속으로 몇 명까지 활성화하는지를 나타냅니다. GA가 2라면, 상대에게 차례를 넘기기 전에 이 오퍼레이티브 둘을 연달아 활성화합니다."
+		}
+	},
+	{
+		"key": "DF (Defence)",
+		"desc": {
+			"en": "The Defence stat defines how many defence dice you roll when this operative is the target of a shooting attack[cite: 89].",
+			"ko": "방어 수치입니다. 이 오퍼레이티브가 사격 공격의 대상이 되었을 때 방어 주사위를 몇 개 굴리는지 정의합니다."
+		}
+	},
+	{
+		"key": "SV (Save)",
+		"desc": {
+			"en": "The Save stat indicates the result required on a defence dice for it to be a success[cite: 89]. Lower values (e.g., 3+) are better.",
+			"ko": "세이브(방어) 수치입니다. 방어 주사위가 성공하기 위해 필요한 주사위 눈의 값을 나타냅니다. 수치가 낮을수록(예: 3+) 더 좋은 방어구입니다."
+		}
+	},
+	{
+		"key": "Obscured",
+		"desc": {
+			"en": "A target is Obscured if it is more than 2\" away from a Heavy terrain feature that blocks the cover line. Obscured targets cannot be selected for shooting attacks, even if visible.",
+			"ko": "대상이 사선을 가리는 '헤비(Heavy)' 지형으로부터 2인치 이상 떨어져 있다면 '가려짐(Obscured)' 상태입니다. 이 상태에서는 대상이 보이더라도 사격 대상으로 선택할 수 없습니다."
+		}
+	},
+	{
+		"key": "Vantage Point",
+		"desc": {
+			"en": "Terrain situated vertically higher than the target (usually 2\" or more). Operatives shooting from a Vantage Point treat targets in Light Cover with a Conceal order as having an Engage order.",
+			"ko": "대상보다 수직으로 높은 곳(보통 2인치 이상)에 위치한 지형입니다. 고지대에서 사격 시, '라이트(Light) 커버' 뒤에 숨은(Conceal) 적을 교전(Engage) 상태로 취급하여 사격할 수 있습니다."
+		}
+	},
+	{
+		"key": "Objective Marker",
+		"desc": {
+			"en": "Key points on the battlefield used to score Victory Points. An operative generally controls a marker if they are within 2\" of it and have a higher total APL than nearby enemies.",
+			"ko": "승점을 얻기 위해 사용되는 전장 내 주요 지점입니다. 일반적으로 오퍼레이티브가 마커 2인치 이내에 있고, 근처 적보다 총 APL이 높으면 해당 마커를 점령(Control)합니다."
+		}
+	},
+	{
+		"key": "Climb",
+		"desc": {
+			"en": "Movement used to ascend or descend vertical terrain. The vertical distance traveled is counted towards the movement cost. It is prohibited during a Dash action[cite: 61].",
+			"ko": "수직 지형을 오르거나 내려갈 때 사용하는 이동입니다. 이동한 수직 거리만큼 이동력을 소모합니다. 대시(Dash) 행동 중에는 등반할 수 없습니다."
+		}
+	},
+	{
+		"key": "Traverse",
+		"desc": {
+			"en": "Movement to cross traverseable terrain (like barricades) without climbing. Typically implies moving over a small obstacle by spending a set amount of movement (often 2\").",
+			"ko": "등반하지 않고 횡단 가능한 지형(바리케이드 등)을 넘어가는 이동입니다. 보통 2인치의 이동력을 소모하여 낮은 장애물을 건너편으로 넘어갑니다."
+		}
+	},
+	{
+		"key": "Flying",
+		"desc": {
+			"en": "An ability allowing an operative to move ignoring terrain and other operatives. Vertical distance is usually ignored during the move, but the operative must end its move on a legal surface.",
+			"ko": "지형지물과 다른 오퍼레이티브를 통과하여 이동할 수 있는 능력입니다. 이동 중 수직 거리는 무시되지만, 이동을 마칠 때는 반드시 착지 가능한 위치에 있어야 합니다."
+		}
 	}
 ]
