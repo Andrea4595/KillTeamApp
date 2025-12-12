@@ -20,17 +20,30 @@ async function init() {
         if (!manifestResponse.ok) {
             throw new Error(`HTTP error! status: ${manifestResponse.status}`);
         }
-        const teamManifests = await manifestResponse.json();
+        const teamFilePaths = await manifestResponse.json();
+
+        // Load Universal Rules
+        const universalRulesResponse = await fetch('data/killTeam/Universal.json');
+        if (!universalRulesResponse.ok) {
+            throw new Error(`HTTP error! status: ${universalRulesResponse.status}`);
+        }
+        const universalRules = await universalRulesResponse.json();
 
         // Eagerly load all kill team data
-        await Promise.all(teamManifests.map(async (manifest) => {
+        await Promise.all(teamFilePaths.map(async (filePath) => {
             try {
-                const teamResponse = await fetch(`data/killTeam/${manifest.file_path}`);
-                if (!teamResponse.ok) throw new Error(`Failed to load ${manifest.file_path}`);
+                const teamResponse = await fetch(`data/killTeam/${filePath}`);
+                if (!teamResponse.ok) throw new Error(`Failed to load ${filePath}`);
                 const teamData = await teamResponse.json();
+
+                // Merge universal rules
+                teamData.ploys.strategy = (teamData.ploys.strategy || []).concat(universalRules.ploys.strategy || []);
+                teamData.ploys.firefight = (teamData.ploys.firefight || []).concat(universalRules.ploys.firefight || []);
+                teamData.equipments = (teamData.equipments || []).concat(universalRules.equipments || []);
+
                 catalog[teamData.id] = teamData; // Use ID from within the file
             } catch (error) {
-                console.error(`Could not load data for ${manifest.id}:`, error);
+                console.error(`Could not load data for ${filePath}:`, error);
             }
         }));
 

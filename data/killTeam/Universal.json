@@ -1,0 +1,155 @@
+{
+  "name": {
+    "en": "Universal",
+    "ko": "공용"
+  },
+  "color": "#808080",
+  "ploys": {
+    "strategy": [],
+    "firefight": [
+      {
+        "name": {
+          "en": "Command Re-roll",
+          "ko": "커맨드 리롤"
+        },
+        "cost": "1CP",
+        "desc": {
+          "en": "Use this firefight ploy after rolling your attack or defence dice. You can re-roll one of those dice.",
+          "ko": "공격 또는 방어 주사위를 굴린 직후에 사용하는 사격전(Firefight) 계략입니다. 굴린 주사위 중 하나를 리롤할 수 있습니다."
+        }
+      }
+    ]
+  },
+  "equipments": [
+    {
+      "id": "u_ammo",
+      "name": {
+        "en": "Ammo Cache",
+        "ko": "탄약 상자"
+      },
+      "cost": "1EQ",
+      "desc": {
+        "en": "Set up a marker in territory. Action (0AP): Select a friendly operative controlling it. Until next turn, re-roll 1 attack die when shooting.",
+        "ko": "아군 지역에 마커를 설치합니다. 액션(0AP): 마커를 통제하는 아군을 선택합니다. 다음 턴 시작 전까지 해당 요원은 사격 시 공격 주사위 1개를 리롤할 수 있습니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "u_razor",
+      "name": {
+        "en": "Razor Wire",
+        "ko": "철조망"
+      },
+      "cost": "1EQ",
+      "desc": {
+        "en": "Exposed, Obstructing terrain. Crossing within 1\" costs additional 1\" movement.",
+        "ko": "노출됨(Exposed), 방해물(Obstructing) 지형입니다. 1인치 이내로 통과 시 이동력을 1인치 추가로 소모합니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "u_comms",
+      "name": {
+        "en": "Comms Device",
+        "ko": "통신 장비"
+      },
+      "cost": "1EQ",
+      "desc": {
+        "en": "Set up a marker in territory. While controlling it, add 3\" to range of Support rules referencing friendly operatives.",
+        "ko": "아군 지역에 마커를 설치합니다. 마커를 통제하는 동안, 아군을 대상으로 하는 지원(Support) 규칙의 거리 요건이 3인치 증가합니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "u_mines",
+      "name": {
+        "en": "Mines",
+        "ko": "지뢰"
+      },
+      "cost": "1EQ",
+      "desc": {
+        "en": "Set up a marker in territory (>2\" from others). First time it is within an operative's control range, inflict D3+3 Dmg and remove marker.",
+        "ko": "아군 지역에 마커를 설치합니다(다른 요소와 2인치 이상 이격). 마커의 통제 범위에 오퍼레이티브가 처음 들어오면, D3+3 피해를 입히고 마커를 제거합니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "u_l_barricade",
+      "name": {
+        "en": "Light Barricades",
+        "ko": "경량 방벽"
+      },
+      "cost": "2EQ",
+      "desc": {
+        "en": "2x Light terrain features. Feet are Insignificant and Exposed.",
+        "ko": "경량(Light) 지형 2개를 설치합니다. 다리 부분은 미미함(Insignificant) 및 노출됨(Exposed) 특성을 가집니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "u_h_barricade",
+      "name": {
+        "en": "Heavy Barricade",
+        "ko": "중형 방벽"
+      },
+      "cost": "1EQ",
+      "desc": {
+        "en": "Heavy terrain. Set up within 4\" of drop zone.",
+        "ko": "중형(Heavy) 지형입니다. 드랍 존 4인치 이내에 설치할 수 있습니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "u_ladders",
+      "name": {
+        "en": "Ladders",
+        "ko": "사다리"
+      },
+      "cost": "2EQ",
+      "desc": {
+        "en": "2x Exposed terrain. Vertical distance counts as 1\" when climbing.",
+        "ko": "노출됨(Exposed) 지형 2개를 설치합니다. 등반 시 수직 거리를 1인치로 간주합니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "u_p_barricade",
+      "name": {
+        "en": "Portable Barricade",
+        "ko": "휴대용 방벽"
+      },
+      "cost": "1EQ",
+      "desc": {
+        "en": "Light, Protective (+1 Save), Portable. Connected operative can use 'Move with Barricade' (1AP) to Reposition with it.",
+        "ko": "경량(Light), 보호(Protective, 세이브 +1), 휴대용(Portable) 지형입니다. 연결된 오퍼레이티브는 1AP로 '방벽과 함께 이동'하여 재배치할 수 있습니다."
+      },
+      "limit": 1
+    },
+    {
+      "id": "u_util_grenades",
+      "name": {
+        "en": "Utility Grenades",
+        "ko": "유틸리티 수류탄"
+      },
+      "cost": "1EQ",
+      "desc": {
+        "en": "Select 2 grenades (Smoke or Stun). Smoke (1AP): Create smoke area. Stun (1AP): Roll D6, on 3+ target gets -1 APL.",
+        "ko": "수류탄 2개를 선택합니다 (연막 또는 섬광). 연막(Smoke, 1AP): 연막 지대 생성. 섬광(Stun, 1AP): 주사위 3+ 성공 시 대상 APL -1."
+      },
+      "limit": 1
+    },
+    {
+      "id": "u_exp_grenades",
+      "name": {
+        "en": "Explosive Grenades",
+        "ko": "폭발성 수류탄"
+      },
+      "cost": "1EQ",
+      "desc": {
+        "en": "Select 2 grenades (Frag or Krak). Frag: Rng 6, Blast 2, Saturate. Krak: Rng 6, Piercing 1, Saturate.",
+        "ko": "수류탄 2개를 선택합니다 (파편 또는 크랙). 파편(Frag): 사거리 6, 폭발 2, 포화. 크랙(Krak): 사거리 6, 관통 1, 포화."
+      },
+      "limit": 1
+    }
+  ]
+}

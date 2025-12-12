@@ -1,10 +1,4 @@
 [
-    {
-        "id": "ork_wrecka_krew",
-        "file_path": "WreckaCrew.json"
-    },
-    {
-        "id": "spaceMarine_angel_of_death",
-        "file_path": "AngelOfDeath.json"
-    }
+    "WreckaCrew.json",
+    "AngelOfDeath.json"
 ]
