@@ -1,4 +1,3 @@
-// Helper function to get text in the correct language
 export function getText(data, lang) {
     if (typeof data === 'string') {
         return data;
@@ -115,7 +114,7 @@ export function updateRosterSelectDropdown(savedRosters, currentRosterId, lang, 
 }
 
 
-export function renderRosterList(roster, equipCount, eventHandler, lang) {
+export function renderRosterList(roster, equipCount, lang) {
     const container = document.getElementById('my-roster-list');
     const countSpan = document.getElementById('roster-count');
     const equipSpan = document.getElementById('equip-count');
@@ -186,7 +185,7 @@ function renderOpCard(op, mode, idx, lang) {
             </div>`;
     }).join('');
     
-    const tipHtml = isRosterMode ? `<div class="weapon-tip">${lang === 'ko' ? '💡 무기를 클릭하여 활성/비활성(사용 안함) 상태를 변경하세요.' : '💡 Click a weapon to toggle its active state.'}</div>` : '';
+    const tipHtml = isRosterMode ? `<div class="weapon-tip" style="font-size: 0.75rem; color: #888; text-align: center; margin-top: 5px;">${lang === 'ko' ? '💡 무기를 클릭하여 활성/비활성 상태를 변경하세요.' : '💡 Click a weapon to toggle its active state.'}</div>` : '';
 
     let woundsArea = '';
     if (isGameMode) {
@@ -220,7 +219,7 @@ function renderOpCard(op, mode, idx, lang) {
     } else if (mode === 'roster') {
         actionArea = `
             <div style="display:flex; justify-content:space-between; margin-top:10px;">
-                <button class="btn-equip">${lang === 'ko' ? '➕ 장비 추가' : '➕ Add Equipment'}</button>
+                <button class="btn-equip btn-secondary btn-small">${lang === 'ko' ? '➕ 장비 추가' : '➕ Add Equipment'}</button>
                 <button class="btn btn-danger btn-small">${lang === 'ko' ? '🗑️ 제거' : '🗑️ Remove'}</button>
             </div>`;
     }
@@ -254,9 +253,8 @@ export function openAddModal(teamData, addOpHandler, lang) {
     }
 
     teamData.operatives.forEach((op, index) => {
-        const cardHtml = renderOpCard(op, 'modal', index, lang);
         const cardEl = document.createElement('div');
-        cardEl.innerHTML = cardHtml;
+        cardEl.innerHTML = renderOpCard(op, 'modal', index, lang);
         cardEl.querySelector('.add-op-to-roster').addEventListener('click', () => {
             addOpHandler(op);
             closeAddModal();
@@ -272,13 +270,14 @@ export function closeAddModal() {
 }
 
 export function openInfoModal(team, lang) {
-    document.getElementById('info-faction-rules').innerHTML = team.factionRules.map(r =>
-        `<div class="ploy-card"><div class="ploy-name" style="color:var(--primary-color)">${getText(r.title, lang)}</div><div class="ploy-desc">${getText(r.desc, lang)}</div></div>`
+    if (!team) return;
+    document.getElementById('info-faction-rules').innerHTML = (team.factionRules || []).map(r =>
+        `<div class="ploy-card"><div class="ploy-header"><span class="ploy-name">${getText((r.title || r.name), lang)}</span></div><div class="ploy-desc">${getText(r.desc, lang)}</div></div>`
     ).join('');
-    document.getElementById('info-strat-ploys').innerHTML = team.ploys.strategy.map(p =>
+    document.getElementById('info-strat-ploys').innerHTML = (team.ploys.strategy || []).map(p =>
         `<div class="ploy-card strat"><div class="ploy-header"><span class="ploy-name">${getText(p.name, lang)}</span><span class="ploy-cost">${p.cost}</span></div><div class="ploy-desc">${getText(p.desc, lang)}</div></div>`
     ).join('');
-    document.getElementById('info-fire-ploys').innerHTML = team.ploys.firefight.map(p =>
+    document.getElementById('info-fire-ploys').innerHTML = (team.ploys.firefight || []).map(p =>
         `<div class="ploy-card fire"><div class="ploy-header"><span class="ploy-name">${getText(p.name, lang)}</span><span class="ploy-cost">${p.cost}</span></div><div class="ploy-desc">${getText(p.desc, lang)}</div></div>`
     ).join('');
     document.getElementById('info-modal-overlay').style.display = 'flex';
@@ -307,7 +306,7 @@ export function displayCoopPlaceholder(lang, savedRosters) {
 export function renderGameEquipment(teamData, lang, containerId = 'team-left') {
     const container = document.getElementById(containerId).querySelector('.game-equipment-list');
     if (!container || !teamData) return;
-    container.innerHTML = teamData.equipments.map(e => `
+    container.innerHTML = (teamData.equipments || []).map(e => `
         <div class="ploy-card">
             <div class="ploy-header"><span class="ploy-name">${getText(e.name, lang)}</span><span class="ploy-cost">${e.cost}</span></div>
             <div class="ploy-desc">${getText(e.desc, lang)}</div>
@@ -317,12 +316,11 @@ export function renderGameEquipment(teamData, lang, containerId = 'team-left') {
 
 export function renderGameInfo(teamData, spendCPHandler, lang, containerId = 'team-left') {
     const container = document.getElementById(containerId);
-    if (!container) return;
+    if (!container || !teamData) return;
 
-    // Update team title
     const teamTitleElement = container.querySelector('.team-title');
     if (teamTitleElement) {
-        teamTitleElement.innerText = getText(teamData.name, lang);
+        teamTitleElement.innerText = ui.getText(teamData.name, lang);
     }
 
     const fpBox = container.querySelector('.resource-box[data-type="fp"]');
@@ -338,14 +336,14 @@ export function renderGameInfo(teamData, spendCPHandler, lang, containerId = 'te
     }
 
     const rList = container.querySelector('.game-faction-rules');
-    if (rList) rList.innerHTML = teamData.factionRules.map(r =>
-        `<div class="ploy-card"><div class="ploy-name" style="color:var(--primary-color)">${getText(r.title, lang)}</div><div class="ploy-desc">${getText(r.desc, lang)}</div></div>`
+    if (rList) rList.innerHTML = (teamData.factionRules || []).map(r =>
+        `<div class="ploy-card"><div class="ploy-header"><span class="ploy-name">${getText((r.title || r.name), lang)}</span></div><div class="ploy-desc">${getText(r.desc, lang)}</div></div>`
     ).join('');
 
     const sList = container.querySelector('.game-strat-ploys');
     if (sList) {
         sList.innerHTML = ''; // Clear previous
-        teamData.ploys.strategy.forEach(p => {
+        (teamData.ploys.strategy || []).forEach(p => {
             const ployEl = document.createElement('div');
             ployEl.className = 'ploy-card strat';
             ployEl.innerHTML = `<div class="ploy-header"><span class="ploy-name">${getText(p.name, lang)}</span><span class="ploy-cost">${p.cost}</span></div><div class="ploy-desc">${getText(p.desc, lang)}</div>`;
@@ -362,7 +360,7 @@ export function renderGameInfo(teamData, spendCPHandler, lang, containerId = 'te
     const fList = container.querySelector('.game-fire-ploys');
     if (fList) {
         fList.innerHTML = ''; // Clear previous
-        teamData.ploys.firefight.forEach(p => {
+        (teamData.ploys.firefight || []).forEach(p => {
             const ployEl = document.createElement('div');
             ployEl.className = 'ploy-card fire';
             ployEl.innerHTML = `<div class="ploy-header"><span class="ploy-name">${getText(p.name, lang)}</span><span class="ploy-cost">${p.cost}</span></div><div class="ploy-desc">${getText(p.desc, lang)}</div>`;
@@ -385,8 +383,7 @@ export function showScreen(name) {
 }
 
 export function updateResourceDisplay(globalState) {
-    // Only handles global resources now
-    document.getElementById('tp-val').innerText = globalState.currentTP;
+    if (globalState) document.getElementById('tp-val').innerText = globalState.currentTP;
 }
 
 export function updateTeamResourceDisplay(teamState, containerId) {
@@ -405,7 +402,7 @@ export function updateTeamResourceDisplay(teamState, containerId) {
 }
 
 
-export function renderGameScreen(gameState, eventHandler, lang, containerId = 'team-left') {
+export function renderGameScreen(gameState, lang, containerId = 'team-left') {
     const container = document.getElementById(containerId).querySelector('.game-op-list');
     if (!container) return;
     
@@ -434,18 +431,26 @@ export function renderSearchResults(results, lang) {
     const container = document.getElementById('rule-search-results');
     if (!container) return;
 
-    container.innerHTML = ''; // Clear previous results
+    container.innerHTML = ''; 
 
     if (results.length === 0) {
-        // Optional: Show a "no results" message
         return;
     }
 
     results.forEach(rule => {
         const item = document.createElement('div');
         item.className = 'search-result-item';
+        
+        const borderColor = rule.teamColor || 'var(--primary-color)';
+        item.style.borderLeftColor = borderColor;
+
+        const typeText = getText(rule.type, lang);
+
         item.innerHTML = `
-            <div class="key">${rule.key}</div>
+            <div class="search-result-header">
+                <div class="key">${getText(rule.key, lang)}</div>
+                <span class="search-result-type" style="background-color: ${borderColor}">${typeText}</span>
+            </div>
             <div class="desc">${getText(rule.desc, lang)}</div>
         `;
         container.appendChild(item);

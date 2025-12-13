@@ -5,6 +5,7 @@ let catalog = {};
 let savedRosters = [];
 let currentLang = 'ko';
 let rules = [];
+let unifiedSearchIndex = [];
 
 // Roster Builder State
 let currentRosterId = null;
@@ -55,6 +56,8 @@ async function init() {
         return;
     }
 
+    buildSearchIndex(); // Build index with common rules initially
+
     const availableTeams = Object.values(catalog);
     ui.populateTeamSelect(availableTeams, currentLang);
     loadLibrary();
@@ -97,11 +100,11 @@ function setLanguage(lang) {
 
 function rerenderUI() {
     ui.populateTeamSelect(Object.values(catalog), currentLang);
-    document.getElementById('team-select').value = currentTeamId;
+    if(currentTeamId) document.getElementById('team-select').value = currentTeamId;
     
     if(catalog[currentTeamId]) {
         ui.updateTeamUI(catalog[currentTeamId], currentLang);
-        ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
+        ui.renderRosterList(myRoster, getTeamEquipCount(), currentLang);
 
         if(document.getElementById('screen-game').classList.contains('active')) {
             if (gameState) {
@@ -109,7 +112,7 @@ function rerenderUI() {
                 document.getElementById('team-left').style.setProperty('--primary-color', teamData.color);
                 ui.renderGameInfo(teamData, spendCP, currentLang, 'team-left');
                 ui.renderGameEquipment(teamData, currentLang, 'team-left');
-                ui.renderGameScreen(gameState, handleGameOpListClick, currentLang, 'team-left');
+                ui.renderGameScreen(gameState, currentLang, 'team-left');
                 ui.updateTeamResourceDisplay(gameState, 'team-left');
             }
             if (coopGameState) {
@@ -117,7 +120,7 @@ function rerenderUI() {
                 document.getElementById('team-right').style.setProperty('--primary-color', teamData.color);
                 ui.renderGameInfo(teamData, spendCP, currentLang, 'team-right');
                 ui.renderGameEquipment(teamData, currentLang, 'team-right');
-                ui.renderGameScreen(coopGameState, handleGameOpListClick, currentLang, 'team-right');
+                ui.renderGameScreen(coopGameState, currentLang, 'team-right');
                 ui.updateTeamResourceDisplay(coopGameState, 'team-right');
             }
         }
@@ -156,7 +159,11 @@ function setupEventListeners() {
     document.getElementById('rule-search-input').addEventListener('input', (e) => {
         const searchTerm = e.target.value.toLowerCase();
         if (searchTerm.length > 1) {
-            const results = rules.filter(rule => rule.key.toLowerCase().includes(searchTerm) || ui.getText(rule.desc, 'ko').toLowerCase().includes(searchTerm));
+            const results = unifiedSearchIndex.filter(rule => 
+                ui.getText(rule.key, 'en').toLowerCase().includes(searchTerm) || 
+                ui.getText(rule.key, 'ko').toLowerCase().includes(searchTerm) ||
+                ui.getText(rule.desc, 'ko').toLowerCase().includes(searchTerm)
+            );
             ui.renderSearchResults(results, currentLang);
         } else {
             ui.renderSearchResults([], currentLang);
@@ -219,11 +226,11 @@ function handleGameOpListClick(event) {
     if (target.closest('.hp-btn')) {
         const woundValue = parseInt(target.closest('.hp-btn').innerText);
         setWounds(activeGameState, opIndex, woundValue);
-        ui.renderGameScreen(activeGameState, handleGameOpListClick, currentLang, containerId);
+        ui.renderGameScreen(activeGameState, currentLang, containerId);
     } else if (target.closest('.card-equip-item')) {
         const equipIndex = parseInt(target.closest('.card-equip-item').dataset.index);
         toggleEquipUsed(activeGameState, opIndex, equipIndex);
-        ui.renderGameScreen(activeGameState, handleGameOpListClick, currentLang, containerId);
+        ui.renderGameScreen(activeGameState, currentLang, containerId);
     }
 }
 
@@ -232,9 +239,11 @@ function changeTeam(shouldSave = true) {
     if (!select) return;
     currentTeamId = select.value;
 
+    buildSearchIndex(currentTeamId); // Rebuild index for the new team
+
     ui.updateTeamUI(catalog[currentTeamId], currentLang);
     myRoster = [];
-    ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
+    ui.renderRosterList(myRoster, getTeamEquipCount(), currentLang);
     if (shouldSave) autoSave();
 }
 
@@ -248,13 +257,13 @@ function addEquipToOp(equipData) {
     
     op.assignedEquipments.push(newEquip);
     ui.closeEquipModal();
-    ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
+    ui.renderRosterList(myRoster, getTeamEquipCount(), currentLang);
     autoSave();
 }
 
 function removeEquipFromOp(opIdx, eqIdx) {
     myRoster[opIdx].assignedEquipments.splice(eqIdx, 1);
-    ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
+    ui.renderRosterList(myRoster, getTeamEquipCount(), currentLang);
     autoSave();
 }
 
@@ -284,8 +293,10 @@ function resetToNewRoster() {
     currentTeamId = Object.keys(catalog)[0];
     document.getElementById('team-select').value = currentTeamId;
     
+    buildSearchIndex(currentTeamId);
+
     ui.updateTeamUI(catalog[currentTeamId], currentLang);
-    ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
+    ui.renderRosterList(myRoster, getTeamEquipCount(), currentLang);
     ui.updateRosterSelectDropdown(savedRosters, currentRosterId, currentLang, 'roster-select');
 }
 
@@ -295,6 +306,8 @@ async function loadRosterById(id) {
 
     currentRosterId = found.id;
     currentTeamId = found.teamId;
+
+    buildSearchIndex(currentTeamId);
 
     const teamData = catalog[currentTeamId];
     if (!teamData) {
@@ -319,7 +332,7 @@ async function loadRosterById(id) {
     document.getElementById('team-select').value = currentTeamId;
     
     ui.updateTeamUI(catalog[currentTeamId], currentLang);
-    ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
+    ui.renderRosterList(myRoster, getTeamEquipCount(), currentLang);
     ui.updateRosterSelectDropdown(savedRosters, currentRosterId, currentLang, 'roster-select');
 }
 
@@ -363,7 +376,7 @@ function loadLibrary() {
 function toggleWeapon(opIdx, wIdx) {
     const weapon = myRoster[opIdx].weapons[wIdx];
     weapon.active = weapon.active === undefined ? false : !weapon.active;
-    ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
+    ui.renderRosterList(myRoster, getTeamEquipCount(), currentLang);
     autoSave();
 }
 
@@ -372,15 +385,57 @@ function addOp(opData) {
     newOp.weapons.forEach(w => w.active = true);
     newOp.assignedEquipments = [];
     myRoster.push(newOp);
-    ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
+    ui.renderRosterList(myRoster, getTeamEquipCount(), currentLang);
     autoSave();
 }
 
 function removeOp(index) {
     myRoster.splice(index, 1);
-    ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
+    ui.renderRosterList(myRoster, getTeamEquipCount(), currentLang);
     autoSave();
 }
+
+
+// --- Search Index Builder ---
+function buildSearchIndex(...teamIds) {
+    unifiedSearchIndex = [];
+
+    // 1. Add global rules
+    rules.forEach(rule => {
+        unifiedSearchIndex.push({
+            key: { en: rule.key, ko: rule.key },
+            desc: rule.desc,
+            type: { en: 'Common Rule', ko: '공통 규칙' }
+        });
+    });
+
+    // 2. Add team-specific rules
+    teamIds.forEach(teamId => {
+        if (!teamId || !catalog[teamId]) return;
+        const team = catalog[teamId];
+        const teamColor = team.color;
+
+        // Faction Rules
+        (team.factionRules || []).forEach(r => unifiedSearchIndex.push({ key: (r.title || r.name), desc: r.desc, type: { en: 'Faction Rule', ko: '팩션 룰' }, teamColor }));
+        
+        // Ploys
+        [...(team.ploys.strategy || []), ...(team.ploys.firefight || [])].forEach(p => unifiedSearchIndex.push({ key: p.name, desc: p.desc, type: { en: 'Ploy', ko: '계략' }, teamColor }));
+        
+        // Equipments
+        (team.equipments || []).forEach(e => unifiedSearchIndex.push({ key: e.name, desc: e.desc, type: { en: 'Equipment', ko: '장비' }, teamColor }));
+
+        // Operatives and their abilities
+        (team.operatives || []).forEach(op => {
+            const opName = op.name || op.title;
+            unifiedSearchIndex.push({ key: opName, desc: { en: `Operative from ${ui.getText(team.name, 'en')}`, ko: `${ui.getText(team.name, 'ko')}의 오퍼레이티브`}, type: { en: 'Operative', ko: '오퍼레이티브' }, teamColor });
+            (op.abilities || []).forEach(a => {
+                const abilityName = a.name || a.title;
+                unifiedSearchIndex.push({ key: abilityName, desc: a.desc, type: { en: 'Ability', ko: '능력' }, teamColor });
+            });
+        });
+    });
+}
+
 
 // --- Game Logic ---
 
@@ -390,7 +445,6 @@ function startGame() {
         return;
     }
     const teamData = catalog[currentTeamId];
-    document.getElementById('team-left').style.setProperty('--primary-color', teamData.color);
     
     globalGameState = { currentTP: 1 };
     gameState = {
@@ -402,12 +456,15 @@ function startGame() {
     };
     gameState.operatives.forEach(op => { op.currentW = op.stats.W; op.startOfTurnW = op.stats.W; });
 
+    buildSearchIndex(currentTeamId);
+
+    document.getElementById('team-left').style.setProperty('--primary-color', teamData.color);
     document.querySelector('#team-left .team-title').innerText = gameState.name;
     ui.renderGameInfo(teamData, spendCP, currentLang, 'team-left');
     ui.renderGameEquipment(teamData, currentLang, 'team-left');
     ui.updateResourceDisplay(globalGameState);
     ui.updateTeamResourceDisplay(gameState, 'team-left');
-    ui.renderGameScreen(gameState, handleGameOpListClick, currentLang, 'team-left');
+    ui.renderGameScreen(gameState, currentLang, 'team-left');
     
     ui.showScreen('game');
     const firstTabBtn = document.querySelector('#team-left .tab-btn');
@@ -418,9 +475,10 @@ function exitGame() {
     document.getElementById('screen-game').classList.remove('coop-mode');
     document.querySelector('.container').classList.remove('coop-view');
     document.getElementById('btn-add-team').style.display = 'block';
-    document.getElementById('team-right').innerHTML = ''; // Clear right team content
+    document.getElementById('team-right').innerHTML = '';
     gameState = null;
     coopGameState = null;
+    buildSearchIndex(); // Rebuild with only common rules
     ui.showScreen('roster');
 }
 
@@ -448,8 +506,6 @@ function loadCoopTeam() {
         return;
     }
 
-    document.getElementById('team-right').style.setProperty('--primary-color', teamData.color);
-
     const coopRoster = found.roster.map(savedOp => {
         const fullOpData = teamData.operatives.find(op => op.id === savedOp.opId);
         if (!fullOpData) return null;
@@ -472,6 +528,9 @@ function loadCoopTeam() {
     };
     coopGameState.operatives.forEach(op => { op.currentW = op.stats.W; op.startOfTurnW = op.stats.W; });
 
+    buildSearchIndex(gameState.teamId, coopGameState.teamId);
+
+    document.getElementById('team-right').style.setProperty('--primary-color', teamData.color);
     document.getElementById('team-right').innerHTML = `
         <div class="sticky-header">
             <h3 class="team-title" style="margin-bottom: 10px; text-align: center;"></h3>
@@ -494,7 +553,7 @@ function loadCoopTeam() {
     ui.renderGameInfo(teamData, spendCP, currentLang, 'team-right');
     ui.renderGameEquipment(teamData, currentLang, 'team-right');
     ui.updateTeamResourceDisplay(coopGameState, 'team-right');
-    ui.renderGameScreen(coopGameState, handleGameOpListClick, currentLang, 'team-right');
+    ui.renderGameScreen(coopGameState, currentLang, 'team-right');
     
     const firstTabBtn = document.querySelector('#team-right .tab-btn');
     if (firstTabBtn) ui.switchTab('ops', { target: firstTabBtn }, 'team-right');
@@ -533,26 +592,26 @@ function updateTP(val) {
     if(coopGameState) finalizeWoundStates(coopGameState);
     
     ui.updateResourceDisplay(globalGameState);
-    ui.renderGameScreen(gameState, handleGameOpListClick, currentLang, 'team-left');
-    if(coopGameState) ui.renderGameScreen(coopGameState, handleGameOpListClick, currentLang, 'team-right');
+    ui.renderGameScreen(gameState, currentLang, 'team-left');
+    if(coopGameState) ui.renderGameScreen(coopGameState, currentLang, 'team-right');
 }
 
 function endTurn() {
     if (!gameState) return;
     globalGameState.currentTP += 1;
     
-    gameState.cp += 1;
+    if(gameState) gameState.cp += 1;
     if(coopGameState) coopGameState.cp += 1;
     
     finalizeWoundStates(gameState);
     if(coopGameState) finalizeWoundStates(coopGameState);
 
     ui.updateResourceDisplay(globalGameState);
-    ui.updateTeamResourceDisplay(gameState, 'team-left');
+    if(gameState) ui.updateTeamResourceDisplay(gameState, 'team-left');
     if(coopGameState) ui.updateTeamResourceDisplay(coopGameState, 'team-right');
 
-    ui.renderGameScreen(gameState, handleGameOpListClick, currentLang, 'team-left');
-    if(coopGameState) ui.renderGameScreen(coopGameState, handleGameOpListClick, currentLang, 'team-right');
+    if(gameState) ui.renderGameScreen(gameState, currentLang, 'team-left');
+    if(coopGameState) ui.renderGameScreen(coopGameState, currentLang, 'team-right');
     ui.showToast("턴이 종료되었습니다. (양 팀 CP+1, TP+1)");
 }
 

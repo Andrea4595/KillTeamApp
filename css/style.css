@@ -385,3 +385,68 @@ h1, h2, h3 {
     background: var(--bg-dark);
     padding-top: 10px;
 }
+
+/* Text Styles for Rule Descriptions */
+.rule-keyword {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.designer-note {
+    font-style: italic;
+    color: #888;
+    font-size: 0.8rem;
+    display: block;
+    margin-top: 5px;
+}
+
+.lore-text {
+    font-style: italic;
+    color: #aaa;
+}
+
+.rule-emphasis {
+    font-weight: bold;
+    color: var(--warning);
+}
+
+/* Ploy Card Header Styles */
+.ploy-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.ploy-name {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1.05rem;
+}
+
+.ploy-cost {
+    background-color: var(--warning);
+    color: #111;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    margin-left: 10px;
+}
+
+.search-result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.search-result-type {
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 8px;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+}
