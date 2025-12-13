@@ -12,12 +12,12 @@
   "factionRules": [
     {
       "title": {
-        "en": "Chapter Tactics",
+        "en": "CHAPTER TACTICS",
         "ko": "챕터 전술"
       },
       "desc": {
-        "en": "Select a primary and secondary Chapter Tactic. Options include: Aggressive (Rending), Dueller (Parry bonus), Resolute (Ignore APL mods), Stealthy (Cover save bonus), Mobile (Fall Back/Charge buff), Hardy (5+ Def crit), Sharpshooter (Severe bolts), Siege Specialist (Saturate).",
-        "ko": "주(Primary) 챕터 전술과 부(Secondary) 챕터 전술을 선택합니다. 선택지: 공격적(Rending), 결투가(패리 보너스), 결의(APL 변동 무시), 은밀함(커버 세이브 보너스), 기동성(후퇴/돌격 강화), 강인함(방어 5+ 치명타), 명사수(볼트 무기 Severe), 공성 전문가(Saturate)."
+        "en": "Each Space Marine Chapter is a martial brotherhood with its own combat philosophies, suited to the unique skills and temperaments of its battle-brothers. These tenets of war may be clothed in esoteric rituals built up over thousands of years, but remain as brutally effective as when they were first laid down.<br>When selecting your kill team, select a primary and secondary CHAPTER TACTIC for friendly ANGEL OF DEATH operatives to gain for the battle. Multiple instances of the same CHAPTER TACTIC are not cumulative.<br>Designer’s Note: If you’re playing a series of games, i.e. a campaign or tournament, you must select the same primary and secondary CHAPTER TACTIC for every battle (you can still change the secondary with the Adaptive Tactics strategy ploy).<br><br>1. Aggressive<br>This operative’s melee weapons have the Rending weapon rule.<br><br>2. Dueller<br>Once per sequence, whenever this operative is fighting or retaliating:<br>• One of your normal successes can block one unresolved critical success (unless the enemy operative’s weapon has the Brutal weapon rule).<br>• One of your critical successes can block two unresolved normal successes (instead of one critical success).<br><br>3. Resolute<br>You can ignore any changes to this operative’s APL stat.<br><br>4. Stealthy<br>Whenever an operative is shooting this operative, if you can retain any cover saves, you can retain one additional cover save, or you can retain one cover save as a critical success instead. This isn’t cumulative with improved cover saves from Vantage terrain.<br><br>5. Mobile<br>• This operative can perform the Fall Back action for 1 less AP.<br>• This operative can perform the Charge action while within control range of an enemy operative, and can leave that operative’s control range to do so (but then normal requirements for that move apply).<br><br>6. Hardy<br>Whenever an operative is shooting this operative, defence dice results of 5+ are critical successes.<br><br>7. Sharpshooter<br>Whenever this operative is shooting during an activation in which it hasn’t performed the Charge, Fall Back or Reposition action, its bolt weapons have the Severe weapon rule.<br><br>8. Siege Specialist<br>This operative’s ranged weapons have the Saturate weapon rule.",
+        "ko": "<span class='lore-text'>각 스페이스 마린 챕터는 전투 형제들의 고유한 기술과 기질에 맞춰진, 그들만의 전투 철학을 가진 무장 형제단입니다. 이러한 전쟁의 교리는 수천 년에 걸쳐 쌓인 난해한 의식으로 포장되어 있을지라도, 처음 제정되었을 때와 마찬가지로 여전히 잔혹할 만큼 효과적입니다.</span><br><br>킬팀을 선택할 때, 이번 전투에서 아군 죽음의 천사(ANGEL OF DEATH) 요원들이 얻게 될 '주(Primary)' 및 '부(Secondary)' 챕터 전술을 중복되지 않게 선택하십시오.<br><span class='designer-note'>디자이너 노트: 캠페인이나 토너먼트와 같이 연작 게임을 진행하는 경우, 모든 전투에서 동일한 주 및 부 챕터 전술을 선택해야 합니다 (단, '적응형 전술(Adaptive Tactics)' 전략 계략을 사용하면 부 전술은 변경할 수 있습니다).</span><br><br><span class='rule-emphasis'>1. 공세적 (Aggressive)</span><br>근접 무기가 렌딩(Rending) 무기 규칙을 가집니다.<br><br><span class='rule-emphasis'>2. 결투가 (Dueller)</span><br>시퀀스당 한 번, 이 요원이 교전(Fighting)하거나 반격(Retaliating)할 때:<br>• 자신의 일반 성공(Normal success) 하나로 아직 해결되지 않은 상대의 치명타 성공(Critical success) 하나를 막을 수 있습니다 (단, 적 요원의 무기에 잔혹함(Brutal) 규칙이 있는 경우는 제외).<br>• 자신의 치명타 성공 하나로 (치명타 성공 1개를 막는 대신) 아직 해결되지 않은 상대의 일반 성공 2개를 막을 수 있습니다.<br><br><span class='rule-emphasis'>3. 단호함 (Resolute)</span><br>APL(행동 포인트 한계) 수치에 대한 모든 변화를 무시할 수 있습니다.<br><br><span class='rule-emphasis'>4. 은밀함 (Stealthy)</span><br>적 요원이 이 요원을 사격할 때, 당신이 엄폐(Cover) 세이브를 유지할 수 있다면:<br>추가로 1개의 엄폐 세이브를 유지하거나, 대신 엄폐 세이브 1개를 치명타 성공으로 유지할 수 있습니다.<br>이 효과는 고지대(Vantage) 지형으로 인한 엄폐 세이브 향상 효과와 중복되지 않습니다.<br><br><span class='rule-emphasis'>5. 기동성 (Mobile)</span><br>• 이 요원은 후퇴(Fall Back) 행동을 1 AP 적게 소모하여 수행할 수 있습니다.<br>• 이 요원은 적 요원의 통제 범위(Control Range) 내에 있더라도 돌격(Charge) 행동을 수행할 수 있으며, 이를 위해 해당 요원의 통제 범위를 벗어날 수 있습니다 (단, 그 외 이동에 대한 일반적인 요구 조건은 적용됩니다).<br><br><span class='rule-emphasis'>6. 강인함 (Hardy)</span><br>적 요원이 이 요원을 사격할 때, 방어 주사위 결과값이 **5+**이면 치명타 성공이 됩니다.<br><br><span class='rule-emphasis'>7. 명사수 (Sharpshooter)</span><br>이 요원이 활성화(Activation) 동안 돌격(Charge), 후퇴(Fall Back), 재배치(Reposition) 행동을 하지 않고 사격할 때, 가지고 있는 볼트(bolt) 무기들은 심각함(Severe) 무기 규칙을 가집니다.<br><br><span class='rule-emphasis'>8. 공성 전문가 (Siege Specialist)</span><br>이 요원의 사격 무기는 포화(Saturate) 무기 규칙을 가집니다."
       }
     },
     {
@@ -26,8 +26,8 @@
         "ko": "아스타르테스"
       },
       "desc": {
-        "en": "Operatives can perform two Shoot actions or two Fight actions during their activation. (Bolt weapons required for double Shoot).",
-        "ko": "오퍼레이티브는 활성화 동안 사격 액션 2회 또는 격투 액션 2회를 수행할 수 있습니다. (2회 사격 시 최소 하나는 볼트 무기여야 함)."
+        "en": "These genetically modified superhumans are made for one purpose: war.<br><br>During each friendly ANGEL OF DEATH operative’s activation, it can perform either two Shoot actions or two Fight actions. If it’s two Shoot actions, a bolt weapon must be selected for at least one of them, and if it’s a bolt sniper rifle or heavy bolter, 1 additional AP must be spent for the second action if both actions are using that weapon. Each friendly ANGEL OF DEATH operative can counteract regardless of its order.",
+        "ko": "<span class='lore-text'>이 유전적으로 개조된 초인들은 단 하나의 목적, 바로 전쟁을 위해 만들어졌습니다.</span><br><br>각 아군 죽음의 천사(ANGEL OF DEATH) 요원의 활성화 동안, 해당 요원은 사격(Shoot) 행동을 두 번 수행하거나 교전(Fight) 행동을 두 번 수행할 수 있습니다. 만약 사격 행동을 두 번 수행한다면, 적어도 그중 한 번은 볼트(bolt) 무기를 선택해야 합니다.<br><br>만약 볼트 스나이퍼 라이플(bolt sniper rifle)이나 헤비 볼터(heavy bolter)를 사용하여 두 행동 모두 수행하는 경우, 두 번째 행동에는 1 AP가 추가로 소모됩니다.<br><br>각 아군 죽음의 천사 요원은 자신의 명령(Order) 상태와 상관없이 대응(Counteract)할 수 있습니다."
       }
     }
   ],
@@ -40,8 +40,8 @@
         },
         "cost": "1CP",
         "desc": {
-          "en": "Select a Doctrine (Devastator, Tactical, Assault). Operatives gain [Balanced] under specific conditions relevant to the doctrine.",
-          "ko": "교리(데바스테이터, 택티컬, 어설트)를 하나 선택합니다. 해당 교리의 조건에 따라 오퍼레이티브들이 [Balanced] 규칙을 얻습니다."
+        "en": "Space Marines hold the teachings of the Codex Astartes in highest esteem, employing its flexible combat doctrines to annihilate their enemies.<br><br>Select one COMBAT DOCTRINE from those presented below.<br>Whenever a friendly ANGEL OF DEATH operative is x, its weapons have the Balanced weapon rule. X is the COMBAT DOCTRINE you selected.<br>• Devastator Doctrine: Shooting an operative more than 6\" from it.<br>• Tactical Doctrine: Shooting an operative within 6\" of it.<br>• Assault Doctrine: Fighting or retaliating.",
+        "ko": "<span class='lore-text'>스페이스 마린들은 코덱스 아스타르테스의 가르침을 가장 숭고하게 여기며, 그 유연한 전투 교리를 구사하여 적들을 섬멸합니다.</span><br><br>아래 제시된 전투 교리(COMBAT DOCTRINE) 중 하나를 선택하십시오.<br>이번 교전 단계(Firefight) 동안 전투 교리에 맞는 행동 중 해당 요원의 무기는 균형(Balanced) 무기 규칙을 가집니다.<br><br>• <span class='rule-emphasis'>데바스테이터 교리(Devastator Doctrine)</span>:<br>6\"보다 멀리 있는 요원을 사격할 때.<br><br>• <span class='rule-emphasis'>택티컬 교리(Tactical Doctrine)</span>:<br>6\" 이내에 있는 요원을 사격할 때.<br><br>• <span class='rule-emphasis'>어썰트 교리(Assault Doctrine)</span>:<br>교전(Fighting)하거나 반격(Retaliating)할 때."
         }
       },
       {
@@ -51,8 +51,8 @@
         },
         "cost": "1CP",
         "desc": {
-          "en": "Ignore penalties from being injured.",
-          "ko": "부상(Injured)으로 인한 모든 페널티를 무시합니다."
+          "en": "Space Marines possess extraordinary courage and are utterly unflinching in the face of terrifying horrors and overwhelming odds.<br><br>You can ignore any changes to the stats of friendly ANGEL OF DEATH operatives from being injured (including their weapons’ stats).",
+          "ko": "<span class='lore-text'>스페이스 마린들은 비범한 용기를 지녔으며, 끔찍한 공포와 압도적인 역경 앞에서도 결코 위축되지 않습니다.</span><br><br>아군 죽음의 천사(ANGEL OF DEATH) 요원이 부상(Injured)으로 인해 겪는 모든 능력치 변화를 무시할 수 있습니다(무기 능력치 포함)."
         }
       },
       {
@@ -62,8 +62,8 @@
         },
         "cost": "1CP",
         "desc": {
-          "en": "Change your secondary Chapter Tactic for this turning point.",
-          "ko": "이번 터닝 포인트 동안 부(Secondary) 챕터 전술을 변경합니다."
+          "en": "There are few more tactically flexible warriors than the Adeptus Astartes. Supplementing the teachings of the Codex Astartes with their own experience, Space Marines may adjust their strategies at a moment’s notice.<br><br>Change your secondary CHAPTER TACTIC. Note this ploy only lasts until the end of the turning point, at which point your original secondary CHAPTER TACTIC returns.",
+          "ko": "<span class='lore-text'>아뎁투스 아스타르테스만큼 전술적으로 유연한 전사는 드뭅니다. 코덱스 아스타르테스의 가르침에 자신의 경험을 더하여, 스페이스 마린은 즉각적으로 전략을 수정할 수 있습니다.</span><br><br>당신의 <b>부(Secondary) 챕터 전술</b>을 변경하십시오.<br>단, 이 계략은 해당 터닝 포인트가 끝날 때까지만 지속되며, 그 시점에 원래의 <b>부 챕터 전술</b>로 되돌아옵니다."
         }
       },
       {
@@ -73,8 +73,8 @@
         },
         "cost": "1CP",
         "desc": {
-          "en": "When defending against shooting, discard one fail to retain another fail as a normal success.",
-          "ko": "사격 방어 시, 실패한 주사위 하나를 버리고 다른 실패 주사위 하나를 일반 성공으로 바꿀 수 있습니다."
+          "en": "This is the Era Indomitus. The Imperium wages galaxy-spanning crusades to drive back the horrors that plague it, and the battle-brothers of the Adeptus Astartes are spurred on by this righteous purpose.<br><br> Whenever an operative is shooting a friendly ANGEL OF DEATH operative, if you roll two or more fails, you can discard one of them to retain another as a normal success instead.",
+          "ko": "<span class='lore-text'>지금은 인도미투스 시대입니다. 제국은 자신들을 괴롭히는 공포를 물리치기 위해 은하계 전역에 걸친 성전을 벌이고 있으며, 아뎁투스 아스타르테스의 전투 형제들은 이러한 정의로운 목적에 고무되어 있습니다.</span><br><br>적 요원으로부터 사격당할 때, 당신이 <b>실패(fails)</b>를 2개 이상 굴렸다면, 그중 하나를 버리고 다른 하나를 <b>일반 성공(normal success)</b>으로 유지할 수 있습니다."
         }
       }
     ],
@@ -86,8 +86,8 @@
         },
         "cost": "1CP",
         "desc": {
-          "en": "Change the active Combat Doctrine.",
-          "ko": "현재 적용 중인 전투 교리(Combat Doctrine)를 변경합니다."
+          "en": "Adeptus Astartes kill teams adapt their strategies on the fly to overcome the foe. Swiftly traded hand signals and abrupt vox exchanges herald a shift in doctrine.<br><br>Use this firefight ploy during a friendly ANGEL OF DEATH operative’s activation, before or after it performs an action. If you’ve used the Combat Doctrine strategy ploy during this turning point, change the COMBAT DOCTRINE you selected.",
+          "ko": "<span class='lore-text'>아뎁투스 아스타르테스 킬팀은 적을 극복하기 위해 상황에 맞춰 즉각적으로 전략을 조정합니다. 빠르게 교환되는 수신호와 간결한 복스 교신은 교리의 변화를 예고합니다.</span><br><br>이 사격전 계략을 아군 요원의 활성화 동안, 해당 요원이 행동을 수행하기 전이나 후에 사용하십시오.<br><br>만약 이번 터닝 포인트에 <b>전투 교리(Combat Doctrine)</b> 전략 계략을 사용했다면, 당신이 선택했던 <b>전투 교리</b>를 변경하십시오."
         }
       },
       {
@@ -97,8 +97,8 @@
         },
         "cost": "1CP",
         "desc": {
-          "en": "When rolling defence dice against shooting, retain one normal success as a critical success.",
-          "ko": "사격 방어 주사위를 굴릴 때, 일반 성공 1개를 치명타(Critical) 성공으로 변경합니다."
+          "en": "The genetically modified physiology of a Space Marine is capable of resisting wounds that would kill a lesser being.<br><br>Use this firefight ploy when an operative is shooting a friendly ANGEL OF DEATH operative, in the Roll Defence Dice step. You can retain one of your normal successes as a critical success instead.",
+          "ko": "<span class='lore-text'>스페이스 마린의 유전적으로 개조된 신체는 나약한 존재라면 목숨을 잃었을 부상조차 견뎌낼 수 있습니다.</span><br><br>이 사격전 계략을 적 요원이 아군 <b>죽음의 천사(ANGEL OF DEATH)</b> 요원을 사격할 때, <b>방어 주사위 굴림</b> 단계에 사용하십시오.<br>당신의 <b>일반 성공</b> 중 하나를 대신 <b>치명타 성공</b>으로 유지할 수 있습니다."
         }
       },
       {
@@ -108,9 +108,9 @@
         },
         "cost": "1CP",
         "desc": {
-          "en": "Use when Fighting after Charging. Weapon gains [Shock] and first strike deals +1 Dmg.",
-          "ko": "돌격(Charge) 후 격투 시 사용. 무기가 [Shock]를 얻으며, 첫 타격의 데미지가 1 증가합니다."
-        }
+		  "en": "The Adeptus Astartes strike with exceptional speed and strength, the roar of chainswords and brutal assaults spelling death for their foes.<br><br>Use this firefight ploy when a friendly ANGEL OF DEATH operative is performing the Fight action during an activation in which it performed the Charge action, at the start of the Resolve Attack Dice step. Until the end of that action:<br>• Its melee weapon has the Shock weapon rule.<br>• The first time you strike during that sequence, inflict 1 additional damage (to a maximum of 7).",
+		  "ko": "<span class='lore-text'>아뎁투스 아스타르테스는 놀라운 속도와 힘으로 타격하며, 체인소드의 포효와 잔혹한 강습은 적들에게 죽음을 선사합니다.</span><br><br>이 사격전 계략을 아군 <b>죽음의 천사(ANGEL OF DEATH)</b> 요원이 <b>돌격(Charge)</b> 행동을 수행한 활성화 동안 <b>교전(Fight)</b> 행동을 수행할 때, <b>공격 주사위 해결</b> 단계 시작 시 사용하십시오. 해당 행동이 끝날 때까지:<br>• 해당 요원의 근접 무기는 <b>충격(Shock)</b> 무기 규칙을 가집니다.<br>• 해당 시퀀스에서 첫 번째로 <b>타격(strike)</b>할 때, 1의 추가 피해를 입힙니다 (최대 7까지)."
+		}
       },
       {
         "name": {
@@ -119,9 +119,9 @@
         },
         "cost": "1CP",
         "desc": {
-          "en": "When counteracting, perform an additional 1AP action for free (must be different action).",
-          "ko": "반격(Counteract) 시, 1AP 액션 하나를 무료로 추가 수행합니다 (서로 다른 액션이어야 함)."
-        }
+		  "en": "When roused to anger, a battle-brother of the Adeptus Astartes may be spurred to acts of extraordinary strength and athleticism.<br><br>Use this firefight ploy when a friendly ANGEL OF DEATH operative is counteracting. It can perform an additional 1AP action for free during that counteraction, but both actions must be different.",
+		  "ko": "<span class='lore-text'>분노가 치밀어 오르면, 아뎁투스 아스타르테스의 전투 형제는 비범한 힘과 신체 능력을 발휘하도록 고무될 수 있습니다.</span><br><br>이 사격전 계략을 아군 <b>죽음의 천사(ANGEL OF DEATH)</b> 요원이 <b>대응(counteracting)</b>할 때 사용하십시오. 해당 대응 동안 그 요원은 <b>1AP</b> 행동을 추가로 하나 무료로 수행할 수 있습니다. 단, 두 행동은 서로 달라야 합니다."
+		}
       }
     ]
   },
@@ -134,9 +134,9 @@
       },
       "cost": "EP",
       "desc": {
-        "en": "Once per turning point, discard one fail to retain another as normal success.",
-        "ko": "터닝 포인트당 한 번, 실패 주사위 하나를 버리고 다른 하나를 일반 성공으로 변경합니다."
-      },
+		  "en": "Awarded by the Chapter’s Chaplains, purity seals are inscribed with blessings and inspire the bearer to fight with increased vigour.<br><br>Once per turning point, when a friendly ANGEL OF DEATH operative is shooting, fighting or retaliating, if you roll two or more fails, you can discard one of them to retain another as a normal success instead.",
+		  "ko": "<span class='lore-text'>챕터의 채플린들이 수여하는 퓨리티 씰에는 축복의 문구가 새겨져 있어, 착용자가 더욱 활기차게 싸울 수 있도록 고무합니다.</span><br><br>터닝 포인트당 한 번, 아군 <b>죽음의 천사(ANGEL OF DEATH)</b> 요원이 <b>사격(shooting)</b>, <b>교전(fighting)</b> 또는 <b>반격(retaliating)</b>할 때, <b>실패(fails)</b>를 2개 이상 굴렸다면, 그중 하나를 버리고 다른 하나를 대신 <b>일반 성공(normal success)</b>으로 유지할 수 있습니다."
+		},
       "limit": 1
     },
     {
@@ -147,9 +147,9 @@
       },
       "cost": "EP",
       "desc": {
-        "en": "Wrath of Vengeance costs 0CP for this operative if engaged.",
-        "ko": "이 오퍼레이티브가 인게이지 상태라면 '복수의 분노' 계략 비용이 0CP가 됩니다."
-      },
+		  "en": "Many Space Marines bear macabre relics taken from the bodies of their fallen. Those who bear these inspirational items fight all the harder to honour the sacrifice of their battle-brothers.<br><br>You can use the Wrath of Vengeance firefight ploy for 0CP if the specified friendly operative has an Engage order.",
+		  "ko": "<span class='lore-text'>많은 스페이스 마린들은 전사한 동료의 시신에서 수습한 섬뜩한 유물을 소지합니다. 이러한 고무적인 물품을 지닌 이들은 전투 형제들의 희생을 기리기 위해 더욱 맹렬히 싸웁니다.</span><br><br>만약 지정된 아군 요원이 <b>교전(Engage)</b> 명령 상태라면, <b>복수의 분노(Wrath of Vengeance)</b> 사격전 계략을 <b>0CP</b>로 사용할 수 있습니다."
+		},
       "limit": 1
     },
     {
@@ -160,9 +160,9 @@
       },
       "cost": "EP",
       "desc": {
-        "en": "In melee, opponent cannot retain results less than 6 as critical successes.",
-        "ko": "근접전에서 상대는 6 미만의 주사위 값을 치명타로 간주할 수 없습니다."
-      },
+		  "en": "As well as displaying company colours and personal heraldry, a Space Marine’s tilting plate serves to protect the bearer in the press of melee combat.<br><br>Once per turning point, when a friendly ANGEL OF DEATH operative is fighting or retaliating, after your opponent rolls their attack dice, you can use this rule. If you do, your opponent cannot retain attack dice results of less than 6 as critical successes during that sequence (e.g. as a result of the Lethal, Rending or Severe weapon rules).",
+		  "ko": "<span class='lore-text'>중대 색상과 개인의 문장을 드러내는 것 외에도, 스페이스 마린의 틸팅 플레이트는 근접 전투의 혼전 속에서 착용자를 보호하는 역할을 합니다.</span><br><br>터닝 포인트당 한 번, 아군 <b>죽음의 천사(ANGEL OF DEATH)</b> 요원이 <b>교전(fighting)</b>하거나 <b>반격(retaliating)</b>할 때, 상대방이 공격 주사위를 굴린 후 이 규칙을 사용할 수 있습니다. 사용 시, 해당 시퀀스 동안 상대방은 6 미만의 공격 주사위 결과를 <b>치명타 성공(critical successes)</b>으로 유지할 수 없습니다 (예: <b>치명적(Lethal)</b>, <b>렌딩(Rending)</b> 또는 <b>심각함(Severe)</b> 무기 규칙의 결과 등)."
+		},
       "limit": 1
     },
     {
@@ -173,9 +173,9 @@
       },
       "cost": "EP",
       "desc": {
-        "en": "Once per turning point when shooting, enemies within 8\" cannot be Obscured.",
-        "ko": "터닝 포인트당 한 번 사격 시 사용. 8인치 이내의 적은 가려짐(Obscured) 효과를 받을 수 없습니다."
-      },
+		  "en": "Auspexes come in many forms. These scanning devices can detect motion, analyse atmospheric conditions and reveal heat signatures.<br><br>Once per turning point, when a friendly ANGEL OF DEATH operative performs the Shoot action and you’re selecting a valid target, you can use this rule. If you do, until the end of the activation/counteraction, enemy operatives within 8\" of that friendly operative cannot be obscured.",
+		  "ko": "<span class='lore-text'>오스펙스는 다양한 형태를 띱니다. 이 스캔 장치는 움직임을 감지하고, 대기 상태를 분석하며, 열 신호를 드러낼 수 있습니다.</span><br><br>터닝 포인트당 한 번, 아군 <b>죽음의 천사(ANGEL OF DEATH)</b> 요원이 <b>사격(Shoot)</b> 행동을 수행하고 유효한 목표를 선택할 때 이 규칙을 사용할 수 있습니다. 사용 시, 해당 활성화/대응이 끝날 때까지 그 아군 요원으로부터 <b>8인치(8\")</b> 이내에 있는 적 요원들은 <b>가려짐(Obscured)</b> 상태가 될 수 없습니다."
+		},
       "limit": 1
     }
   ],
@@ -204,9 +204,9 @@
             "ko": "영웅적 리더"
           },
           "desc": {
-            "en": "Once per turning point, use a firefight ploy for 0CP (or Adjust Doctrine).",
-            "ko": "터닝 포인트당 한 번, 사격전(Firefight) 계략 하나를 0CP로 사용하거나 '교리 조정'을 0CP로 사용합니다."
-          }
+			  "en": "Once per turning point, you can use a firefight ploy for 0CP if this is the specified ANGEL OF DEATH operative (excluding Command Re-roll), or the Adjust Doctrine firefight ploy for 0CP if this operative is in the killzone and not within control range of enemy operatives.",
+			  "ko": "터닝 포인트당 한 번 <b>사격전 계략(firefight ploy)</b>을 <b>0CP</b>로 사용할 수 있습니다(<b>지휘 재굴림(Command Re-roll)</b> 제외).<br>또는, 이 요원이 <b>킬존(killzone)</b> 내에 있고 적 요원의 <b>통제 범위(control range)</b> 내에 있지 않다면, <b>교리 조정(Adjust Doctrine)</b> 사격전 계략을 <b>0CP</b>로 사용할 수 있습니다."
+			}
         },
         {
           "title": {
@@ -214,9 +214,9 @@
             "ko": "아이언 헤일로"
           },
           "desc": {
-            "en": "Once per battle, ignore one Normal Damage attack.",
-            "ko": "전투당 한 번, 입게 되는 일반 피해(Normal Dmg) 하나를 무시합니다."
-          }
+			  "en": "Once per battle, when an attack dice inflicts Normal Dmg on this operative, you can ignore that inflicted damage",
+			  "ko": "전투당 한 번, 공격 주사위가 이 요원에게 <b>일반 피해(Normal Dmg)</b>를 입힐 때, 그 피해를 무시할 수 있습니다."
+			}
         }
       ],
       "weapons": [
@@ -289,9 +289,9 @@
             "ko": "교리 전술"
           },
           "desc": {
-            "en": "Combat Doctrine (Assault or Tactical) costs 0CP if this operative is in killzone.",
-            "ko": "이 오퍼레이티브가 킬존에 있으면 '전투 교리' (어설트 또는 택티컬) 사용 비용이 0CP가 됩니다."
-          }
+			  "en": "Whenever you would use the Combat Doctrine strategic ploy and then select Assault or Tactical, if this operative is in the killzone, it costs you 0CP.",
+			  "ko": "당신이 <b>전투 교리(Combat Doctrine)</b> 전략 계략을 사용하고 <b>어썰트(Assault)</b> 또는 <b>택티컬(Tactical)</b>을 선택할 때마다, 만약 이 요원이 <b>킬존(killzone)</b> 내에 있다면 그 비용은 <b>0CP</b>가 됩니다."
+			}
         },
         {
           "title": {
@@ -299,9 +299,9 @@
             "ko": "챕터 베테랑"
           },
           "desc": {
-            "en": "Select one additional Chapter Tactic for this operative.",
-            "ko": "이 오퍼레이티브에게 적용할 챕터 전술 하나를 추가로 선택합니다."
-          }
+			  "en": "At the end of the Select Operatives step, if this operative is selected for deployment, select one additional CHAPTER TACTIC for it to have for the battle. Unlike primary and secondary CHAPTER TACTICS, you don’t have to select the same one for each battle in a campaign or tournament.",
+			  "ko": "<b>요원 선택(Select Operatives)</b> 단계가 끝날 때, 만약 이 요원이 배치되기로 선택되었다면, 이번 전투 동안 이 요원이 가질 <b>챕터 전술(CHAPTER TACTIC)</b> 하나를 추가로 선택하십시오. <b>주(primary)</b> 및 <b>부(secondary) 챕터 전술</b>과 달리, 캠페인이나 토너먼트의 매 전투마다 동일한 것을 선택할 필요는 없습니다."
+			}
         }
       ],
       "weapons": [
@@ -336,15 +336,32 @@
         },
         {
           "name": {
-            "en": "Plasma pistol",
-            "ko": "플라즈마 피스톨"
+            "en": "Plasma pistol (standard)",
+            "ko": "플라즈마 피스톨 (일반)"
           },
           "A": 4,
           "hit": "3+",
           "dmg": "3/5",
           "range": "Ranged",
           "rules": [
-            "Rng 8\""
+            "Rng 8\"",
+			"Piercing 1"
+          ]
+        },
+        {
+          "name": {
+            "en": "Plasma pistol (supercharge)",
+            "ko": "플라즈마 피스톨 (과충전)"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "4/5",
+          "range": "Ranged",
+          "rules": [
+            "Rng 8\"",
+			"Hot",
+			"Lethal 5+",
+			"Piercing 1"
           ]
         },
         {
@@ -424,9 +441,9 @@
             "ko": "교리 전술"
           },
           "desc": {
-            "en": "Combat Doctrine (Devastator or Tactical) costs 0CP if this operative is in killzone.",
-            "ko": "이 오퍼레이티브가 킬존에 있으면 '전투 교리' (데바스테이터 또는 택티컬) 사용 비용이 0CP가 됩니다."
-          }
+			  "en": "Whenever you would use the Combat Doctrine strategic ploy and then select Devastator or Tactical, if this operative is in the killzone, it costs you 0CP.",
+			  "ko": "당신이 <b>전투 교리(Combat Doctrine)</b> 전략 계략을 사용하고 <b>데바스테이터(Devastator)</b> 또는 <b>택티컬(Tactical)</b>을 선택할 때마다, 만약 이 요원이 <b>킬존(killzone)</b> 내에 있다면 그 비용은 <b>0CP</b>가 됩니다."
+			}
         },
         {
           "title": {
@@ -434,9 +451,9 @@
             "ko": "챕터 베테랑"
           },
           "desc": {
-            "en": "Select one additional Chapter Tactic for this operative.",
-            "ko": "이 오퍼레이티브에게 적용할 챕터 전술 하나를 추가로 선택합니다."
-          }
+			  "en": "At the end of the Select Operatives step, if this operative is selected for deployment, select one additional CHAPTER TACTIC for it to have for the battle. Unlike primary and secondary CHAPTER TACTICS, you don’t have to select the same one for each battle in a campaign or tournament.",
+			  "ko": "<b>요원 선택(Select Operatives)</b> 단계가 끝날 때, 만약 이 요원이 배치되기로 선택되었다면, 이번 전투 동안 이 요원이 가질 <b>챕터 전술(CHAPTER TACTIC)</b> 하나를 추가로 선택하십시오. <b>주(primary)</b> 및 <b>부(secondary) 챕터 전술</b>과 달리, 캠페인이나 토너먼트의 매 전투마다 동일한 것을 선택할 필요는 없습니다."
+			}
         }
       ],
       "weapons": [
@@ -483,6 +500,17 @@
         },
         {
           "name": {
+            "en": "Stalker bolt rifle (mobile)",
+            "ko": "스토커 볼트 라이플 (휴대)"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": []
+        },
+        {
+          "name": {
             "en": "Chainsword",
             "ko": "체인소드"
           },
@@ -517,6 +545,20 @@
           "rules": [
             "Lethal 5+"
           ]
+        },
+        {
+          "name": {
+            "en": "Thunder hammer",
+            "ko": "썬더 해머"
+          },
+          "A": 5,
+          "hit": "4+",
+          "dmg": "5/6",
+          "range": "Melee",
+          "rules": [
+            "Shock",
+            "Stun"
+          ]
         }
       ]
     },
@@ -544,9 +586,9 @@
             "ko": "그레나디어"
           },
           "desc": {
-            "en": "Free Frag and Krak grenades. Improve Hit stat by 1 when using grenades.",
-            "ko": "파편(Frag) 및 크랙(Krak) 수류탄을 무료로 장비합니다. 수류탄 사용 시 명중(Hit) 스탯이 1 향상됩니다."
-          }
+			  "en": "This operative can use frag and krak grenades (see universal equipment). Doing so doesn’t count towards any limited uses you have (i.e. if you also select those grenades from equipment for other operatives). Whenever it’s doing so, improve the Hit stat of that weapon by 1.",
+			  "ko": "이 요원은 <b>파편(frag)</b> 및 <b>크랙(krak) 수류탄</b>을 사용할 수 있습니다 (<b>공용 장비(universal equipment)</b> 참조). 이는 보유한 사용 제한 횟수에 포함되지 않습니다 (예: 다른 요원을 위해 장비에서 해당 수류탄을 선택한 경우 등).<br>이 요원이 해당 무기를 사용할 때마다, 그 무기의 <b>명중(Hit)</b> 능력치를 1 향상시킵니다."
+			}
         }
       ],
       "weapons": [
@@ -647,22 +689,35 @@
             "ko": "카모 클록"
           },
           "desc": {
-            "en": "Ignore [Saturate] when being shot. Has [Stealthy] Tactic (double bonus if selected).",
-            "ko": "사격 당할 때 [Saturate] 규칙을 무시합니다. '은밀함(Stealthy)' 전술을 기본 보유하며, 해당 전술 선택 시 효과가 강화됩니다."
-          }
+			  "en": "Camo Cloak: Whenever an operative is shooting this operative, ignore the Saturate weapon rule. This operative has the Stealthy CHAPTER TACTIC. If you selected that CHAPTER TACTIC, you can do both of its options (i.e. retain two cover saves – one normal and one critical success).",
+			  "ko": "<b>카모 클록(Camo Cloak):</b> 적 요원이 이 요원을 <b>사격(shooting)</b>할 때, <b>포화(Saturate)</b> 무기 규칙을 무시합니다. 이 요원은 <b>은밀함(Stealthy) 챕터 전술</b>을 가집니다. 만약 당신이 해당 <b>챕터 전술</b>을 선택했다면, 그 두 가지 옵션을 모두 사용할 수 있습니다 (즉, 두 개의 <b>엄폐 세이브</b>를 유지함 – <b>일반 성공</b> 하나와 <b>치명타 성공</b> 하나)."
+			}
         },
         {
           "title": {
-            "en": "Optics",
-            "ko": "광학 장비"
+            "en": "Optics (1AP)",
+            "ko": "광학 장비 (1AP)"
           },
           "desc": {
-            "en": "1AP. Until next activation, enemies cannot be Obscured against this operative's shooting.",
-            "ko": "1AP. 다음 활성화 시작 전까지, 이 오퍼레이티브가 사격할 때 적은 가려짐(Obscured) 상태가 될 수 없습니다."
-          }
+			  "en": "Until the start of this operative’s next activation, whenever it’s shooting, enemy operatives cannot be obscured.<br>This operative cannot perform this action while within control range of an enemy operative.",
+			  "ko": "이 요원의 다음 <b>활성화(activation)</b> 시작 시까지, 이 요원이 <b>사격(shooting)</b>할 때마다 적 요원들은 <b>가려짐(obscured)</b> 상태가 될 수 없습니다.<br>이 요원이 적 요원의 <b>통제 범위(control range)</b> 내에 있다면 이 행동을 수행할 수 없습니다."
+			}
         }
       ],
       "weapons": [
+        {
+          "name": {
+            "en": "Bolt pistol",
+            "ko": "볼트 피스톨"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": [
+            "Rng 8\""
+          ]
+        },
         {
           "name": {
             "en": "Bolt sniper rifle (executioner)",
@@ -673,9 +728,24 @@
           "dmg": "3/4",
           "range": "Ranged",
           "rules": [
-            "Heavy",
+            "Heavy (Dash only)",
             "Saturate",
             "Seek Light",
+            "Silent"
+          ]
+        },
+        {
+          "name": {
+            "en": "Bolt sniper rifle (hyperfrag)",
+            "ko": "볼트 스나이퍼 라이플 (하이퍼프랙)"
+          },
+          "A": 4,
+          "hit": "2+",
+          "dmg": "2/4",
+          "range": "Ranged",
+          "rules": [
+			"Blast 1\"",
+            "Heavy (Dash only)",
             "Silent"
           ]
         },
@@ -690,10 +760,21 @@
           "range": "Ranged",
           "rules": [
             "Devastating 3",
-            "Heavy",
+            "Heavy (Dash only)",
             "Piercing 1",
             "Silent"
           ]
+        },
+        {
+          "name": {
+            "en": "Fist",
+            "ko": "주먹"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Melee",
+          "rules": []
         }
       ]
     },
@@ -777,6 +858,19 @@
       "weapons": [
         {
           "name": {
+            "en": "Auto bolt rifle",
+            "ko": "오토 볼트 라이플"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": [
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": {
             "en": "Auxiliary grenade launcher (frag)",
             "ko": "보조 유탄 발사기 (파편)"
           },
@@ -803,19 +897,6 @@
         },
         {
           "name": {
-            "en": "Auto bolt rifle",
-            "ko": "오토 볼트 라이플"
-          },
-          "A": 4,
-          "hit": "3+",
-          "dmg": "3/4",
-          "range": "Ranged",
-          "rules": [
-            "Torrent 1\""
-          ]
-        },
-        {
-          "name": {
             "en": "Bolt rifle",
             "ko": "볼트 라이플"
           },
@@ -826,6 +907,43 @@
           "rules": [
             "Piercing Crits 1"
           ]
+        },
+        {
+          "name": {
+            "en": "Stalker bolt rifle (heavy)",
+            "ko": "스토커 볼트 라이플 (중화기)"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/5",
+          "range": "Ranged",
+          "rules": [
+            "Heavy (Dash only)",
+            "Lethal 5+",
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": {
+            "en": "Stalker bolt rifle (mobile)",
+            "ko": "스토커 볼트 라이플 (휴대)"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": []
+        },
+        {
+          "name": {
+            "en": "Fists",
+            "ko": "주먹"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Melee",
+          "rules": []
         }
       ]
     },
@@ -888,6 +1006,17 @@
             "Lethal 5+",
             "Piercing Crits 1"
           ]
+        },
+        {
+          "name": {
+            "en": "Stalker bolt rifle (mobile)",
+            "ko": "스토커 볼트 라이플 (휴대)"
+          },
+          "A": 4,
+          "hit": "3+",
+          "dmg": "3/4",
+          "range": "Ranged",
+          "rules": []
         },
         {
           "name": {

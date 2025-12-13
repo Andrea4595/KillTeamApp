@@ -456,5 +456,47 @@
 			"en": "An ability allowing an operative to move ignoring terrain and other operatives. Vertical distance is usually ignored during the move, but the operative must end its move on a legal surface.",
 			"ko": "지형지물과 다른 오퍼레이티브를 통과하여 이동할 수 있는 능력입니다. 이동 중 수직 거리는 무시되지만, 이동을 마칠 때는 반드시 착지 가능한 위치에 있어야 합니다."
 		}
+	},
+	{
+		"key": "Retaliate",
+		"desc": {
+			"en": "The term used for the defender in a Fight action. When an operative performs a Fight action, the selected enemy target 'retaliates'. Both operatives roll attack dice and damage each other.",
+			"ko": "근접전(Fight) 행동의 대상으로 지정된 적 오퍼레이티브가 수행하는 대응입니다. 반격하는(Retaliating) 오퍼레이티브는 공격자와 똑같이 공격 주사위를 굴리고 타격 및 방어를 수행하여 맞서 싸웁니다."
+		}
+	},
+	{
+		"key": "Normal Success",
+		"desc": {
+			"en": "A dice result that equals or beats the required stat (Hit or Save) but is not a critical (usually results of 6 are critical). It inflicts Normal Damage or blocks one enemy normal success.",
+			"ko": "주사위 값이 요구 수치(명중/방어) 이상이지만 치명타(보통 6)는 아닌 성공입니다. 무기의 일반 피해(Normal Dmg)를 입히거나, 방어 시 적의 일반 성공 1개를 막을 수 있습니다."
+		}
+	},
+	{
+		"key": "Critical Success",
+		"desc": {
+			"en": "A dice result of 6 (always a success). Inflicts Critical Damage. In a Fight, a critical success can be used to block either an enemy normal success or an enemy critical success.",
+			"ko": "주사위 값이 6인 경우입니다(항상 성공). 무기의 치명타 피해(Critical Dmg)를 입힙니다. 근접전 방어 시에는 적의 일반 성공이나 치명타 성공 중 하나를 선택해 막을 수 있습니다."
+		}
+	},
+	{
+		"key": "Severe",
+		"desc": {
+			"en": "Weapon Trait. If you don't retain any critical successes (results of 6), you can change one of your normal successes to a critical success. The Devastating and Piercing Crits weapon rules still take effect, but Punishing and Rending don't.",
+			"ko": "무기 특성. 치명타 성공(6)이 하나도 확정되지 않았다면, 일반 성공 주사위 하나를 치명타 성공으로 바꿀 수 있습니다. 이 경우, Devastating 및 Piercing Crits 무기 규칙은 여전히 적용되지만, Punishing 및 Rending 규칙은 적용되지 않습니다."
+		}
+	},
+	{
+		"key": "Vantage Point Interaction (Defence)",
+		"desc": {
+			"en": "In standard Kill Team rules, when a Concealed operative in Light Cover is shot by an attacker on a Vantage Point, the defender is granted an 'improved cover save' (retaining a Critical save instead of a Normal save) to compensate for being targeted.",
+			"ko": "킬 팀 정식 규칙에서, '잠입(Conceal)' 상태로 라이트 커버 뒤에 있는 오퍼레이티브가 '고지대(Vantage Point)'의 적에게 공격받을 때 적용되는 규칙입니다. 사격 대상이 되는 불리함을 상쇄하기 위해, 방어자는 일반적인 엄폐 보너스(일반 성공 1개) 대신 향상된 '치명타 성공 1개'를 방어 주사위로 확정할 수 있습니다."
+		}
+	},
+	{
+		"key": "Fail",
+		"desc": {
+			"en": "A dice result that is lower than the required stat (Hit or Save), or a result of 1 (which is always a fail). Generally, fails are discarded, but some special rules (e.g., Punishing) allow you to interact with or modify them.",
+			"ko": "주사위 결과가 요구 수치(명중 또는 방어)보다 낮거나, 주사위 눈이 1인 경우입니다(1은 조건 불문하고 항상 실패). 일반적으로 실패한 주사위는 제거되지만, 'Punishing'과 같은 일부 특수 규칙은 실패한 주사위를 성공으로 변환하거나 활용할 수 있게 해줍니다."
+		}
 	}
 ]
