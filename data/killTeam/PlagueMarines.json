@@ -7,7 +7,8 @@
   "color": "#637a38",
   "rulesText": {
     "en": "• 1 PLAGUE MARINE CHAMPION operative<br>• 5 PLAGUE MARINE operatives selected from the list: BOMBARDIER, FIGHTER, HEAVY GUNNER, ICON BEARER, MALIGNANT PLAGUECASTER, WARRIOR<br>• Your kill team can only include each operative on this list once.",
-    "ko": "• 플레이그 마린 챔피언 1명 (필수)<br>• 나머지 플레이그 마린 오퍼레이티브 5명 선택: 봄바디어, 파이터, 헤비 거너, 아이콘 베어러, 말리그넌트 플레이그캐스터, 워리어<br>• 워리어를 포함하여 각 병종은 킬팀 내에 1명씩만 포함할 수 있습니다."
+    "ko": "• 플레이그 마린 챔피언 1명 (필수)<br>• 나머지 플레이그 마린 오퍼레이티브 5명 선택: 봄바디어, 파이터, 헤비 거너, 아이콘 베어러, 말리그넌트 플레이그캐스터, 워리어<br>• 각 병종은 킬팀 내에 1명씩만 포함할 수 있습니다.",
+    "ko_summation": "• 리더 1명 (필수)<br>• 나머지 5명 선택 (병종별 최대 1명)"
   },
   "factionRules": [
     {
@@ -17,7 +18,8 @@
       },
       "desc": {
         "en": "Space Marines are genetically augmented transhumans forged for only one purpose: war.<br><br>During each friendly PLAGUE MARINE operative’s activation, it can perform either two Shoot actions or two Fight actions. If it’s two Shoot actions, a bolt pistol, boltgun or PSYCHIC weapon must be selected for at least one of them. You cannot select the same PSYCHIC weapon more than once per activation. Each friendly PLAGUE MARINE operative can counteract regardless of its order.",
-        "ko": "<span class='lore-text'>스페이스 마린은 전쟁이라는 단 하나의 목적을 위해 만들어진 유전적으로 강화된 초인들입니다.</span><br><br>각 아군 플레이그 마린 요원의 활성화 동안, 해당 요원은 사격(Shoot) 행동을 두 번 수행하거나 교전(Fight) 행동을 두 번 수행할 수 있습니다. 만약 사격 행동을 두 번 수행한다면, 적어도 그중 한 번은 볼트 피스톨(bolt pistol), 볼트건(boltgun) 또는 <b>사이킥(PSYCHIC)</b> 무기를 선택해야 합니다.<br>활성화당 동일한 <b>사이킥</b> 무기를 두 번 선택할 수는 없습니다.<br>각 아군 플레이그 마린 요원은 자신의 명령(Order) 상태와 상관없이 대응(Counteract)할 수 있습니다."
+        "ko": "<span class='lore-text'>스페이스 마린은 전쟁이라는 단 하나의 목적을 위해 만들어진 유전적으로 강화된 초인들입니다.</span><br><br>각 아군 플레이그 마린 요원의 활성화 동안, 해당 요원은 <b>사격(Shoot)</b> 행동을 두 번 수행하거나 <b>교전(Fight)</b> 행동을 두 번 수행할 수 있습니다.<br>만약 사격 행동을 두 번 수행한다면, 적어도 그중 한 번은 <b>볼트 피스톨</b>, <b>볼트건</b> 또는 <b>사이킥(PSYCHIC)</b> 무기를 선택해야 합니다. 활성화당 동일한 <b>사이킥</b> 무기를 두 번 선택할 수는 없습니다.<br>각 아군 플레이그 마린 요원은 자신의 명령(Order) 상태와 상관없이 <b>대응(Counteract)</b>할 수 있습니다.",
+        "ko_summation": "활성화 당 <span class='rule-emphasis'>사격(Shoot)</span> 2회(조건부) 또는 <span class='rule-emphasis'>교전(Fight)</span> 2회를 수행할 수 있으며, <span class='rule-emphasis'>명령(Order)</span> 상태와 상관없이 <span class='rule-emphasis'>대응(Counteract)</span>할 수 있습니다."
       }
     },
     {
@@ -27,7 +29,8 @@
       },
       "desc": {
         "en": "Nurgle deals in warp-tainted poisons, toxins, viral plagues and sicknesses of the soul that defy both natural resilience and medical intervention. Some weapons in this team’s rules have the Poison weapon rule.<br><br>Poison: In the Resolve Attack Dice step, if you inflict damage with any successes, the operative this weapon is being used against gains one of your Poison tokens (if it doesn’t already have one). Whenever an operative that has one of your Poison tokens is activated, inflict 1 damage on it.",
-        "ko": "<span class='lore-text'>너글은 자연적인 회복력과 의학적 치료를 모두 거부하는 워프에 오염된 독, 독소, 바이러스성 역병, 영혼의 질병을 다룹니다. 이 팀의 일부 무기 규칙에는 독(Poison) 규칙이 있습니다.</span><br><br><b>독(Poison):</b> 공격 주사위 해결(Resolve Attack Dice) 단계에서, 성공 주사위로 피해를 입혔다면, 해당 무기의 공격 대상이 된 요원은 당신의 <b>독 토큰(Poison token)</b> 1개를 얻습니다 (아직 가지고 있지 않은 경우).<br>당신의 독 토큰을 가진 요원이 활성화될 때마다, 그 요원에게 1의 피해를 입힙니다."
+        "ko": "<span class='lore-text'>너글은 자연적인 회복력과 의학적 치료를 모두 거부하는 워프에 오염된 독, 독소, 바이러스성 역병, 영혼의 질병을 다룹니다. 이 팀의 일부 무기 규칙에는 독(Poison) 규칙이 있습니다.</span><br><br><b>독(Poison):</b> 공격 주사위 해결 단계에서, 성공 주사위로 피해를 입혔다면, 해당 무기의 공격 대상이 된 요원은 당신의 <b>독 토큰(Poison token)</b> 1개를 얻습니다 (아직 가지고 있지 않은 경우).<br>당신의 독 토큰을 가진 요원이 활성화될 때마다, 그 요원에게 <b>1의 피해</b>를 입힙니다.",
+        "ko_summation": "<span class='rule-emphasis'>[Poison]</span> 무기로 피해를 입히면 대상에게 <span class='rule-emphasis'>독 토큰</span>을 부여합니다. 독 토큰을 보유한 요원이 활성화될 때 <span class='rule-emphasis'>1 데미지</span>를 입습니다."
       }
     },
     {
@@ -37,7 +40,8 @@
       },
       "desc": {
         "en": "The followers of Nurgle possess extreme resilience to bullet and blade, for their hideous forms are swollen by death, decay and disease.<br><br>Whenever an attack dice inflicts damage of 3 or more on a friendly PLAGUE MARINE operative, roll one D6: on a 4+, subtract 1 from that inflicted damage.",
-        "ko": "<span class='lore-text'>너글의 추종자들은 죽음, 부패, 질병으로 부풀어 오른 흉측한 형체 덕분에 총탄과 칼날에 대해 극도의 회복력을 지니고 있습니다.</span><br><br>공격 주사위가 아군 플레이그 마린 요원에게 <b>3 이상의 피해</b>를 입힐 때마다, D6을 하나 굴리십시오. <b>4+</b>가 나오면 입는 피해량에서 1을 차감합니다."
+        "ko": "<span class='lore-text'>너글의 추종자들은 죽음, 부패, 질병으로 부풀어 오른 흉측한 형체 덕분에 총탄과 칼날에 대해 극도의 회복력을 지니고 있습니다.</span><br><br>공격 주사위가 아군 플레이그 마린 요원에게 <b>3 이상의 피해</b>를 입힐 때마다, D6을 하나 굴리십시오. <b>4+</b>가 나오면 입는 피해량에서 1을 차감합니다.",
+        "ko_summation": "<span class='rule-emphasis'>3 이상의 피해</span>를 입을 때 주사위를 굴려 <span class='rule-emphasis'>4+</span>가 나오면 피해량을 1 줄입니다."
       }
     }
   ],
@@ -51,7 +55,8 @@
         "cost": "1CP",
         "desc": {
           "en": "Plague Marines are oozing with contagion, their hideous forms emanating a miasma of decay that saps the vigour of their foes.<br><br>Subtract 2\" from the Move stat of an enemy operative and worsen the Hit stat of its weapons by 1 (this isn’t cumulative with being injured) whenever any of the following are true:<br>• It’s within control range of friendly PLAGUE MARINE operatives.<br>• It has one of your Poison tokens and is visible to (or vice versa) and within 3\" of friendly PLAGUE MARINES operatives.<br>• It’s visible to (or vice versa) and within 3\" of a friendly PLAGUE MARINE ICON BEARER operative.",
-          "ko": "<span class='lore-text'>플레이그 마린들은 전염병을 뿜어내며, 그들의 흉측한 형체는 적들의 활력을 앗아가는 부패의 독기를 발산합니다.</span><br><br>다음 중 하나라도 해당되는 경우, 적 요원의 <b>이동(Move)</b> 능력치에서 2\"를 차감하고, 그 무기의 <b>명중(Hit)</b> 능력치를 1 악화시킵니다 (이는 부상으로 인한 효과와 중복되지 않습니다):<br>• 아군 플레이그 마린 요원의 <b>통제 범위(control range)</b> 내에 있을 때.<br>• 해당 적이 당신의 <b>독 토큰</b>을 가지고 있으며, 아군 플레이그 마린 요원과 서로 <b>가시거리(visible)</b>에 있고 <b>3\"</b> 이내에 있을 때.<br>• 아군 <b>플레이그 마린 아이콘 베어러</b>와 서로 <b>가시거리</b>에 있고 <b>3\"</b> 이내에 있을 때."
+          "ko": "<span class='lore-text'>플레이그 마린들은 전염병을 뿜어내며, 그들의 흉측한 형체는 적들의 활력을 앗아가는 부패의 독기를 발산합니다.</span><br><br>다음 중 하나라도 해당되는 경우, 적 요원의 <b>이동(Move)</b> 능력치에서 <b>2\"</b>를 차감하고, 그 무기의 <b>명중(Hit)</b> 능력치를 1 악화시킵니다 (이는 부상 페널티와 중복되지 않습니다):<br>• 아군 플레이그 마린 요원의 <b>통제 범위</b> 내에 있을 때.<br>• 해당 적이 <b>독 토큰</b>을 가지고 있으며, 아군 플레이그 마린 요원과 <b>가시거리</b> 내 <b>3\"</b> 이내에 있을 때.<br>• 아군 <b>아이콘 베어러</b>와 <b>가시거리</b> 내 <b>3\"</b> 이내에 있을 때.",
+          "ko_summation": "아군 요원의 **통제 범위** 내 적(또는 독에 걸린 근처 적)에게 <span class='rule-emphasis'>이동(Move) -2\"</span>, <span class='rule-emphasis'>명중(Hit) -1</span> 페널티를 부여합니다."
         }
       },
       {
@@ -62,7 +67,8 @@
         "cost": "1CP",
         "desc": {
           "en": "Plague Marines are methodical and uncompromising in their approach to warfare, advancing and firing with steadfast determination.<br><br>Whenever a friendly PLAGUE MARINE operative is shooting or fighting during an activation in which it hasn’t moved more than 3\", or whenever it’s retaliating, its weapons have the Ceaseless weapon rule.",
-          "ko": "<span class='lore-text'>플레이그 마린들은 전쟁에 임할 때 체계적이고 타협하지 않으며, 확고한 결의로 전진하며 사격을 가합니다.</span><br><br>아군 플레이그 마린 요원이 활성화 동안 <b>3\"를 초과하여 이동하지 않았고</b> 사격(shooting)하거나 교전(fighting)할 때, 혹은 반격(retaliating)할 때, 그 요원의 무기는 <b>끊임없음(Ceaseless)</b> 무기 규칙을 가집니다."
+          "ko": "<span class='lore-text'>플레이그 마린들은 전쟁에 임할 때 체계적이고 타협하지 않으며, 확고한 결의로 전진하며 사격을 가합니다.</span><br><br>아군 플레이그 마린 요원이 활성화 동안 <b>3\"를 초과하여 이동하지 않았고</b> <b>사격</b>하거나 <b>교전</b>할 때, 혹은 <b>반격</b>할 때, 그 요원의 무기는 <b>끊임없음(Ceaseless)</b> 무기 규칙을 가집니다.",
+          "ko_summation": "활성화 중 3\" 이하로 이동했다면, <span class='rule-emphasis'>사격/교전</span> 시 무기에 <span class='rule-emphasis'>[Ceaseless]</span>를 부여합니다 (반격 포함)."
         }
       },
       {
@@ -73,7 +79,8 @@
         "cost": "1CP",
         "desc": {
           "en": "Disgusting, fat-bodied flies swarm the killzone, blurring the forms of advancing Plague Marines and absorbing the enemy’s projectiles.<br><br>Place one of your Cloud of Flies markers in the killzone. Whenever an operative is shooting a friendly PLAGUE MARINE operative that’s more than 3\" from it, if that friendly operative is wholly within 3\" of that marker, that friendly operative is obscured. In the Ready step of the next Strategy phase, remove that marker.",
-          "ko": "<span class='lore-text'>역겨운 살찐 파리 떼가 킬존을 뒤덮어, 진격하는 플레이그 마린의 형체를 흐릿하게 만들고 적의 투사체를 흡수합니다.</span><br><br>킬존에 <b>파리 떼(Cloud of Flies) 마커</b> 하나를 배치하십시오. 적 요원이 그 마커로부터 3\"보다 멀리 있는 아군 플레이그 마린 요원을 사격할 때, 그 아군 요원이 마커로부터 <b>완전히 3\" 이내(wholly within)</b>에 있다면, 해당 아군 요원은 <b>가려짐(obscured)</b> 판정을 받습니다.<br>다음 전략 단계의 준비(Ready) 단계에 해당 마커를 제거하십시오."
+          "ko": "<span class='lore-text'>역겨운 살찐 파리 떼가 킬존을 뒤덮어, 진격하는 플레이그 마린의 형체를 흐릿하게 만들고 적의 투사체를 흡수합니다.</span><br><br>킬존에 <b>파리 떼 마커</b> 하나를 배치하십시오. 적 요원이 그 마커로부터 3\"보다 멀리 있는 아군 플레이그 마린 요원을 사격할 때, 그 아군 요원이 마커로부터 <b>완전히 3\" 이내</b>에 있다면, 해당 아군 요원은 <b>가려짐(obscured)</b> 판정을 받습니다. 다음 전략 단계의 준비 단계에 마커를 제거하십시오.",
+          "ko_summation": "마커를 배치합니다. 마커 3\" 이내 아군은 원거리 사격에 대해 <span class='rule-emphasis'>가려짐(Obscured)</span> 판정을 받습니다."
         }
       },
       {
@@ -84,7 +91,8 @@
         "cost": "1CP",
         "desc": {
           "en": "The smallest of Nurgle’s daemons, Nurglings are both malicious and playful, cackling wildly as they claw and harass the Plague Marines’ foes with pestilent claws and teeth.<br><br>Select one enemy operative within 3\" of a friendly PLAGUE MARINE operative, or one enemy operative that has one of your Poison tokens and is within 7\" of a friendly PLAGUE MARINE operative. Until the end of the selected operative’s next activation, subtract 1 from its APL stat.",
-          "ko": "<span class='lore-text'>너글의 악마 중 가장 작은 너글링들은 악의적이면서도 장난기가 많으며, 역병 걸린 발톱과 이빨로 플레이그 마린의 적들을 할퀴고 괴롭히며 미친 듯이 낄낄거립니다.</span><br><br>아군 플레이그 마린 요원으로부터 <b>3\"</b> 이내에 있는 적 요원 하나, 혹은 당신의 <b>독 토큰</b>을 가지고 있으면서 아군 플레이그 마린 요원으로부터 <b>7\"</b> 이내에 있는 적 요원 하나를 선택하십시오.<br>선택된 요원의 다음 활성화가 끝날 때까지, 해당 요원의 <b>APL(행동 포인트 한계)</b> 수치에서 1을 차감합니다."
+          "ko": "<span class='lore-text'>너글의 악마 중 가장 작은 너글링들은 악의적이면서도 장난기가 많으며, 역병 걸린 발톱과 이빨로 적들을 괴롭힙니다.</span><br><br>아군 플레이그 마린 요원으로부터 <b>3\"</b> 이내, 혹은 <b>독 토큰</b>을 가지고 있으면서 아군으로부터 <b>7\"</b> 이내에 있는 적 요원 하나를 선택하십시오. 선택된 요원의 다음 활성화가 끝날 때까지, 해당 요원의 <b>APL</b>에서 1을 차감합니다.",
+          "ko_summation": "아군 근처(혹은 독에 걸린) 적 1명을 선택하여 <span class='rule-emphasis'>APL -1</span>을 부여합니다."
         }
       }
     ],
@@ -97,7 +105,8 @@
         "cost": "1CP",
         "desc": {
           "en": "The most potent of Grandfather Nurgle’s foul plagues spread swiftly through the air, breaching even enviro-seals and filtration masks.<br><br>Use this firefight ploy during a friendly PLAGUE MARINE operative’s activation or counteraction, before or after it performs an action. Select one of the following:<br>• One enemy operative within 3\" of that operative gains one of your Poison tokens (if it doesn’t already have one).<br>• Roll 2D6: if the result is 7+, one enemy operative within 7\" of that operative gains one of your Poison tokens (if it doesn’t already have one).",
-          "ko": "<span class='lore-text'>할아버지 너글의 가장 강력하고 불결한 역병은 공기를 타고 빠르게 퍼져나가, 환경 차폐막과 여과 마스크조차 뚫고 들어갑니다.</span><br><br>이 사격전 계략을 아군 플레이그 마린 요원의 활성화 또는 대응 중에, 행동을 수행하기 전이나 후에 사용하십시오. 다음 중 하나를 선택하십시오:<br>• 해당 요원으로부터 <b>3\"</b> 이내에 있는 적 요원 하나가 당신의 <b>독 토큰</b> 1개를 얻습니다 (없는 경우).<br>• <b>2D6</b>을 굴립니다: 결과가 <b>7 이상</b>이면, 해당 요원으로부터 <b>7\"</b> 이내에 있는 적 요원 하나가 당신의 <b>독 토큰</b> 1개를 얻습니다 (없는 경우)."
+          "ko": "<span class='lore-text'>할아버지 너글의 가장 강력한 역병은 공기를 타고 빠르게 퍼져나갑니다.</span><br><br>활성화 또는 반격 중 행동 전후에 사용하십시오. 다음 중 하나를 선택합니다:<br>• 해당 요원으로부터 <b>3\"</b> 이내의 적에게 <b>독 토큰</b> 부여.<br>• <b>2D6</b>을 굴려 <b>7+</b>이면, 해당 요원으로부터 <b>7\"</b> 이내의 적에게 <b>독 토큰</b> 부여.",
+          "ko_summation": "3\" 이내 적에게 <span class='rule-emphasis'>독 토큰</span>을 부여합니다 (또는 주사위 굴림 성공 시 7\" 이내)."
         }
       },
       {
@@ -108,7 +117,8 @@
         "cost": "1CP",
         "desc": {
           "en": "The body of a Plague Marine plays host to countless poisons and plagues. Upon death, their bloated forms may detonate, spreading foul contagion all around.<br><br>Use this firefight ploy when a friendly PLAGUE MARINE operative is incapacitated. Each enemy operative visible to and within 3\" of that operative gains one of your Poison tokens (if they don’t already have one); for each of those enemy operatives that already has one of your Poison tokens (including if they gained one during this action), inflict 1 damage on them instead.",
-          "ko": "<span class='lore-text'>플레이그 마린의 몸은 수많은 독과 역병의 숙주 역할을 합니다. 죽음을 맞이할 때, 그들의 부풀어 오른 몸은 폭발하여 주변에 불결한 전염병을 퍼뜨릴 수 있습니다.</span><br><br>이 사격전 계략을 아군 플레이그 마린 요원이 <b>무력화(incapacitated)</b>될 때 사용하십시오.<br>해당 요원과 <b>가시거리(visible)</b>에 있고 <b>3\"</b> 이내에 있는 각 적 요원은 당신의 <b>독 토큰</b> 1개를 얻습니다 (없는 경우). 이미 독 토큰을 가지고 있는 적 요원(이 행동으로 얻은 경우 포함)에게는 대신 <b>1의 피해</b>를 입힙니다."
+          "ko": "<span class='lore-text'>플레이그 마린이 죽음을 맞이할 때, 그들의 부풀어 오른 몸은 폭발하여 주변에 전염병을 퍼뜨립니다.</span><br><br>아군 요원이 <b>무력화</b>될 때 사용하십시오. 해당 요원과 <b>가시거리</b> 내 <b>3\"</b> 이내에 있는 모든 적은 <b>독 토큰</b>을 얻습니다. 이미 독 토큰이 있다면(방금 얻은 경우 포함) 대신 <b>1의 피해</b>를 입힙니다.",
+          "ko_summation": "아군 요원이 무력화될 때 사용하여 가시거리 3\" 이내 적들에게 <span class='rule-emphasis'>독 토큰</span>을 부여하며, 이미 있다면 <span class='rule-emphasis'>1 데미지</span>를 입힙니다."
         }
       },
       {
@@ -119,7 +129,8 @@
         "cost": "1CP",
         "desc": {
           "en": "By voluntarily offering their bodies as hosts for the Grandfather’s contagious gifts, some Plague Marines are granted even greater endurance.<br><br>Use this firefight ploy when an attack dice inflicts damage on a friendly PLAGUE MARINE operative. Until the end of the activation/counteraction, for the purposes of the Disgustingly Resilient rule for that operative, always subtract 1 from the damage inflicted (to a minimum of 2) – you don’t need to roll.",
-          "ko": "<span class='lore-text'>자발적으로 자신의 몸을 할아버지의 전염성 선물을 위한 숙주로 바침으로써, 일부 플레이그 마린들은 더욱 강력한 인내력을 부여받습니다.</span><br><br>이 사격전 계략을 공격 주사위가 아군 플레이그 마린 요원에게 피해를 입힐 때 사용하십시오.<br>해당 활성화/대응이 끝날 때까지, 그 요원의 <b>혐오스러운 맷집(Disgustingly Resilient)</b> 규칙을 적용할 때, 주사위를 굴릴 필요 없이 항상 입는 피해에서 <b>1을 차감</b>합니다 (피해량은 최소 2까지 줄어듦)."
+          "ko": "<span class='lore-text'>자발적으로 자신의 몸을 할아버지의 선물에 바침으로써, 더욱 강력한 인내력을 부여받습니다.</span><br><br>피해를 입을 때 사용하십시오. 해당 활성화/반격 동안, <b>혐오스러운 맷집</b> 규칙 적용 시 주사위를 굴리지 않고 <b>무조건 피해를 1 차감</b>합니다 (최소 피해 2).",
+          "ko_summation": "피격 시 **혐오스러운 맷집** 굴림 없이 피해량을 1 줄입니다 (최소 2까지)."
         }
       },
       {
@@ -130,7 +141,8 @@
         "cost": "1CP",
         "desc": {
           "en": "To engage a Plague Marine in single combat is to expose oneself to wilting contagion and soul-eroding decay.<br><br>Use this firefight ploy when a friendly PLAGUE MARINE operative is fighting against or shooting against an enemy operative within 3\" of it (or within 7\" of it if that enemy operative has one of your Poison tokens), after your opponent rolls their attack or defence dice. For each result of 3 they roll, inflict 1 damage on that enemy operative, that result is treated as a fail and they cannot re-roll it.",
-          "ko": "<span class='lore-text'>플레이그 마린과 일대일로 맞서는 것은 시들게 하는 전염병과 영혼을 갉아먹는 부패에 자신을 노출시키는 것입니다.</span><br><br>이 사격전 계략을 아군 플레이그 마린 요원이 <b>3\"</b> 이내의 적 요원(혹은 독 토큰이 있다면 <b>7\"</b> 이내)과 <b>교전(fighting)</b>하거나 <b>사격(shooting)</b>할 때, 상대방이 공격 또는 방어 주사위를 굴린 후 사용하십시오.<br>상대방이 굴린 <b>3</b>의 결과마다, 해당 적 요원에게 <b>1의 피해</b>를 입히며, 그 주사위 결과는 <b>실패(fail)</b>로 처리되고 리롤할 수 없습니다."
+          "ko": "<span class='lore-text'>플레이그 마린과 맞서는 것은 시들게 하는 전염병에 자신을 노출시키는 것입니다.</span><br><br>아군이 <b>3\"</b> 이내(독 토큰이 있다면 <b>7\"</b>)의 적과 <b>교전</b>하거나 <b>사격</b>할 때, 상대방의 주사위 결과 <b>3</b>마다 해당 적에게 <b>1의 피해</b>를 입히고, 그 주사위를 <b>실패</b>로 처리합니다 (리롤 불가).",
+          "ko_summation": "근접한 적이 주사위 3을 굴릴 때마다 1 데미지를 입히고 <span class='rule-emphasis'>실패</span> 처리합니다."
         }
       }
     ]
@@ -145,7 +157,8 @@
       "cost": "EP",
       "desc": {
         "en": "When the plague bells toll, the Death Guard are infused with corrupted energy, heightening their unholy resilience to extraordinary levels.<br><br>You can ignore any changes to the stats of friendly PLAGUE MARINE operatives from being injured (including their weapons’ stats).",
-        "ko": "<span class='lore-text'>역병의 종이 울리면, 데스 가드는 타락한 에너지로 충만해져 그들의 불경한 회복력을 비정상적인 수준으로 끌어올립니다.</span><br><br>아군 플레이그 마린 요원이 <b>부상(injured)</b>으로 인해 겪는 모든 능력치 변화를 무시할 수 있습니다 (무기 능력치 포함)."
+        "ko": "<span class='lore-text'>역병의 종이 울리면, 데스 가드는 타락한 에너지로 충만해져 불경한 회복력을 끌어올립니다.</span><br><br>아군 플레이그 마린 요원이 <b>부상(injured)</b>으로 인해 겪는 모든 능력치 변화를 무시합니다.",
+        "ko_summation": "<span class='rule-emphasis'>부상(Injured)</span>으로 인한 능력치 페널티를 무시합니다."
       },
       "limit": 1
     },
@@ -158,7 +171,8 @@
       "cost": "EP",
       "desc": {
         "en": "These devices are packed with explosives, shards of jagged metal and deadly pathogens that poison any unfortunate enough to survive the initial blast.<br><br>Friendly PLAGUE MARINE operatives have the following ranged weapon (you cannot select it for use more than twice during the battle):<br>Name: Blight grenade, Atk: 4, Hit: 4+, Dmg: 2/4, Rules: Range 6\", Blast 2\", Saturate, Severe, Poison",
-        "ko": "<span class='lore-text'>이 장치들은 폭발물, 톱니 모양의 금속 파편, 그리고 치명적인 병원균으로 가득 차 있어 초기 폭발에서 살아남은 불운한 자들을 중독시킵니다.</span><br><br>아군 플레이그 마린 요원들은 다음 사격 무기를 가집니다 (전투 중 2회까지만 선택하여 사용할 수 있습니다):<br><b>블라이트 수류탄</b>: 공격횟수 4, 명중 4+, 피해 2/4, 규칙: 사거리 6\", 폭발 2\", 포화(Saturate), 심각함(Severe), 독(Poison)"
+        "ko": "<span class='lore-text'>이 장치들은 치명적인 병원균으로 가득 차 있어 생존자들을 중독시킵니다.</span><br><br>다음 사격 무기를 얻습니다 (전투 중 최대 2회 사용 가능):<br><b>블라이트 수류탄:</b> A4, 4+, 2/4, 사거리 6\", 폭발 2\", 포화, 심각함, 독",
+        "ko_summation": "강력한 독성 수류탄 무기를 얻습니다 (전투 당 2회 사용 제한)."
       },
       "limit": 1
     },
@@ -171,7 +185,8 @@
       "cost": "EP",
       "desc": {
         "en": "Virulent toxins ooze from these projectiles, so that those struck by them are infected with deadly diseases.<br><br>Friendly PLAGUE MARINE operatives’ boltguns and bolt pistols have the Poison and Severe weapon rules.",
-        "ko": "<span class='lore-text'>이 투사체에서는 맹독이 흘러나와, 이에 맞은 자들은 치명적인 질병에 감염됩니다.</span><br><br>아군 플레이그 마린 요원의 <b>볼트건</b>과 <b>볼트 피스톨</b>은 <b>독(Poison)</b>과 <b>심각함(Severe)</b> 무기 규칙을 가집니다."
+        "ko": "<span class='lore-text'>이 투사체에서는 맹독이 흘러나와, 이에 맞은 자들은 치명적인 질병에 감염됩니다.</span><br><br>아군의 <b>볼트건</b>과 <b>볼트 피스톨</b>은 <b>독(Poison)</b>과 <b>심각함(Severe)</b> 무기 규칙을 얻습니다.",
+        "ko_summation": "볼트건/볼트 피스톨에 <span class='rule-emphasis'>[Poison]</span>, <span class='rule-emphasis'>[Severe]</span> 규칙을 추가합니다."
       },
       "limit": 1
     },
@@ -184,7 +199,8 @@
       "cost": "EP",
       "desc": {
         "en": "Activating vents in their power armour, Plague Marines may unleash clouds of sickening fumes that clog the lungs of nearby foes.<br><br>Whenever an enemy operative that has one of your Poison tokens is activated within 3\" of a friendly PLAGUE MARINE operative, inflict D3 damage on it (instead of the normal 1).",
-        "ko": "<span class='lore-text'>파워 아머의 배출구를 작동시켜, 플레이그 마린은 근처 적들의 폐를 막아버리는 역겨운 연기 구름을 방출할 수 있습니다.</span><br><br>당신의 <b>독 토큰</b>을 가진 적 요원이 아군 플레이그 마린 요원으로부터 <b>3\"</b> 이내에서 활성화될 때마다, (일반적인 1 대신) <b>D3의 피해</b>를 입힙니다."
+        "ko": "<span class='lore-text'>파워 아머의 배출구를 통해 역겨운 연기 구름을 방출합니다.</span><br><br><b>독 토큰</b>을 가진 적 요원이 아군으로부터 <b>3\"</b> 이내에서 활성화될 때, 1 대신 <b>D3의 피해</b>를 입힙니다.",
+        "ko_summation": "근처의 독에 걸린 적이 활성화될 때 입는 피해가 1에서 <span class='rule-emphasis'>D3</span>로 증가합니다."
       },
       "limit": 1
     }
@@ -215,7 +231,8 @@
           },
           "desc": {
             "en": "Whenever an enemy operative that has one of your Poison tokens loses a wound within 7\" of this operative, this operative regains 1 lost wound (to a maximum of 3 lost wounds per turning point, and only if this operative isn’t incapacitated).",
-            "ko": "당신의 <b>독 토큰</b>을 가진 적 요원이 이 요원으로부터 <b>7\"</b> 이내에서 체력(wound)을 잃을 때마다, 이 요원은 잃은 체력을 1 회복합니다 (터닝 포인트당 최대 3까지, 이 요원이 무력화되지 않은 경우에 한함)."
+            "ko": "당신의 <b>독 토큰</b>을 가진 적 요원이 이 요원으로부터 <b>7\"</b> 이내에서 체력을 잃을 때마다, 이 요원은 체력을 <b>1 회복</b>합니다 (터닝 포인트당 최대 3).",
+            "ko_summation": "주변 7\" 이내의 독에 걸린 적이 피해를 입으면 <span class='rule-emphasis'>체력 1 회복</span>."
           }
         },
         {
@@ -225,7 +242,8 @@
           },
           "desc": {
             "en": "Whenever this operative is using this weapon against an enemy operative that has one of your Poison tokens, add 1 to both Dmg stats of this weapon.",
-            "ko": "이 요원이 당신의 <b>독 토큰</b>을 가진 적 요원에게 해당 무기를 사용할 때마다, 그 무기의 두 가지 피해(Dmg) 수치에 모두 1을 더합니다."
+            "ko": "이 요원이 <b>독 토큰</b>을 가진 적 요원에게 무기를 사용할 때, 그 무기의 두 가지 피해(Dmg) 수치에 <b>+1</b>을 합니다.",
+            "ko_summation": "독에 걸린 적 공격 시 <span class='rule-emphasis'>데미지 +1</span>."
           }
         }
       ],
@@ -302,7 +320,8 @@
           },
           "desc": {
             "en": "PSYCHIC. Select one enemy operative visible to and within 7\" of this operative, or one enemy operative that’s a valid target for this operative. That enemy operative gains one of your Poison tokens (if it doesn’t already have one). If it already has one, inflict 3 damage on that enemy operative instead.<br>An operative cannot perform this action while within control range of an enemy operative.",
-            "ko": "<b>사이킥(PSYCHIC).</b> 이 요원과 <b>가시거리</b>에 있고 <b>7\"</b> 이내에 있는 적 요원 하나, 혹은 이 요원의 유효한 사격 대상인 적 요원 하나를 선택하십시오.<br>해당 적 요원은 당신의 <b>독 토큰</b> 1개를 얻습니다 (없는 경우). 만약 이미 가지고 있다면, 대신 그 적 요원에게 <b>3의 피해</b>를 입힙니다.<br>적 요원의 <b>통제 범위</b> 내에 있을 때는 이 행동을 수행할 수 없습니다."
+            "ko": "<b>사이킥.</b> <b>7\"</b> 이내의 적 또는 유효한 사격 대상 적을 선택합니다. 해당 적에게 <b>독 토큰</b>을 부여합니다. 이미 있다면 대신 <b>3의 피해</b>를 입힙니다. (적 통제 범위 내 사용 불가)",
+            "ko_summation": "<span class='rule-emphasis'>사이킥.</span> 7\" 이내 적에게 <span class='rule-emphasis'>독 토큰</span> 부여 (이미 있으면 3 데미지)."
           }
         },
         {
@@ -312,7 +331,8 @@
           },
           "desc": {
             "en": "PSYCHIC. Select one friendly operative visible to and within 3\" of this operative, then roll 2D6: if the result is 7, the selected operative regains 7 lost wounds; otherwise, the selected operative regains lost wounds equal to the highest D6.<br>An operative cannot perform this action while within control range of an enemy operative.",
-            "ko": "<b>사이킥(PSYCHIC).</b> 이 요원과 <b>가시거리</b>에 있고 <b>3\"</b> 이내에 있는 아군 요원 하나를 선택한 후, <b>2D6</b>을 굴립니다. 결과값의 합이 <b>7</b>이면, 선택된 요원은 잃은 체력을 <b>7</b> 회복합니다. 그 외의 경우, 선택된 요원은 두 주사위 중 <b>더 높은 값</b>만큼 잃은 체력을 회복합니다.<br>적 요원의 <b>통제 범위</b> 내에 있을 때는 이 행동을 수행할 수 없습니다."
+            "ko": "<b>사이킥.</b> <b>3\"</b> 이내의 아군을 선택하고 <b>2D6</b>을 굴립니다. 합이 <b>7</b>이면 체력을 <b>7</b> 회복하고, 아니면 <b>더 높은 주사위 값</b>만큼 회복합니다. (적 통제 범위 내 사용 불가)",
+            "ko_summation": "<span class='rule-emphasis'>사이킥.</span> 3\" 이내 아군 치유 (합 7이면 7 회복, 아니면 높은 주사위 값 회복)."
           }
         }
       ],
@@ -392,7 +412,8 @@
           },
           "desc": {
             "en": "This operative can use blight and krak grenades (see faction and universal equipment). Doing so doesn’t count towards any limited uses you have (i.e. if you also select those grenades from equipment for other operatives). Whenever it’s doing so, improve the Hit stat of that weapon by 1 and blight grenades have the Toxic weapon rule (see right).",
-            "ko": "이 요원은 <b>블라이트</b> 및 <b>크랙 수류탄</b>을 사용할 수 있습니다 (팩션 및 공용 장비 참조). 이는 보유한 사용 제한 횟수에 포함되지 않습니다.<br>이 요원이 해당 무기를 사용할 때마다, 그 무기의 <b>명중(Hit)</b> 능력치를 1 향상시키며, 블라이트 수류탄은 <b>독성(Toxic)</b> 무기 규칙을 가집니다."
+            "ko": "이 요원은 제한 횟수 차감 없이 <b>블라이트</b> 및 <b>크랙 수류탄</b>을 사용할 수 있습니다. 사용 시 <b>명중(Hit)</b>이 1 증가하며, 블라이트 수류탄에는 <b>독성(Toxic)</b> 규칙이 추가됩니다.",
+            "ko_summation": "블라이트/크랙 수류탄 무료 사용. 사용 시 명중 +1 및 블라이트에 <span class='rule-emphasis'>[Toxic]</span> 추가."
           }
         },
         {
@@ -402,7 +423,8 @@
           },
           "desc": {
             "en": "Whenever this operative is using this weapon against an enemy operative that has one of your Poison tokens, add 1 to both Dmg stats of this weapon.",
-            "ko": "이 요원이 당신의 <b>독 토큰</b>을 가진 적 요원에게 해당 무기를 사용할 때마다, 그 무기의 두 가지 피해(Dmg) 수치에 모두 1을 더합니다."
+            "ko": "이 요원이 <b>독 토큰</b>을 가진 적 요원에게 무기를 사용할 때, 그 무기의 두 가지 피해(Dmg) 수치에 <b>+1</b>을 합니다.",
+            "ko_summation": "독에 걸린 적 공격 시 <span class='rule-emphasis'>데미지 +1</span>."
           }
         }
       ],
@@ -456,7 +478,8 @@
           },
           "desc": {
             "en": "Inflict D3+2 damage on each other operative that’s both visible to and within 2\" of this operative. Roll separately for each: if it’s an enemy operative, on a 3+, that enemy operative also gains one of your Poison tokens (if it doesn’t already have one).<br>This operative cannot perform this action while it has a Conceal order, or during an activation in which it has performed more than one Fight action, and it cannot perform more than one Fight action during an activation in which it performs this action.",
-            "ko": "이 요원과 <b>가시거리</b>에 있고 <b>2\"</b> 이내에 있는 다른 모든 요원에게 각각 <b>D3+2의 피해</b>를 입힙니다. 각 대상마다 따로 주사위를 굴립니다: 만약 적 요원인 경우, 주사위가 <b>3+</b>이면 그 적 요원은 당신의 <b>독 토큰</b> 1개를 추가로 얻습니다 (없는 경우).<br>이 요원이 <b>은신(Conceal)</b> 명령 상태이거나, 한 활성화 동안 <b>교전(Fight)</b> 행동을 1회 넘게 수행했다면 이 행동을 수행할 수 없습니다. 또한 이 행동을 수행한 활성화 동안에는 교전 행동을 1회 넘게 수행할 수 없습니다."
+            "ko": "<b>2\"</b> 이내의 모든 요원에게 각각 <b>D3+2</b>의 피해를 입힙니다. 적 요원의 경우 <b>3+</b>이면 <b>독 토큰</b>을 부여합니다.<br><b>은신</b> 상태이거나 <b>교전</b> 행동을 1회 초과하여 수행한 경우 사용할 수 없습니다.",
+            "ko_summation": "1AP. 주변 2\" 내 적에게 광역 피해를 주고, 3+로 <span class='rule-emphasis'>독 토큰</span>을 부여합니다."
           }
         }
       ],
@@ -553,7 +576,8 @@
           },
           "desc": {
             "en": "Whenever determining control of a marker, treat this operative’s APL stat as 1 higher. Note this isn’t a change to its APL stat, so any changes are cumulative with this.",
-            "ko": "마커의 통제권을 결정할 때, 이 요원의 <b>APL</b> 수치를 1 더 높은 것으로 간주합니다. 이는 실제 APL 수치의 변경이 아니므로, 다른 수치 변경 효과와 중복 적용됩니다."
+            "ko": "마커 통제권 결정 시, 이 요원의 <b>APL</b>을 1 높게 간주합니다.",
+            "ko_summation": "목표물 통제 시 <span class='rule-emphasis'>APL +1</span>로 간주합니다."
           }
         },
         {
@@ -563,7 +587,8 @@
           },
           "desc": {
             "en": "Whenever this operative is in the killzone, the Contagion strategy ploy costs you 0CP.",
-            "ko": "이 요원이 <b>킬존</b> 내에 있을 때마다, <b>전염(Contagion)</b> 전략 계략의 비용은 <b>0CP</b>가 됩니다."
+            "ko": "이 요원이 킬존에 있다면, <b>전염(Contagion)</b> 계략 비용이 <b>0CP</b>가 됩니다.",
+            "ko_summation": "킬존에 있다면 <span class='rule-emphasis'>'전염'</span> 전략 계략 비용이 <span class='rule-emphasis'>0CP</span>가 됩니다."
           }
         }
       ],
@@ -622,7 +647,8 @@
           },
           "desc": {
             "en": "Whenever an operative is shooting this operative, defence dice results of 5+ are critical successes.",
-            "ko": "적 요원이 이 요원을 <b>사격(shooting)</b>할 때, 방어 주사위 결과값이 <b>5+</b>이면 <b>치명타 성공</b>이 됩니다."
+            "ko": "이 요원을 <b>사격</b>할 때, 방어 주사위 <b>5+</b>는 <b>치명타 성공</b>이 됩니다.",
+            "ko_summation": "사격 방어 시 <span class='rule-emphasis'>5+</span> 결과는 <span class='rule-emphasis'>치명타 성공</span>이 됩니다."
           }
         },
         {
@@ -632,7 +658,8 @@
           },
           "desc": {
             "en": "Whenever this operative is using this weapon against an enemy operative that has one of your Poison tokens, add 1 to both Dmg stats of this weapon.",
-            "ko": "이 요원이 당신의 <b>독 토큰</b>을 가진 적 요원에게 해당 무기를 사용할 때마다, 그 무기의 두 가지 피해(Dmg) 수치에 모두 1을 더합니다."
+            "ko": "이 요원이 <b>독 토큰</b>을 가진 적 요원에게 무기를 사용할 때, 그 무기의 두 가지 피해(Dmg) 수치에 <b>+1</b>을 합니다.",
+            "ko_summation": "독에 걸린 적 공격 시 <span class='rule-emphasis'>데미지 +1</span>."
           }
         }
       ],

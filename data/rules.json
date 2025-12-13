@@ -252,13 +252,6 @@
 		}
 	},
 	{
-		"key": "Severe",
-		"desc": {
-			"en": "If no criticals retained, change one normal success to critical. [cite: 164]",
-			"ko": "치명타 성공이 하나도 없다면, 일반 성공 하나를 치명타로 바꿉니다."
-		}
-	},
-	{
 		"key": "Shock",
 		"desc": {
 			"en": "First critical strike also discards one of opponent's unresolved successes. [cite: 166]",
