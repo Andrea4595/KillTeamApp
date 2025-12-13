@@ -466,7 +466,10 @@ export function renderSearchResults(results, lang) {
         const item = document.createElement('div');
         item.className = 'search-result-item';
         
-        const borderColor = rule.teamColor || 'var(--primary-color)';
+        let borderColor = rule.teamColor || 'var(--primary-color)';
+        if (rule.type && rule.type.en === 'Common Rule') {
+            borderColor = '#555'; // A neutral dark gray
+        }
         item.style.borderLeftColor = borderColor;
 
         const typeText = getText(rule.type, lang);
