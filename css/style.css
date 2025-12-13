@@ -287,7 +287,6 @@ h1, h2, h3 {
 }
 .search-result-item .key {
     font-weight: bold;
-    color: var(--primary-color);
     margin-bottom: 5px;
 }
 .search-result-item .desc {

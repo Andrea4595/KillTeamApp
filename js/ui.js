@@ -468,19 +468,33 @@ export function renderSearchResults(results, lang) {
         
         let borderColor = rule.teamColor || 'var(--primary-color)';
         if (rule.type && rule.type.en === 'Common Rule') {
-            borderColor = '#555'; // A neutral dark gray
+            borderColor = '#AAA'; // A neutral dark gray
         }
         item.style.borderLeftColor = borderColor;
 
         const typeText = getText(rule.type, lang);
+        const keyDiv = document.createElement('div');
+        keyDiv.className = 'key';
+        keyDiv.innerText = getText(rule.key, lang);
+        keyDiv.style.color = borderColor;
 
-        item.innerHTML = `
-            <div class="search-result-header">
-                <div class="key">${getText(rule.key, lang)}</div>
-                <span class="search-result-type" style="background-color: ${borderColor}">${typeText}</span>
-            </div>
-            <div class="desc">${getText(rule.desc, lang)}</div>
-        `;
+        const typeSpan = document.createElement('span');
+        typeSpan.className = 'search-result-type';
+        typeSpan.innerText = typeText;
+        typeSpan.style.backgroundColor = borderColor;
+
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'search-result-header';
+        headerDiv.appendChild(keyDiv);
+        headerDiv.appendChild(typeSpan);
+
+        const descDiv = document.createElement('div');
+        descDiv.className = 'desc';
+        descDiv.innerHTML = getText(rule.desc, lang);
+
+        item.appendChild(headerDiv);
+        item.appendChild(descDiv);
+        
         container.appendChild(item);
     });
 }
