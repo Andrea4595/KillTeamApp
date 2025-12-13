@@ -23,7 +23,7 @@
                 <select id="roster-select" class="roster-select" style="margin-bottom: 0;">
                     <option value="new">+ 새 로스터 만들기</option>
                 </select>
-                <button class="btn btn-danger" style="width: auto; padding: 0 15px;">삭제</button>
+                <button class="btn btn-danger" style="width: auto; padding: 0 15px;">x</button>
             </div>
         </div>
 
@@ -193,7 +193,10 @@
 <div id="toast-msg"></div>
 
 <div id="search-container">
-    <input type="text" id="rule-search-input" placeholder="키워드 검색...">
+    <div style="display: flex; gap: 5px;">
+        <input type="text" id="rule-search-input" placeholder="키워드 검색...">
+        <button id="btn-clear-search" class="btn btn-secondary btn-small">x</button>
+    </div>
     <div id="rule-search-results"></div>
 </div>
 

@@ -275,6 +275,7 @@ h1, h2, h3 {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    align-items: stretch;
 }
 
 .search-result-item {
@@ -282,6 +283,7 @@ h1, h2, h3 {
     padding: 10px;
     border-radius: 4px;
     border-left: 3px solid var(--primary-color);
+    width: 100%;
 }
 .search-result-item .key {
     font-weight: bold;
@@ -449,4 +451,27 @@ h1, h2, h3 {
     border-radius: 8px;
     color: #fff;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+}
+
+#search-container > div { /* Target the flex container for input and button */
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-bottom: 10px; /* Adjust as needed to separate from results */
+}
+
+#search-container input#rule-search-input {
+    flex-grow: 1; /* Allow input to take available space */
+    margin-bottom: 0; /* Remove margin from individual input */
+}
+
+#btn-clear-search {
+    height: 40px; /* Match input height roughly */
+    width: 40px;
+    padding: 0;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* Make it circular */
 }

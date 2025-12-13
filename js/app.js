@@ -156,7 +156,8 @@ function setupEventListeners() {
     document.querySelector('#info-modal-overlay .btn-danger').addEventListener('click', ui.closeInfoModal);
     document.getElementById('my-roster-list').addEventListener('click', handleRosterListClick);
 
-    document.getElementById('rule-search-input').addEventListener('input', (e) => {
+    const ruleSearchInput = document.getElementById('rule-search-input');
+    ruleSearchInput.addEventListener('input', (e) => {
         const searchTerm = e.target.value.toLowerCase();
         if (searchTerm.length > 1) {
             const results = unifiedSearchIndex.filter(rule => 
@@ -168,6 +169,11 @@ function setupEventListeners() {
         } else {
             ui.renderSearchResults([], currentLang);
         }
+    });
+
+    document.getElementById('btn-clear-search').addEventListener('click', () => {
+        ruleSearchInput.value = '';
+        ui.renderSearchResults([], currentLang);
     });
 }
 
@@ -293,7 +299,7 @@ function resetToNewRoster() {
     currentTeamId = Object.keys(catalog)[0];
     document.getElementById('team-select').value = currentTeamId;
     
-    buildSearchIndex(currentTeamId);
+    buildSearchIndex(currentTeamId); // Build index for the new team
 
     ui.updateTeamUI(catalog[currentTeamId], currentLang);
     ui.renderRosterList(myRoster, getTeamEquipCount(), currentLang);
@@ -307,7 +313,7 @@ async function loadRosterById(id) {
     currentRosterId = found.id;
     currentTeamId = found.teamId;
 
-    buildSearchIndex(currentTeamId);
+    buildSearchIndex(currentTeamId); // Rebuild index for the loaded team
 
     const teamData = catalog[currentTeamId];
     if (!teamData) {
@@ -411,7 +417,9 @@ function buildSearchIndex(...teamIds) {
 
     // 2. Add team-specific rules
     teamIds.forEach(teamId => {
-        if (!teamId || !catalog[teamId]) return;
+        if (!teamId || !catalog[teamId]) {
+            return;
+        }
         const team = catalog[teamId];
         const teamColor = team.color;
 
@@ -536,7 +544,7 @@ function loadCoopTeam() {
             <h3 class="team-title" style="margin-bottom: 10px; text-align: center;"></h3>
             <div class="resource-grid">
                 <div class="resource-box"><span class="resource-label">VP (승점)</span><span class="resource-val" data-type="vp">0</span><div class="res-btn-group"><button class="res-btn" data-type="vp" data-mod="-1">-</button><button class="res-btn" data-type="vp" data-mod="1">+</button></div></div>
-                <div class="resource-box"><span class="resource-label">CP (커맨드)</span><span class="resource-val" data-type="cp">2</span><div class="res-btn-group"><button class="res-btn" data-type="cp" data-mod="-1">-</button><button class="res-btn" data-type="cp" data-mod="1">+</button></div></div>
+                <div class="resource-box"><span class="resource-label">CP (커맨드)</span><span class="resource-val" data-type="cp">2</span><div class="res-btn-group"><button class="res-btn" data-type="vp" data-mod="-1">-</button><button class="res-btn" data-type="vp" data-mod="1">+</button></div></div>
                 <div class="resource-box" data-type="fp" style="display: none;"><span class="resource-label" data-type="fp-name">FP</span><span class="resource-val" data-type="fp">0</span><div class="res-btn-group"><button class="res-btn" data-type="fp" data-mod="-1">-</button><button class="res-btn" data-type="fp" data-mod="1">+</button></div></div>
             </div>
         </div>
