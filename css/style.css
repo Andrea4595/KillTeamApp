@@ -494,3 +494,28 @@ h1, h2, h3 {
     color: #bdc3c7;
     padding-left: 5px;
 }
+
+
+
+/* Button-style Summary Toggle */
+#btn-summary-toggle {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    width: auto;
+    color: var(--text-light);
+    background-color: #555; /* Default inactive color */
+    border: 1px solid #777;
+}
+#btn-summary-toggle.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.lang-switcher {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}

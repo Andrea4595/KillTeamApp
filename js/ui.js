@@ -1,10 +1,35 @@
+let _isSummaryMode = false;
+
+export function setSummaryMode(isSummary) {
+    _isSummaryMode = isSummary;
+}
+
 export function getText(data, lang) {
     if (typeof data === 'string') {
         return data;
     }
-    if (data && typeof data === 'object') {
-        return data[lang] || data['en'] || ''; // Fallback to English, then empty string
+    if (!data || typeof data !== 'object') {
+        return '';
     }
+
+    if (_isSummaryMode) {
+        const summaryKey = `${lang}_summation`; // e.g., 'ko_summation'
+        if (data[summaryKey]) {
+            return data[summaryKey];
+        }
+    }
+
+    // Fallback to regular key for the current language
+    if (data[lang]) {
+        return data[lang];
+    }
+
+    // Fallback to English
+    if (data['en']) {
+        return data['en'];
+    }
+
+    // Final fallback
     return '';
 }
 
@@ -320,7 +345,7 @@ export function renderGameInfo(teamData, spendCPHandler, lang, containerId = 'te
 
     const teamTitleElement = container.querySelector('.team-title');
     if (teamTitleElement) {
-        teamTitleElement.innerText = ui.getText(teamData.name, lang);
+        teamTitleElement.innerText = getText(teamData.name, lang);
     }
 
     const fpBox = container.querySelector('.resource-box[data-type="fp"]');

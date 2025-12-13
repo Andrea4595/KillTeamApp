@@ -6,6 +6,7 @@ let savedRosters = [];
 let currentLang = 'ko';
 let rules = [];
 let unifiedSearchIndex = [];
+let isSummaryMode = false;
 
 // Roster Builder State
 let currentRosterId = null;
@@ -85,7 +86,7 @@ async function init() {
     }
     
     setupEventListeners();
-    setLanguage(currentLang);
+    setLanguage(currentLang); // Call once to set initial language and rerender
 }
 
 function setLanguage(lang) {
@@ -95,6 +96,19 @@ function setLanguage(lang) {
     document.getElementById('lang-en').classList.toggle('btn-secondary', lang === 'en');
     document.getElementById('lang-en').classList.toggle('btn-outline', lang !== 'en');
     
+    rerenderUI();
+}
+
+function toggleSummaryMode() {
+    const btn = document.getElementById('btn-summary-toggle');
+    isSummaryMode = !isSummaryMode;
+    btn.classList.toggle('active', isSummaryMode);
+    if(isSummaryMode) {
+        btn.classList.remove('btn-secondary');
+    } else {
+        btn.classList.add('btn-secondary');
+    }
+    ui.setSummaryMode(isSummaryMode);
     rerenderUI();
 }
 
@@ -131,6 +145,7 @@ function rerenderUI() {
 function setupEventListeners() {
     document.getElementById('lang-ko').addEventListener('click', () => setLanguage('ko'));
     document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
+    document.getElementById('btn-summary-toggle').addEventListener('click', toggleSummaryMode);
 
     document.getElementById('roster-select').addEventListener('change', (e) => switchRoster(e.target.value));
     document.getElementById('roster-name').addEventListener('input', autoSave);

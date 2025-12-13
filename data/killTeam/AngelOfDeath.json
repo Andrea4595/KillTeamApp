@@ -7,7 +7,8 @@
   "color": "#4086b8",
   "rulesText": {
     "en": "• 1 Leader operative selected from: ASSAULT INTERCESSOR SERGEANT, INTERCESSOR SERGEANT, SPACE MARINE CAPTAIN<br>• 5 Operatives selected from the list<br>• Max 1 of each operative type (excluding WARRIOR operatives)<br>• Max 1 ELIMINATOR SNIPER or HEAVY INTERCESSOR GUNNER combined",
-    "ko": "• 리더 오퍼레이티브 1명 선택 (어설트 인터세서 서전트, 인터세서 서전트, 스페이스 마린 캡틴 중)<br>• 나머지 오퍼레이티브 5명 선택<br>• 워리어(Warrior)를 제외한 각 병종은 1명씩만 포함 가능<br>• 엘리미네이터 스나이퍼와 헤비 인터세서 거너는 합쳐서 최대 1명만 선택 가능"
+    "ko": "• 리더 오퍼레이티브 1명 선택 (어설트 인터세서 서전트, 인터세서 서전트, 스페이스 마린 캡틴 중)<br>• 나머지 오퍼레이티브 5명 선택<br>• 워리어(Warrior)를 제외한 각 병종은 1명씩만 포함 가능<br>• 엘리미네이터 스나이퍼와 헤비 인터세서 거너는 합쳐서 최대 1명만 선택 가능",
+	"ko_summation" : "• 리더 오퍼레이티브 1명 선택 (어설트 인터세서 서전트, 인터세서 서전트, 스페이스 마린 캡틴 중)<br>• 나머지 오퍼레이티브 5명 선택<br>• 워리어(Warrior)를 제외한 각 병종은 1명씩만 포함 가능<br>• 엘리미네이터 스나이퍼와 헤비 인터세서 거너는 합쳐서 최대 1명만 선택 가능"
   },
   "factionRules": [
     {
