@@ -1,5 +1,5 @@
 // Helper function to get text in the correct language
-function getText(data, lang) {
+export function getText(data, lang) {
     if (typeof data === 'string') {
         return data;
     }

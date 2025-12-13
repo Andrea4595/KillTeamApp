@@ -4,6 +4,7 @@ import * as ui from './ui.js';
 let catalog = {};
 let savedRosters = [];
 let currentLang = 'ko';
+let rules = [];
 
 // Roster Builder State
 let currentRosterId = null;
@@ -21,18 +22,20 @@ const STORAGE_KEY = 'kt_roster_library';
 // --- Core App Logic ---
 
 async function init() {
-    // Data loading remains the same...
     try {
-        const [manifestResponse, universalRulesResponse] = await Promise.all([
+        const [manifestResponse, universalRulesResponse, rulesResponse] = await Promise.all([
             fetch('data/killTeam/index.json'),
             fetch('data/killTeam/Universal.json'),
+            fetch('data/rules.json')
         ]);
 
         if (!manifestResponse.ok) throw new Error(`Failed to load index.json: ${manifestResponse.status}`);
         if (!universalRulesResponse.ok) throw new Error(`Failed to load Universal.json: ${universalRulesResponse.status}`);
-
+        if (!rulesResponse.ok) throw new Error(`Failed to load rules.json: ${rulesResponse.status}`);
+        
         const teamFilePaths = await manifestResponse.json();
         const universalRules = await universalRulesResponse.json();
+        rules = await rulesResponse.json();
         
         await Promise.all(teamFilePaths.map(async (filePath) => {
             try {
@@ -149,6 +152,16 @@ function setupEventListeners() {
     document.querySelector('#equip-modal-overlay .btn-danger').addEventListener('click', ui.closeEquipModal);
     document.querySelector('#info-modal-overlay .btn-danger').addEventListener('click', ui.closeInfoModal);
     document.getElementById('my-roster-list').addEventListener('click', handleRosterListClick);
+
+    document.getElementById('rule-search-input').addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        if (searchTerm.length > 1) {
+            const results = rules.filter(rule => rule.key.toLowerCase().includes(searchTerm) || ui.getText(rule.desc, 'ko').toLowerCase().includes(searchTerm));
+            ui.renderSearchResults(results, currentLang);
+        } else {
+            ui.renderSearchResults([], currentLang);
+        }
+    });
 }
 
 function handleTeamContainerEvents(event) {
