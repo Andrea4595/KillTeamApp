@@ -20,20 +20,26 @@ export function showToast(msg) {
     }, 2000);
 }
 
-export function switchTab(tabId, e) {
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(con => con.classList.remove('active'));
+export function switchTab(tabId, e, containerId = 'team-left') {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    container.querySelectorAll('.tab-content').forEach(con => con.classList.remove('active'));
+    
     if (e && e.target) {
         e.target.classList.add('active');
     }
-    const tab = document.getElementById(`tab-${tabId}`);
+    const tab = container.querySelector(`#tab-${tabId}`);
     if (tab) {
         tab.classList.add('active');
     }
 }
 
+
 export function updateTeamUI(teamData, lang) {
     if (!teamData) return;
+    // This is for the roster screen only now. Game screen colors are handled per-container.
     document.documentElement.style.setProperty('--primary-color', teamData.color);
 
     const rulesEl = document.getElementById('team-rules-text');
@@ -88,9 +94,10 @@ export function closeEquipModal() {
     document.getElementById('equip-modal-overlay').style.display = 'none';
 }
 
-export function updateRosterSelectDropdown(savedRosters, currentRosterId, lang) {
-    const select = document.getElementById('roster-select');
+export function updateRosterSelectDropdown(savedRosters, currentRosterId, lang, selectId = 'roster-select') {
+    const select = document.getElementById(selectId);
     if (!select) return;
+
     const currentValue = select.value;
     select.innerHTML = '';
     const newOption = document.createElement('option');
@@ -106,6 +113,7 @@ export function updateRosterSelectDropdown(savedRosters, currentRosterId, lang) 
     });
     select.value = currentRosterId || 'new';
 }
+
 
 export function renderRosterList(roster, equipCount, eventHandler, lang) {
     const container = document.getElementById('my-roster-list');
@@ -280,8 +288,24 @@ export function closeInfoModal() {
     document.getElementById('info-modal-overlay').style.display = 'none';
 }
 
-export function renderGameEquipment(teamData, lang) {
-    const container = document.getElementById('game-equipment-list');
+export function displayCoopPlaceholder(lang, savedRosters) {
+    const container = document.getElementById('team-right');
+    if (!container) return;
+
+    container.innerHTML = `
+        <div id="team-right-placeholder">
+            <h3 style="margin:0;">${lang === 'ko' ? '두 번째 팀' : 'Second Team'}</h3>
+            <p style="margin:0; font-size:0.9rem; color:#aaa;">${lang === 'ko' ? '저장된 로스터를 불러와주세요.' : 'Load a saved roster.'}</p>
+            <select id="coop-roster-select" class="roster-select"></select>
+            <button id="btn-activate-coop" class="btn btn-primary">${lang === 'ko' ? '🚀 활성화' : '🚀 Activate'}</button>
+        </div>
+    `;
+    updateRosterSelectDropdown(savedRosters, null, lang, 'coop-roster-select');
+}
+
+
+export function renderGameEquipment(teamData, lang, containerId = 'team-left') {
+    const container = document.getElementById(containerId).querySelector('.game-equipment-list');
     if (!container || !teamData) return;
     container.innerHTML = teamData.equipments.map(e => `
         <div class="ploy-card">
@@ -291,23 +315,34 @@ export function renderGameEquipment(teamData, lang) {
     `).join('');
 }
 
-export function renderGameInfo(teamData, spendCPHandler, lang) {
-    const fpBox = document.getElementById('faction-res-box');
+export function renderGameInfo(teamData, spendCPHandler, lang, containerId = 'team-left') {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    // Update team title
+    const teamTitleElement = container.querySelector('.team-title');
+    if (teamTitleElement) {
+        teamTitleElement.innerText = getText(teamData.name, lang);
+    }
+
+    const fpBox = container.querySelector('.resource-box[data-type="fp"]');
     if (fpBox) {
         if (teamData.resourceConfig) {
             fpBox.style.display = 'flex';
-            document.getElementById('fp-name').innerText = getText(teamData.resourceConfig.name, lang);
+            fpBox.style.borderColor = 'var(--primary-color)';
+            fpBox.querySelector('.resource-label').innerText = getText(teamData.resourceConfig.name, lang);
+            fpBox.querySelector('.resource-val').style.color = 'var(--primary-color)';
         } else {
             fpBox.style.display = 'none';
         }
     }
 
-    const rList = document.getElementById('game-faction-rules');
+    const rList = container.querySelector('.game-faction-rules');
     if (rList) rList.innerHTML = teamData.factionRules.map(r =>
         `<div class="ploy-card"><div class="ploy-name" style="color:var(--primary-color)">${getText(r.title, lang)}</div><div class="ploy-desc">${getText(r.desc, lang)}</div></div>`
     ).join('');
 
-    const sList = document.getElementById('game-strat-ploys');
+    const sList = container.querySelector('.game-strat-ploys');
     if (sList) {
         sList.innerHTML = ''; // Clear previous
         teamData.ploys.strategy.forEach(p => {
@@ -318,13 +353,13 @@ export function renderGameInfo(teamData, spendCPHandler, lang) {
             button.className = 'btn-outline';
             button.style.cssText = 'margin-top:5px; width:100%; font-size:0.8rem;';
             button.innerText = lang === 'ko' ? '사용 (CP 소모)' : 'Use (Spend CP)';
-            button.onclick = spendCPHandler;
+            button.onclick = () => spendCPHandler(containerId);
             ployEl.appendChild(button);
             sList.appendChild(ployEl);
         });
     }
 
-    const fList = document.getElementById('game-fire-ploys');
+    const fList = container.querySelector('.game-fire-ploys');
     if (fList) {
         fList.innerHTML = ''; // Clear previous
         teamData.ploys.firefight.forEach(p => {
@@ -335,7 +370,7 @@ export function renderGameInfo(teamData, spendCPHandler, lang) {
             button.className = 'btn-outline';
             button.style.cssText = 'margin-top:5px; width:100%; font-size:0.8rem;';
             button.innerText = lang === 'ko' ? '사용 (CP 소모)' : 'Use (Spend CP)';
-            button.onclick = spendCPHandler;
+            button.onclick = () => spendCPHandler(containerId);
             ployEl.appendChild(button);
             fList.appendChild(ployEl);
         });
@@ -349,21 +384,39 @@ export function showScreen(name) {
     if (target) target.classList.add('active');
 }
 
-export function updateResourceDisplay(gameState) {
-    document.getElementById('vp-val').innerText = gameState.vp;
-    document.getElementById('cp-val').innerText = gameState.cp;
-    document.getElementById('fp-val').innerText = gameState.fp;
-    document.getElementById('tp-val').innerText = gameState.currentTP;
+export function updateResourceDisplay(globalState) {
+    // Only handles global resources now
+    document.getElementById('tp-val').innerText = globalState.currentTP;
 }
 
-export function renderGameScreen(gameState, eventHandler, lang) {
-    const container = document.getElementById('game-op-list');
+export function updateTeamResourceDisplay(teamState, containerId) {
+    if (!teamState) return;
+    const container = document.getElementById(containerId);
     if (!container) return;
+
+    const vpElement = container.querySelector('.resource-val[data-type="vp"]');
+    if (vpElement) vpElement.innerText = teamState.vp;
+    
+    const cpElement = container.querySelector('.resource-val[data-type="cp"]');
+    if (cpElement) cpElement.innerText = teamState.cp;
+    
+    const fpElement = container.querySelector('.resource-val[data-type="fp"]');
+    if (fpElement) fpElement.innerText = teamState.fp;
+}
+
+
+export function renderGameScreen(gameState, eventHandler, lang, containerId = 'team-left') {
+    const container = document.getElementById(containerId).querySelector('.game-op-list');
+    if (!container) return;
+    
     container.innerHTML = '';
+    if (!gameState || !gameState.operatives) return;
+
     gameState.operatives.forEach((op, idx) => {
         container.innerHTML += renderOpCard(op, 'game', idx, lang);
     });
 }
+
 
 export function populateTeamSelect(availableKillTeams, lang) {
     const select = document.getElementById('team-select');

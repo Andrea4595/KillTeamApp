@@ -61,83 +61,92 @@
     </div>
 
     <!-- 2. 게임 화면 (플레이 모드) -->
-    <div id="screen-game" class="screen">
-        <div class="top-bar">
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                <button id="btn-exit-game" class="btn btn-secondary" style="width: auto; padding: 5px 10px;">← 나가기</button>
-                <h3 id="game-title" style="margin: 0; font-size: 1.1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></h3>
-            </div>
-
-            <!-- TP Tracker -->
-            <div class="tp-tracker">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 1.2rem; font-weight: bold;">Turn (TP)</span>
-                    <div class="resource-control">
-                        <button class="res-btn">-</button>
-                        <span id="tp-val" class="resource-val">1</span>
-                        <button class="res-btn">+</button>
+            <div id="screen-game" class="screen">
+                <div class="top-bar">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <button id="btn-exit-game" class="btn btn-secondary" style="width: auto; padding: 5px 10px;">← 나가기</button>
+                        <button id="btn-add-team" class="btn btn-info" style="width: auto; padding: 5px 10px;">+ 팀 추가하기</button>
+                    </div>
+    
+                    <!-- TP Tracker -->
+                    <div class="tp-tracker">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.2rem; font-weight: bold;">Turn (TP)</span>
+                            <div class="resource-control">
+                                <button class="res-btn">-</button>
+                                <span id="tp-val" class="resource-val">1</span>
+                                <button class="res-btn">+</button>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" style="width: auto; margin-top:0; padding: 5px 12px; font-size: 0.9rem;">🏁 턴 종료</button>
                     </div>
                 </div>
-                <button class="btn btn-primary" style="width: auto; margin-top:0; padding: 5px 12px; font-size: 0.9rem;">🏁 턴 종료</button>
-            </div>
+    
+                <div id="game-main-content">
+                    <div id="team-left" class="team-container">
+                        <div class="sticky-header">
+                            <h3 class="team-title" style="margin-bottom: 10px; text-align: center;"></h3>
+                            <!-- Resource Grid -->
+                            <div class="resource-grid">
+                                <div class="resource-box">
+                                    <span class="resource-label">VP (승점)</span>
+                                    <span class="resource-val" data-type="vp">0</span>
+                                    <div class="res-btn-group">
+                                        <button class="res-btn" data-type="vp" data-mod="-1">-</button>
+                                        <button class="res-btn" data-type="vp" data-mod="1">+</button>
+                                    </div>
+                                </div>
+                                <div class="resource-box">
+                                    <span class="resource-label">CP (커맨드)</span>
+                                    <span class="resource-val" data-type="cp">2</span>
+                                    <div class="res-btn-group">
+                                        <button class="res-btn" data-type="cp" data-mod="-1">-</button>
+                                        <button class="res-btn" data-type="cp" data-mod="1">+</button>
+                                    </div>
+                                </div>
+                                <!-- Faction Resource Box -->
+                                <div class="resource-box" data-type="fp" style="display: none;">
+                                    <span class="resource-label" data-type="fp-name">FP</span>
+                                    <span class="resource-val" data-type="fp">0</span>
+                                    <div class="res-btn-group">
+                                        <button class="res-btn" data-type="fp" data-mod="-1">-</button>
+                                        <button class="res-btn" data-type="fp" data-mod="1">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-            <!-- Resource Grid -->
-            <div class="resource-grid" id="resource-grid">
-                <div class="resource-box">
-                    <span class="resource-label">VP (승점)</span>
-                    <span id="vp-val" class="resource-val">0</span>
-                    <div class="res-btn-group">
-                        <button class="res-btn">-</button>
-                        <button class="res-btn">+</button>
+                        <!-- Tab Nav -->
+                        <div class="tab-nav">
+                            <button class="tab-btn active" data-tab="ops">오퍼레이티브</button>
+                            <button class="tab-btn" data-tab="ploys">규칙 & 계략</button>
+                            <button class="tab-btn" data-tab="equip">장비 도감</button>
+                        </div>
+                
+                        <!-- Tab Contents -->
+                        <div id="tab-ops" class="tab-content active">
+                            <div class="game-op-list"></div>
+                        </div>
+                
+                        <div id="tab-ploys" class="tab-content">
+                            <h3 style="margin-top:0;">📜 팩션 규칙</h3>
+                            <div class="game-faction-rules"></div>
+                            <h3>⚡ 전략 계략</h3>
+                            <div class="game-strat-ploys"></div>
+                            <h3>🔥 교전 계략</h3>
+                            <div class="game-fire-ploys"></div>
+                        </div>
+                
+                        <div id="tab-equip" class="tab-content">
+                            <h3 style="margin-top:0;">🎒 장비 도감 (Reference)</h3>
+                            <div class="game-equipment-list"></div>
+                        </div>
+                    </div>
+                    <div id="team-right" class="team-container">
+                        <!-- Co-op team content will be injected here -->
                     </div>
                 </div>
-                <div class="resource-box">
-                    <span class="resource-label">CP (커맨드)</span>
-                    <span id="cp-val" class="resource-val">2</span>
-                    <div class="res-btn-group">
-                        <button class="res-btn">-</button>
-                        <button class="res-btn">+</button>
-                    </div>
-                </div>
-                <!-- Faction Resource Box -->
-                <div class="resource-box" id="faction-res-box" style="display: none; border-color: var(--primary-color);">
-                    <span class="resource-label" id="fp-name">FP</span>
-                    <span id="fp-val" class="resource-val" style="color: var(--primary-color);">0</span>
-                    <div class="res-btn-group">
-                        <button class="res-btn">-</button>
-                        <button class="res-btn">+</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tab Nav -->
-        <div class="tab-nav">
-            <button class="tab-btn active">오퍼레이티브</button>
-            <button class="tab-btn">규칙 & 계략</button>
-            <button class="tab-btn">장비 도감</button>
-        </div>
-
-        <!-- Tab Contents -->
-        <div id="tab-ops" class="tab-content active">
-            <div id="game-op-list"></div>
-        </div>
-
-        <div id="tab-ploys" class="tab-content">
-            <h3 style="margin-top:0;">📜 팩션 규칙</h3>
-            <div id="game-faction-rules"></div>
-            <h3>⚡ 전략 계략</h3>
-            <div id="game-strat-ploys"></div>
-            <h3>🔥 교전 계략</h3>
-            <div id="game-fire-ploys"></div>
-        </div>
-
-        <div id="tab-equip" class="tab-content">
-            <h3 style="margin-top:0;">🎒 장비 도감 (Reference)</h3>
-            <div id="game-equipment-list"></div>
-        </div>
-    </div>
-</div>
+            </div></div>
 
 <!-- 오퍼레이티브 추가 모달 -->
 <div id="modal-overlay">

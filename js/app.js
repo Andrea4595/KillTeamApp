@@ -1,14 +1,19 @@
 import * as ui from './ui.js';
 
-// State variables
+// --- State Management ---
 let catalog = {};
 let savedRosters = [];
+let currentLang = 'ko';
+
+// Roster Builder State
 let currentRosterId = null;
 let currentTeamId = null; 
-let currentLang = 'ko';
 let myRoster = [];
-let rules = [];
-let gameState = { vp: 0, cp: 2, fp: 0, currentTP: 1, operatives: [] };
+
+// Game State
+let globalGameState = { currentTP: 1 };
+let gameState = null;       // For the left team
+let coopGameState = null;   // For the right team
 let currentOpForEquip = null;
 
 const STORAGE_KEY = 'kt_roster_library';
@@ -16,40 +21,32 @@ const STORAGE_KEY = 'kt_roster_library';
 // --- Core App Logic ---
 
 async function init() {
+    // Data loading remains the same...
     try {
-        // Load all data files in parallel
-        const [manifestResponse, universalRulesResponse, rulesResponse] = await Promise.all([
+        const [manifestResponse, universalRulesResponse] = await Promise.all([
             fetch('data/killTeam/index.json'),
             fetch('data/killTeam/Universal.json'),
-            fetch('data/rules.json')
         ]);
 
         if (!manifestResponse.ok) throw new Error(`Failed to load index.json: ${manifestResponse.status}`);
         if (!universalRulesResponse.ok) throw new Error(`Failed to load Universal.json: ${universalRulesResponse.status}`);
-        if (!rulesResponse.ok) throw new Error(`Failed to load rules.json: ${rulesResponse.status}`);
 
         const teamFilePaths = await manifestResponse.json();
         const universalRules = await universalRulesResponse.json();
-        rules = await rulesResponse.json();
         
-        // Eagerly load all kill team data
         await Promise.all(teamFilePaths.map(async (filePath) => {
             try {
                 const teamResponse = await fetch(`data/killTeam/${filePath}`);
                 if (!teamResponse.ok) throw new Error(`Failed to load ${filePath}`);
                 const teamData = await teamResponse.json();
-
-                // Merge universal rules
                 teamData.ploys.strategy = (teamData.ploys.strategy || []).concat(universalRules.ploys.strategy || []);
                 teamData.ploys.firefight = (teamData.ploys.firefight || []).concat(universalRules.ploys.firefight || []);
                 teamData.equipments = (teamData.equipments || []).concat(universalRules.equipments || []);
-
-                catalog[teamData.id] = teamData; // Use ID from within the file
+                catalog[teamData.id] = teamData;
             } catch (error) {
                 console.error(`Could not load data for ${filePath}:`, error);
             }
         }));
-
     } catch (error) {
         console.error("Could not load Kill Team manifest:", error);
         return;
@@ -59,7 +56,6 @@ async function init() {
     ui.populateTeamSelect(availableTeams, currentLang);
     loadLibrary();
     
-    // Determine the initial Kill Team to load
     let initialTeamId = null;
     let lastUsedRoster = null;
     if (savedRosters.length > 0) {
@@ -79,7 +75,6 @@ async function init() {
             resetToNewRoster();
         }
     } else {
-        // Handle case where no teams are available at all
         console.error("No Kill Teams could be loaded.");
     }
     
@@ -89,7 +84,6 @@ async function init() {
 
 function setLanguage(lang) {
     currentLang = lang;
-    // Update button styles
     document.getElementById('lang-ko').classList.toggle('btn-secondary', lang === 'ko');
     document.getElementById('lang-ko').classList.toggle('btn-outline', lang !== 'ko');
     document.getElementById('lang-en').classList.toggle('btn-secondary', lang === 'en');
@@ -99,31 +93,39 @@ function setLanguage(lang) {
 }
 
 function rerenderUI() {
-    // This function will re-render all visible text-based components
     ui.populateTeamSelect(Object.values(catalog), currentLang);
-    document.getElementById('team-select').value = currentTeamId; // re-select current team
+    document.getElementById('team-select').value = currentTeamId;
     
     if(catalog[currentTeamId]) {
         ui.updateTeamUI(catalog[currentTeamId], currentLang);
         ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
-        // If game is active, re-render game screen too
-        const gameScreen = document.getElementById('screen-game');
-        if(gameScreen.classList.contains('active')) {
-            ui.renderGameInfo(catalog[currentTeamId], spendCP, currentLang);
-            ui.renderGameEquipment(catalog[currentTeamId], currentLang);
-            ui.renderGameScreen(gameState, handleGameOpListClick, currentLang);
+
+        if(document.getElementById('screen-game').classList.contains('active')) {
+            if (gameState) {
+                const teamData = catalog[gameState.teamId];
+                document.getElementById('team-left').style.setProperty('--primary-color', teamData.color);
+                ui.renderGameInfo(teamData, spendCP, currentLang, 'team-left');
+                ui.renderGameEquipment(teamData, currentLang, 'team-left');
+                ui.renderGameScreen(gameState, handleGameOpListClick, currentLang, 'team-left');
+                ui.updateTeamResourceDisplay(gameState, 'team-left');
+            }
+            if (coopGameState) {
+                const teamData = catalog[coopGameState.teamId];
+                document.getElementById('team-right').style.setProperty('--primary-color', teamData.color);
+                ui.renderGameInfo(teamData, spendCP, currentLang, 'team-right');
+                ui.renderGameEquipment(teamData, currentLang, 'team-right');
+                ui.renderGameScreen(coopGameState, handleGameOpListClick, currentLang, 'team-right');
+                ui.updateTeamResourceDisplay(coopGameState, 'team-right');
+            }
         }
     }
     ui.updateRosterSelectDropdown(savedRosters, currentRosterId, currentLang);
 }
 
-
 function setupEventListeners() {
-    // Language Switcher
     document.getElementById('lang-ko').addEventListener('click', () => setLanguage('ko'));
     document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
 
-    // Roster Screen
     document.getElementById('roster-select').addEventListener('change', (e) => switchRoster(e.target.value));
     document.getElementById('roster-name').addEventListener('input', autoSave);
     document.getElementById('team-select').addEventListener('change', () => changeTeam(true));
@@ -132,46 +134,41 @@ function setupEventListeners() {
     document.getElementById('btn-add-op').addEventListener('click', () => ui.openAddModal(catalog[currentTeamId], addOp, currentLang));
     document.querySelector('#screen-roster .btn-primary').addEventListener('click', startGame);
 
-    // Game Screen
-    document.getElementById('btn-exit-game').addEventListener('click', () => ui.showScreen('roster'));
-    document.querySelector('.tp-tracker .res-btn:first-of-type').addEventListener('click', () => updateTP(-1));
-    document.querySelector('.tp-tracker .res-btn:last-of-type').addEventListener('click', () => updateTP(1));
-    document.querySelector('.tp-tracker .btn-primary').addEventListener('click', endTurn);
+    document.getElementById('btn-exit-game').addEventListener('click', exitGame);
+    document.getElementById('btn-add-team').addEventListener('click', activateCoopMode);
 
-    // Resource buttons
-    const resourceGrid = document.getElementById('resource-grid');
-    resourceGrid.querySelector('.resource-box:nth-child(1) .res-btn:first-of-type').addEventListener('click', () => updateResource('vp', -1));
-    resourceGrid.querySelector('.resource-box:nth-child(1) .res-btn:last-of-type').addEventListener('click', () => updateResource('vp', 1));
-    resourceGrid.querySelector('.resource-box:nth-child(2) .res-btn:first-of-type').addEventListener('click', () => updateResource('cp', -1));
-    resourceGrid.querySelector('.resource-box:nth-child(2) .res-btn:last-of-type').addEventListener('click', () => updateResource('cp', 1));
-    resourceGrid.querySelector('#faction-res-box .res-btn:first-of-type').addEventListener('click', () => updateResource('fp', -1));
-    resourceGrid.querySelector('#faction-res-box .res-btn:last-of-type').addEventListener('click', () => updateResource('fp', 1));
+    const topBar = document.querySelector('.top-bar');
+    topBar.querySelector('.tp-tracker .res-btn:first-of-type').addEventListener('click', () => updateTP(-1));
+    topBar.querySelector('.tp-tracker .res-btn:last-of-type').addEventListener('click', () => updateTP(1));
+    topBar.querySelector('.tp-tracker .btn-primary').addEventListener('click', endTurn);
     
-    // Tabs
-    const tabNav = document.querySelector('.tab-nav');
-    tabNav.querySelector('button:nth-child(1)').addEventListener('click', (e) => ui.switchTab('ops', e));
-    tabNav.querySelector('button:nth-child(2)').addEventListener('click', (e) => ui.switchTab('ploys', e));
-    tabNav.querySelector('button:nth-child(3)').addEventListener('click', (e) => ui.switchTab('equip', e));
+    document.getElementById('team-left').addEventListener('click', handleTeamContainerEvents);
+    document.getElementById('team-right').addEventListener('click', handleTeamContainerEvents);
 
-    // Modals
     document.querySelector('#modal-overlay .btn-danger').addEventListener('click', ui.closeAddModal);
     document.querySelector('#equip-modal-overlay .btn-danger').addEventListener('click', ui.closeEquipModal);
     document.querySelector('#info-modal-overlay .btn-danger').addEventListener('click', ui.closeInfoModal);
-
-    // Event Delegation for dynamic content
     document.getElementById('my-roster-list').addEventListener('click', handleRosterListClick);
-    document.getElementById('game-op-list').addEventListener('click', handleGameOpListClick);
+}
 
-    // Rule Search
-    document.getElementById('rule-search-input').addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        if (searchTerm.length > 1) {
-            const results = rules.filter(rule => rule.key.toLowerCase().includes(searchTerm));
-            ui.renderSearchResults(results, currentLang);
-        } else {
-            ui.renderSearchResults([], currentLang);
+function handleTeamContainerEvents(event) {
+    const teamContainer = event.currentTarget;
+    const containerId = teamContainer.id;
+    const target = event.target;
+    
+    const tabButton = target.closest('.tab-btn');
+    if (tabButton) {
+        const tabName = tabButton.dataset.tab;
+        if (tabName) {
+            ui.switchTab(tabName, event, containerId);
         }
-    });
+    } else if (target.closest('.op-card')) {
+        handleGameOpListClick(event);
+    } else if (target.closest('.res-btn')) {
+        const type = target.dataset.type;
+        const mod = parseInt(target.dataset.mod);
+        updateTeamResource(containerId, type, mod);
+    }
 }
 
 function handleRosterListClick(event) {
@@ -201,24 +198,27 @@ function handleGameOpListClick(event) {
     if (!opCard) return;
 
     const opIndex = parseInt(opCard.dataset.index);
+    const containerId = opCard.closest('.team-container').id;
+    const activeGameState = containerId === 'team-left' ? gameState : coopGameState;
+    
+    if (!activeGameState) return;
 
     if (target.closest('.hp-btn')) {
         const woundValue = parseInt(target.closest('.hp-btn').innerText);
-        setWounds(opIndex, woundValue);
+        setWounds(activeGameState, opIndex, woundValue);
+        ui.renderGameScreen(activeGameState, handleGameOpListClick, currentLang, containerId);
     } else if (target.closest('.card-equip-item')) {
         const equipIndex = parseInt(target.closest('.card-equip-item').dataset.index);
-        toggleEquipUsed(opIndex, equipIndex);
+        toggleEquipUsed(activeGameState, opIndex, equipIndex);
+        ui.renderGameScreen(activeGameState, handleGameOpListClick, currentLang, containerId);
     }
 }
-
-// --- Data & State Management ---
 
 function changeTeam(shouldSave = true) {
     const select = document.getElementById('team-select');
     if (!select) return;
     currentTeamId = select.value;
 
-    // Data is pre-loaded, just update UI
     ui.updateTeamUI(catalog[currentTeamId], currentLang);
     myRoster = [];
     ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
@@ -249,11 +249,10 @@ function getTeamEquipCount() {
     return myRoster.reduce((count, op) => count + (op.assignedEquipments ? op.assignedEquipments.length : 0), 0);
 }
 
-function toggleEquipUsed(opIdx, eqIdx) {
-    const op = gameState.operatives[opIdx];
+function toggleEquipUsed(activeGameState, opIdx, eqIdx) {
+    const op = activeGameState.operatives[opIdx];
     if (op && op.assignedEquipments && op.assignedEquipments[eqIdx]) {
         op.assignedEquipments[eqIdx].isUsed = !op.assignedEquipments[eqIdx].isUsed;
-        ui.renderGameScreen(gameState, handleGameOpListClick, currentLang);
     }
 }
 
@@ -274,7 +273,7 @@ function resetToNewRoster() {
     
     ui.updateTeamUI(catalog[currentTeamId], currentLang);
     ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
-    ui.updateRosterSelectDropdown(savedRosters, currentRosterId, currentLang);
+    ui.updateRosterSelectDropdown(savedRosters, currentRosterId, currentLang, 'roster-select');
 }
 
 async function loadRosterById(id) {
@@ -284,68 +283,42 @@ async function loadRosterById(id) {
     currentRosterId = found.id;
     currentTeamId = found.teamId;
 
-    // Data is pre-loaded, just re-hydrate and update UI
     const teamData = catalog[currentTeamId];
     if (!teamData) {
-        console.error(`Attempted to load roster for team ID ${currentTeamId}, but it was not found in the catalog.`);
         ui.showToast(`Error: Data for team ${currentTeamId} is missing.`);
         return;
     }
     
-    // Re-hydrate the roster
     myRoster = found.roster.map(savedOp => {
         const fullOpData = teamData.operatives.find(op => op.id === savedOp.opId);
-        if (!fullOpData) return null; // Or handle error
-
+        if (!fullOpData) return null;
         const hydratedOp = JSON.parse(JSON.stringify(fullOpData));
-        
-        // Deactivate weapons
         if (savedOp.disabledWeapons && savedOp.disabledWeapons.length > 0) {
             hydratedOp.weapons.forEach(w => {
-                if (savedOp.disabledWeapons.includes(w.name.en)) {
-                    w.active = false;
-                }
+                if (savedOp.disabledWeapons.includes(w.name.en)) w.active = false;
             });
         }
-        
-        // Assign equipment
         hydratedOp.assignedEquipments = savedOp.equipments || [];
-        
         return hydratedOp;
-    }).filter(Boolean); // Filter out any nulls if an op wasn't found
+    }).filter(Boolean);
 
-    // Update UI
     document.getElementById('roster-name').value = found.name;
     document.getElementById('team-select').value = currentTeamId;
     
     ui.updateTeamUI(catalog[currentTeamId], currentLang);
     ui.renderRosterList(myRoster, getTeamEquipCount(), handleRosterListClick, currentLang);
-    ui.updateRosterSelectDropdown(savedRosters, currentRosterId, currentLang);
+    ui.updateRosterSelectDropdown(savedRosters, currentRosterId, currentLang, 'roster-select');
 }
 
 function autoSave() {
     const name = document.getElementById('roster-name').value || "Unknown";
+    const minimalRoster = myRoster.map(op => ({
+        opId: op.id,
+        disabledWeapons: op.weapons.filter(w => w.active === false).map(w => w.name.en),
+        equipments: op.assignedEquipments || []
+    }));
 
-    // Create a minimal roster to save
-    const minimalRoster = myRoster.map(op => {
-        const disabledWeapons = op.weapons
-            .filter(w => w.active === false)
-            .map(w => w.name.en); // Save with the English name as a stable ID
-        
-        return {
-            opId: op.id,
-            disabledWeapons: disabledWeapons,
-            equipments: op.assignedEquipments || []
-        };
-    });
-
-    const rosterData = { 
-        id: currentRosterId, 
-        name: name, 
-        teamId: currentTeamId, 
-        roster: minimalRoster, 
-        updatedAt: new Date().getTime() 
-    };
+    const rosterData = { id: currentRosterId, name, teamId: currentTeamId, roster: minimalRoster, updatedAt: new Date().getTime() };
 
     if (!currentRosterId) {
         rosterData.id = 'roster_' + new Date().getTime();
@@ -353,22 +326,16 @@ function autoSave() {
         savedRosters.push(rosterData);
     } else {
         const idx = savedRosters.findIndex(r => r.id === currentRosterId);
-        if (idx >= 0) {
-            savedRosters[idx] = rosterData;
-        } else {
-            savedRosters.push(rosterData);
-        }
+        if (idx >= 0) savedRosters[idx] = rosterData;
+        else savedRosters.push(rosterData);
     }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(savedRosters));
-    ui.updateRosterSelectDropdown(savedRosters, currentRosterId, currentLang);
+    ui.updateRosterSelectDropdown(savedRosters, currentRosterId, currentLang, 'roster-select');
     ui.showToast("자동 저장됨");
 }
 
 function deleteCurrentRoster() {
-    if (!currentRosterId) {
-        ui.showToast("저장되지 않은 로스터입니다.");
-        return;
-    }
+    if (!currentRosterId) return;
     savedRosters = savedRosters.filter(r => r.id !== currentRosterId);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(savedRosters));
     resetToNewRoster();
@@ -377,13 +344,7 @@ function deleteCurrentRoster() {
 
 function loadLibrary() {
     const json = localStorage.getItem(STORAGE_KEY);
-    if (json) {
-        try {
-            savedRosters = JSON.parse(json);
-        } catch (e) {
-            savedRosters = [];
-        }
-    }
+    savedRosters = json ? JSON.parse(json) : [];
 }
 
 function toggleWeapon(opIdx, wIdx) {
@@ -416,82 +377,187 @@ function startGame() {
         return;
     }
     const teamData = catalog[currentTeamId];
-
-    gameState.vp = 0;
-    gameState.cp = 2;
-    gameState.fp = teamData.resourceConfig ? teamData.resourceConfig.start : 0;
-    gameState.currentTP = 1;
-    gameState.operatives = JSON.parse(JSON.stringify(myRoster.filter(op => op.stats.W > 0))); // filter out expendable
-    gameState.operatives.forEach(op => {
-        op.currentW = op.stats.W;
-        op.startOfTurnW = op.stats.W;
-    });
-
-    ui.renderGameInfo(teamData, spendCP, currentLang);
-    ui.renderGameEquipment(teamData, currentLang);
-    ui.updateResourceDisplay(gameState);
-    ui.renderGameScreen(gameState, handleGameOpListClick, currentLang);
+    document.getElementById('team-left').style.setProperty('--primary-color', teamData.color);
     
-    const gameTitle = document.getElementById('roster-name').value;
-    document.getElementById('game-title').innerText = gameTitle;
+    globalGameState = { currentTP: 1 };
+    gameState = {
+        name: document.getElementById('roster-name').value,
+        teamId: currentTeamId,
+        vp: 0, cp: 2,
+        fp: teamData.resourceConfig ? teamData.resourceConfig.start : 0,
+        operatives: JSON.parse(JSON.stringify(myRoster.filter(op => op.stats.W > 0)))
+    };
+    gameState.operatives.forEach(op => { op.currentW = op.stats.W; op.startOfTurnW = op.stats.W; });
+
+    document.querySelector('#team-left .team-title').innerText = gameState.name;
+    ui.renderGameInfo(teamData, spendCP, currentLang, 'team-left');
+    ui.renderGameEquipment(teamData, currentLang, 'team-left');
+    ui.updateResourceDisplay(globalGameState);
+    ui.updateTeamResourceDisplay(gameState, 'team-left');
+    ui.renderGameScreen(gameState, handleGameOpListClick, currentLang, 'team-left');
     
     ui.showScreen('game');
-    const firstTabBtn = document.querySelector('.tab-btn');
-    if (firstTabBtn) ui.switchTab('ops', { target: firstTabBtn });
+    const firstTabBtn = document.querySelector('#team-left .tab-btn');
+    if (firstTabBtn) ui.switchTab('ops', { target: firstTabBtn }, 'team-left');
 }
 
-function spendCP() {
-    if (gameState.cp > 0) {
-        updateResource('cp', -1);
+function exitGame() {
+    document.getElementById('screen-game').classList.remove('coop-mode');
+    document.querySelector('.container').classList.remove('coop-view');
+    document.getElementById('btn-add-team').style.display = 'block';
+    document.getElementById('team-right').innerHTML = ''; // Clear right team content
+    gameState = null;
+    coopGameState = null;
+    ui.showScreen('roster');
+}
+
+function activateCoopMode() {
+    document.getElementById('screen-game').classList.add('coop-mode');
+    document.querySelector('.container').classList.add('coop-view');
+    this.style.display = 'none';
+
+    ui.displayCoopPlaceholder(currentLang, savedRosters);
+    document.getElementById('btn-activate-coop').addEventListener('click', loadCoopTeam);
+}
+
+function loadCoopTeam() {
+    const rosterId = document.getElementById('coop-roster-select').value;
+    if (rosterId === 'new' || !rosterId) {
+        ui.showToast("저장된 로스터를 선택하세요.");
+        return;
+    }
+    const found = savedRosters.find(r => r.id === rosterId);
+    if (!found) return;
+
+    const teamData = catalog[found.teamId];
+    if (!teamData) {
+        ui.showToast(`Error: Data for team ${found.teamId} is missing.`);
+        return;
+    }
+
+    document.getElementById('team-right').style.setProperty('--primary-color', teamData.color);
+
+    const coopRoster = found.roster.map(savedOp => {
+        const fullOpData = teamData.operatives.find(op => op.id === savedOp.opId);
+        if (!fullOpData) return null;
+        const hydratedOp = JSON.parse(JSON.stringify(fullOpData));
+        if (savedOp.disabledWeapons && savedOp.disabledWeapons.length > 0) {
+            hydratedOp.weapons.forEach(w => {
+                if (savedOp.disabledWeapons.includes(w.name.en)) w.active = false;
+            });
+        }
+        hydratedOp.assignedEquipments = savedOp.equipments || [];
+        return hydratedOp;
+    }).filter(Boolean);
+
+    coopGameState = {
+        name: found.name,
+        teamId: found.teamId,
+        vp: 0, cp: 2,
+        fp: teamData.resourceConfig ? teamData.resourceConfig.start : 0,
+        operatives: JSON.parse(JSON.stringify(coopRoster.filter(op => op.stats.W > 0)))
+    };
+    coopGameState.operatives.forEach(op => { op.currentW = op.stats.W; op.startOfTurnW = op.stats.W; });
+
+    document.getElementById('team-right').innerHTML = `
+        <div class="sticky-header">
+            <h3 class="team-title" style="margin-bottom: 10px; text-align: center;"></h3>
+            <div class="resource-grid">
+                <div class="resource-box"><span class="resource-label">VP (승점)</span><span class="resource-val" data-type="vp">0</span><div class="res-btn-group"><button class="res-btn" data-type="vp" data-mod="-1">-</button><button class="res-btn" data-type="vp" data-mod="1">+</button></div></div>
+                <div class="resource-box"><span class="resource-label">CP (커맨드)</span><span class="resource-val" data-type="cp">2</span><div class="res-btn-group"><button class="res-btn" data-type="cp" data-mod="-1">-</button><button class="res-btn" data-type="cp" data-mod="1">+</button></div></div>
+                <div class="resource-box" data-type="fp" style="display: none;"><span class="resource-label" data-type="fp-name">FP</span><span class="resource-val" data-type="fp">0</span><div class="res-btn-group"><button class="res-btn" data-type="fp" data-mod="-1">-</button><button class="res-btn" data-type="fp" data-mod="1">+</button></div></div>
+            </div>
+        </div>
+        <div class="tab-nav">
+            <button class="tab-btn active" data-tab="ops">오퍼레이티브</button>
+            <button class="tab-btn" data-tab="ploys">규칙 & 계략</button>
+            <button class="tab-btn" data-tab="equip">장비 도감</button>
+        </div>
+        <div id="tab-ops" class="tab-content active"><div class="game-op-list"></div></div>
+        <div id="tab-ploys" class="tab-content"><h3 style="margin-top:0;">📜 팩션 규칙</h3><div class="game-faction-rules"></div><h3>⚡ 전략 계략</h3><div class="game-strat-ploys"></div><h3>🔥 교전 계략</h3><div class="game-fire-ploys"></div></div>
+        <div id="tab-equip" class="tab-content"><h3 style="margin-top:0;">🎒 장비 도감</h3><div class="game-equipment-list"></div></div>`;
+
+    document.querySelector('#team-right .team-title').innerText = coopGameState.name;
+    ui.renderGameInfo(teamData, spendCP, currentLang, 'team-right');
+    ui.renderGameEquipment(teamData, currentLang, 'team-right');
+    ui.updateTeamResourceDisplay(coopGameState, 'team-right');
+    ui.renderGameScreen(coopGameState, handleGameOpListClick, currentLang, 'team-right');
+    
+    const firstTabBtn = document.querySelector('#team-right .tab-btn');
+    if (firstTabBtn) ui.switchTab('ops', { target: firstTabBtn }, 'team-right');
+}
+
+function spendCP(containerId) {
+    const activeGameState = containerId === 'team-left' ? gameState : coopGameState;
+    if (activeGameState.cp > 0) {
+        activeGameState.cp--;
+        ui.updateTeamResourceDisplay(activeGameState, containerId);
         ui.showToast("CP를 소모했습니다.");
     } else {
         ui.showToast("CP가 부족합니다!");
     }
 }
 
-function updateResource(type, val) {
-    gameState[type] += val;
-    if (gameState[type] < 0) gameState[type] = 0;
+function updateTeamResource(containerId, type, val) {
+    const activeGameState = containerId === 'team-left' ? gameState : coopGameState;
+    if (!activeGameState) return;
+
+    activeGameState[type] += val;
+    if (activeGameState[type] < 0) activeGameState[type] = 0;
     if (type === 'fp') {
-        const conf = catalog[currentTeamId].resourceConfig;
-        if (conf && gameState.fp > conf.max) gameState.fp = conf.max;
+        const conf = catalog[activeGameState.teamId].resourceConfig;
+        if (conf && activeGameState.fp > conf.max) activeGameState.fp = conf.max;
     }
-    ui.updateResourceDisplay(gameState);
+    ui.updateTeamResourceDisplay(activeGameState, containerId);
 }
 
 function updateTP(val) {
-    gameState.currentTP += val;
-    if (gameState.currentTP < 1) gameState.currentTP = 1;
-    finalizeWoundStates();
-    ui.updateResourceDisplay(gameState);
-    ui.renderGameScreen(gameState, handleGameOpListClick, currentLang);
+    if (!gameState) return;
+    globalGameState.currentTP += val;
+    if (globalGameState.currentTP < 1) globalGameState.currentTP = 1;
+    
+    finalizeWoundStates(gameState);
+    if(coopGameState) finalizeWoundStates(coopGameState);
+    
+    ui.updateResourceDisplay(globalGameState);
+    ui.renderGameScreen(gameState, handleGameOpListClick, currentLang, 'team-left');
+    if(coopGameState) ui.renderGameScreen(coopGameState, handleGameOpListClick, currentLang, 'team-right');
 }
 
 function endTurn() {
+    if (!gameState) return;
+    globalGameState.currentTP += 1;
+    
     gameState.cp += 1;
-    gameState.currentTP += 1;
-    finalizeWoundStates();
-    ui.updateResourceDisplay(gameState);
-    ui.renderGameScreen(gameState, handleGameOpListClick, currentLang);
-    ui.showToast("턴이 종료되었습니다. (CP+1, TP+1)");
+    if(coopGameState) coopGameState.cp += 1;
+    
+    finalizeWoundStates(gameState);
+    if(coopGameState) finalizeWoundStates(coopGameState);
+
+    ui.updateResourceDisplay(globalGameState);
+    ui.updateTeamResourceDisplay(gameState, 'team-left');
+    if(coopGameState) ui.updateTeamResourceDisplay(coopGameState, 'team-right');
+
+    ui.renderGameScreen(gameState, handleGameOpListClick, currentLang, 'team-left');
+    if(coopGameState) ui.renderGameScreen(coopGameState, handleGameOpListClick, currentLang, 'team-right');
+    ui.showToast("턴이 종료되었습니다. (양 팀 CP+1, TP+1)");
 }
 
-function finalizeWoundStates() {
-    gameState.operatives.forEach(op => {
+function finalizeWoundStates(activeGameState) {
+    if (!activeGameState) return;
+    activeGameState.operatives.forEach(op => {
         op.startOfTurnW = op.currentW;
     });
 }
 
-function setWounds(opIdx, val) {
-    const op = gameState.operatives[opIdx];
+function setWounds(activeGameState, opIdx, val) {
+    if (!activeGameState) return;
+    const op = activeGameState.operatives[opIdx];
     if (op.currentW === val) {
         op.currentW = val - 1;
     } else {
         op.currentW = val;
     }
-    ui.renderGameScreen(gameState, handleGameOpListClick, currentLang);
 }
 
-
-// Start the app
 document.addEventListener('DOMContentLoaded', init);

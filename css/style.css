@@ -89,7 +89,7 @@ h1, h2, h3 {
     align-items: center; border: 1px solid var(--primary-color);
 }
 .resource-grid {
-    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; margin-bottom: 10px;
 }
 .resource-box {
     background: var(--card-bg); padding: 5px; border-radius: 5px;
@@ -228,10 +228,10 @@ h1, h2, h3 {
         max-width: 1100px;
     }
 
-    #my-roster-list, #modal-op-list, #game-op-list,
+    #my-roster-list, #modal-op-list, .game-op-list,
     #info-faction-rules, #info-strat-ploys, #info-fire-ploys,
-    #game-faction-rules, #game-strat-ploys, #game-fire-ploys,
-    #equip-modal-list, #game-equipment-list {
+    .game-faction-rules, .game-strat-ploys, .game-fire-ploys,
+    #equip-modal-list, .game-equipment-list {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
@@ -292,4 +292,96 @@ h1, h2, h3 {
     font-size: 0.85rem;
     color: #ccc;
     line-height: 1.4;
+}
+
+/* Co-op Mode Styles */
+#team-right {
+    display: none; /* Initially hide the right panel */
+}
+
+#screen-game.coop-mode #game-main-content {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+#screen-game.coop-mode .team-container {
+    display: block; /* Make #team-right visible */
+    flex-shrink: 0;
+    background-color: rgba(0,0,0,0.15);
+    border: 1px solid #444;
+    border-radius: 8px;
+    /* Independent scrolling */
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+    padding-right: 5px; /* space for scrollbar */
+}
+
+/* Custom scrollbar for team containers */
+#screen-game.coop-mode .team-container::-webkit-scrollbar {
+    width: 8px;
+}
+#screen-game.coop-mode .team-container::-webkit-scrollbar-track {
+    background: #2c3e50;
+    border-radius: 4px;
+}
+#screen-game.coop-mode .team-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+#screen-game.coop-mode .team-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+#team-right-placeholder {
+    padding: 20px;
+    text-align: center;
+    border: 2px dashed #555;
+    border-radius: 8px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+#coop-roster-select {
+    width: 100%;
+    max-width: 300px;
+}
+
+#btn-activate-coop {
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Adjust container width for coop mode */
+@media (min-width: 768px) {
+    .container.coop-view {
+        /* 2x narrow width + gap + container padding */
+        max-width: 1100px; 
+    }
+
+    #screen-game.coop-mode .team-container {
+        width: 480px; /* More spacious width for wide screens */
+    }
+
+    /* Revert grid layout in coop mode to prevent double-column inside a column */
+    #screen-game.coop-mode .team-container .game-op-list,
+    #screen-game.coop-mode .team-container .game-faction-rules,
+    #screen-game.coop-mode .team-container .game-strat-ploys,
+    #screen-game.coop-mode .team-container .game-fire-ploys,
+    #screen-game.coop-mode .team-container .game-equipment-list {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+.team-container .sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg-dark);
+    padding-top: 10px;
 }
